@@ -1,0 +1,60 @@
+.fallbackDirection:where(:not([dir])) {
+  direction: ltr;
+}
+.root {
+  --display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  color: #193d30;
+  background: #edf5ef;
+  border: 1px solid #cbded1;
+  border-radius: 12px;
+  font-family: system-ui, sans-serif;
+  font-size: 16px;
+  pointer-events: auto;
+  overflow-wrap: anywhere;
+}
+.heading {
+  box-sizing: border-box;
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+.status {
+  box-sizing: border-box;
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+.countdown[hidden] {
+  display: none;
+}
+.countdown {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  min-width: 0;
+}
+.unit {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.number {
+  box-sizing: border-box;
+  font-variant-numeric: tabular-nums;
+  font-size: 1.8em;
+  line-height: 1.2;
+}
+.label {
+  box-sizing: border-box;
+}

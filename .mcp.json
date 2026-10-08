@@ -7,6 +7,15 @@
         "@wix/mcp-remote",
         "https://mcp.wix.com/sse"
       ]
+    },
+    "shopify-dev-mcp": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@shopify/dev-mcp@latest"
+      ],
+      "env": {}
     }
   }
 }
