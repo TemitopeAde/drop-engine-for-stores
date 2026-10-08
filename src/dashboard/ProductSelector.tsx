@@ -9,6 +9,7 @@ import { collectProductIds } from "./catalog-selection";
 interface Props {
   firstPage: CatalogPage;
   ids: string[];
+  lockedIds: string[];
   disabled: boolean;
   onChange: (ids: string[]) => void;
   onSelecting: (selecting: boolean) => void;
@@ -17,6 +18,7 @@ interface Props {
 export function ProductSelector({
   firstPage,
   ids,
+  lockedIds,
   disabled,
   onChange,
   onSelecting,
@@ -34,9 +36,11 @@ export function ProductSelector({
   const request = useRef<AbortController | null>(null);
   const selectAll = useRef<HTMLInputElement>(null);
   const selected = useMemo(() => new Set(ids), [ids]);
+  const locked = useMemo(() => new Set(lockedIds), [lockedIds]);
+  const selectableIds = catalogIds?.filter((id) => !locked.has(id));
   const allSelected =
-    !!catalogIds?.length && catalogIds.every((id) => selected.has(id));
-  const locked = disabled || loading || selecting;
+    !!selectableIds?.length && selectableIds.every((id) => selected.has(id));
+  const busy = disabled || loading || selecting;
 
   useEffect(() => () => request.current?.abort(), []);
   useEffect(() => {
@@ -45,7 +49,7 @@ export function ProductSelector({
   }, [ids.length, allSelected]);
 
   async function changePage(nextPage: number) {
-    if (locked || request.current) return;
+    if (busy || request.current) return;
     const controller = new AbortController();
     request.current = controller;
     setLoading(true);
@@ -74,7 +78,7 @@ export function ProductSelector({
   }
 
   async function toggleAll() {
-    if (locked || request.current) return;
+    if (busy || request.current) return;
     setError("");
     if (allSelected) {
       onChange([]);
@@ -93,7 +97,9 @@ export function ProductSelector({
         setFound,
       );
       controller.signal.throwIfAborted();
-      const nextIds = [...new Set([...ids, ...allIds])];
+      const nextIds = [
+        ...new Set([...ids, ...allIds.filter((id) => !locked.has(id))]),
+      ];
       if (nextIds.length > MAX_PRODUCTS_PER_DROP)
         throw new Error(t("selectionTooLarge"));
       setCatalogIds(allIds);
@@ -142,7 +148,7 @@ export function ProductSelector({
             type="checkbox"
             checked={allSelected}
             disabled={
-              locked || (!firstPage.products.length && !firstPage.hasNext)
+              busy || (!firstPage.products.length && !firstPage.hasNext)
             }
             aria-describedby="select-all-help"
             onChange={() => void toggleAll()}
@@ -172,13 +178,14 @@ export function ProductSelector({
           {error}
         </p>
       )}
-      <fieldset disabled={locked}>
+      <fieldset disabled={busy}>
         <legend className="de-sr-only">{t("products")}</legend>
         {current.products.map((product) => (
           <label className="de-product" key={product.id}>
             <input
               type="checkbox"
               checked={selected.has(product.id)}
+              disabled={locked.has(product.id) && !selected.has(product.id)}
               onChange={(event) =>
                 toggleProduct(product.id, event.target.checked)
               }
@@ -197,6 +204,9 @@ export function ProductSelector({
               </span>
             )}
             <span>{product.name}</span>
+            {locked.has(product.id) && (
+              <span className="de-product-locked">{t("inOtherDrop")}</span>
+            )}
           </label>
         ))}
         {!current.products.length && <p>{t("noProducts")}</p>}
@@ -209,7 +219,7 @@ export function ProductSelector({
           <Button
             type="button"
             variant="outline"
-            disabled={locked || page === 0}
+            disabled={busy || page === 0}
             onClick={() => void changePage(page - 1)}
           >
             {t("previousProducts")}
@@ -217,7 +227,7 @@ export function ProductSelector({
           <Button
             type="button"
             variant="outline"
-            disabled={locked || !current.hasNext}
+            disabled={busy || !current.hasNext}
             onClick={() => void changePage(page + 1)}
           >
             {loading && (

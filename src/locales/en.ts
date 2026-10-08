@@ -2,6 +2,7 @@ export const en = {
   selectProduct: "Set a Wix Stores product ID to connect this countdown.",
   noLaunch: "No published launch is configured for this product.",
   app: "Drop Engine",
+  site: "Your site",
   subtitle: "Make your next launch count.",
   drops: "Drops",
   create: "Create drop",
@@ -57,6 +58,9 @@ export const en = {
   activeLimit:
     "Free includes one active drop. Cancel the current drop before publishing another.",
   conflict: "This drop changed in another session. Reload before saving.",
+  productInUse:
+    "One or more products already belong to another drop. Remove them or cancel that drop first.",
+  inOtherDrop: "In another drop",
   storageLimit: "This installation has reached its storage limit.",
   expiredSchedule: "Choose a future end time before publishing.",
   forbidden: "Open this app as a site owner or authorized contributor.",
@@ -105,6 +109,51 @@ export const en = {
   showSeconds: "Show seconds",
   saveSettings: "Save settings",
   settingsSaved: "Settings saved",
+  pluginPlacement: "Countdown plugin placement",
+  pluginAdded: "Added",
+  pluginNotAdded: "Not added",
+  pluginUnknown: "Unable to check",
+  pluginChecking: "Checking placement…",
+  pluginAdding: "Adding plugin…",
+  pluginCheck: "Check placement",
+  pluginAdd: "Add plugin",
+  pluginCheckingHelp: "Checking the countdown's placement on your product page.",
+  pluginAddedHelp: "Your countdown is placed on the product page.",
+  pluginMissingHelp:
+    "Add the countdown to your product page so shoppers can see your launch window.",
+  pluginCheckFailed: "Placement couldn't be checked. Try checking again.",
+  pluginConfirmationFailed:
+    "The add request completed, but placement couldn't be checked. Check again to confirm.",
+  pluginStillMissing:
+    "The countdown isn't placed yet. Check again or try adding it again.",
+  pluginAddCancelled: "Adding the plugin was cancelled. You can try again.",
+  pluginPublishFirst: "Publish your site first, then try adding the plugin again.",
+  pluginSlotOccupied:
+    "The countdown's slot is occupied. Update the placement in the site editor, then check again.",
+  pluginAddFailed: "The plugin couldn't be added. Try again.",
+  guide: "Guide & FAQ",
+  guideEyebrow: "Help center",
+  guideTitle: "How Drop Engine works",
+  guideIntro:
+    "Schedule product launches that open checkout at an exact moment, and show customers a live countdown while they wait.",
+  guideSteps: "Get started in five steps",
+  guideStepsHelp: "From an empty dashboard to a live launch in a few minutes.",
+  guideStep: "Step",
+  guideStatuses: "Drop lifecycle",
+  guideStatusesHelp:
+    "Every published drop moves through these stages on the server clock.",
+  guideSidePaths: "Anytime you need it",
+  guideActions: "Drop actions",
+  guideActionsHelp: "Open the ⋯ menu on any drop in the list.",
+  faq: "Frequently asked questions",
+  faqHelp: "Quick answers about launches, checkout, and your storefront.",
+  faqSearch: "Search questions",
+  faqAll: "All",
+  faqEmpty: "No questions match your search.",
+  faqClear: "Clear search",
+  guideJump: "Jump to",
+  guideCta: "Create your first drop",
+  guideCtaTitle: "Ready for your next launch?",
 } as const;
 export type MessageKey = keyof typeof en;
 export const t = (key: MessageKey, _locale = "en") => en[key];

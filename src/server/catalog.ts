@@ -18,6 +18,7 @@ export async function storeContext() {
   return {
     catalogVersion: catalog.catalogVersion,
     timeZone: site.properties?.timeZone || "UTC",
+    siteName: site.properties?.siteDisplayName?.trim() || "",
   };
 }
 export async function catalogPage(

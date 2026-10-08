@@ -18,6 +18,7 @@ const responseSchema = catalogSchema.extend({
   revision: z.number(),
   serverNow: z.number(),
   timeZone: z.string(),
+  siteName: z.string().optional(),
   catalogVersion: z.enum(["V1_CATALOG", "V3_CATALOG"]),
 });
 export type CatalogPage = z.infer<typeof catalogSchema>;

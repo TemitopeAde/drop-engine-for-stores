@@ -2,10 +2,15 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Temporal } from "@js-temporal/polyfill";
 import { ArrowLeft, LoaderCircle, Rocket } from "lucide-react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { dashboard } from "@wix/dashboard";
 import { toast } from "sonner";
-import { dropInputSchema, type Drop, type DropInput } from "../domain/drop";
+import {
+  dropInputSchema,
+  heldProductIds,
+  type Drop,
+  type DropInput,
+} from "../domain/drop";
 import { t } from "../locales/en";
 import { Button } from "../components/ui/button";
 import { mutate, type DashboardData } from "./api";
@@ -34,6 +39,18 @@ export function DropForm({ drop, data, back, saved }: Props) {
     },
   });
   const ids = form.watch("productIds");
+  const timeZones = useMemo(
+    () =>
+      [
+        ...new Set([
+          "UTC",
+          data.timeZone,
+          drop?.timeZone ?? data.timeZone,
+          ...Intl.supportedValuesOf("timeZone"),
+        ]),
+      ].sort(),
+    [data.timeZone, drop?.timeZone],
+  );
   async function chooseProducts() {
     setSelecting(true);
     try {
@@ -42,6 +59,7 @@ export function DropForm({ drop, data, back, saved }: Props) {
         params: {
           products: data.products,
           selectedIds: form.getValues("productIds"),
+          lockedIds: [...heldProductIds(data.drops, drop?.id, data.serverNow)],
           hasNext: data.hasNext,
           cursor: data.cursor,
         },
@@ -127,38 +145,42 @@ export function DropForm({ drop, data, back, saved }: Props) {
                   {t("fieldsRequired")}
                 </p>
               )}
-              <div className="de-field-pair">
-                {(["localStart", "localEnd"] as const).map((field, index) => (
-                  <div className="de-field" key={field}>
-                    <label htmlFor={field}>{t(index ? "end" : "start")}</label>
-                    <div className="de-date-input">
-                      <input
-                        id={field}
-                        type="datetime-local"
-                        {...form.register(field)}
-                        aria-invalid={!!form.formState.errors[field]}
-                      />
-                      {field === "localStart" && (
-                        <Button
-                          type="button"
-                          variant="outline"
-                          disabled={busy}
-                          onClick={setStartNow}
-                        >
-                          {t("now")}
-                        </Button>
-                      )}
-                    </div>
+              {(["localStart", "localEnd"] as const).map((field, index) => (
+                <div className="de-field" key={field}>
+                  <label htmlFor={field}>{t(index ? "end" : "start")}</label>
+                  <div className="de-date-input">
+                    <input
+                      id={field}
+                      type="datetime-local"
+                      {...form.register(field)}
+                      aria-invalid={!!form.formState.errors[field]}
+                    />
+                    {field === "localStart" && (
+                      <Button
+                        type="button"
+                        variant="outline"
+                        disabled={busy}
+                        onClick={setStartNow}
+                      >
+                        {t("now")}
+                      </Button>
+                    )}
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
               <label className="de-field" htmlFor="time-zone">
                 {t("zone")}
-                <input
+                <select
                   id="time-zone"
                   {...form.register("timeZone")}
                   aria-invalid={!!form.formState.errors.timeZone}
-                />
+                >
+                  {timeZones.map((timeZone) => (
+                    <option key={timeZone} value={timeZone}>
+                      {timeZone.replaceAll("_", " ")}
+                    </option>
+                  ))}
+                </select>
               </label>
               <label className="de-field" htmlFor="end-behavior">
                 {t("endBehavior")}

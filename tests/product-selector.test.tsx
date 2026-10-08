@@ -28,8 +28,10 @@ function Selector({
   initial = [],
   firstPage = catalogPage(0),
   disabled = false,
+  lockedIds = [],
 }: {
   initial?: string[];
+  lockedIds?: string[];
   firstPage?: CatalogPage;
   disabled?: boolean;
 }) {
@@ -38,6 +40,7 @@ function Selector({
     <ProductSelector
       firstPage={firstPage}
       ids={ids}
+      lockedIds={lockedIds}
       disabled={disabled}
       onChange={setIds}
       onSelecting={vi.fn()}
@@ -183,5 +186,19 @@ describe("catalog product selection", () => {
         .getAllByRole<HTMLInputElement>("checkbox")
         .every((checkbox) => checkbox.matches(":disabled")),
     ).toBe(true);
+  });
+  it("prevents choosing products that belong to another drop", async () => {
+    const page = { products: products.slice(0, 3), hasNext: false };
+    render(<Selector firstPage={page} lockedIds={[products[1].id]} />);
+    const locked = screen.getByRole<HTMLInputElement>("checkbox", {
+      name: /Product 2/,
+    });
+    expect(locked.disabled).toBe(true);
+    expect(screen.getByText("In another drop")).toBeTruthy();
+    fireEvent.click(
+      screen.getByRole("checkbox", { name: "Select all products" }),
+    );
+    await waitFor(() => expect(screen.getByText("2 selected")).toBeTruthy());
+    expect(locked.checked).toBe(false);
   });
 });

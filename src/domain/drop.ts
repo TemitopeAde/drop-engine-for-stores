@@ -67,6 +67,21 @@ export function blocked(drop: Drop, now: number) {
     controlsPurchasing(drop, now) && (now < drop.startsAt || now >= drop.endsAt)
   );
 }
+// A product may belong to only one drop that is a draft or still gates checkout.
+export function holdsProducts(drop: Drop, now: number) {
+  return drop.status === "DRAFT" || controlsPurchasing(drop, now);
+}
+export function heldProductIds(
+  drops: Drop[],
+  exceptId: string | undefined,
+  now: number,
+) {
+  return new Set(
+    drops
+      .filter((drop) => drop.id !== exceptId && holdsProducts(drop, now))
+      .flatMap((drop) => drop.productIds),
+  );
+}
 export function assertPublishable(endsAt: number, now: number) {
   if (endsAt <= now) throw new DomainError("expiredSchedule");
 }
@@ -75,6 +90,11 @@ export function replaceDrop(drops: Drop[], next: Drop, now: number) {
   if (controlsPurchasing(next, now)) {
     if (others.some((drop) => controlsPurchasing(drop, now)))
       throw new DomainError("activeLimit", 409);
+  }
+  if (holdsProducts(next, now)) {
+    const held = heldProductIds(others, undefined, now);
+    if (next.productIds.some((id) => held.has(id)))
+      throw new DomainError("productInUse", 409);
   }
   const result = [...others, next];
   // Bound the canonical item below Wix Data's 500 KB limit.

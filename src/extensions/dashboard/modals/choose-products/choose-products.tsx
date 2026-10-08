@@ -58,6 +58,7 @@ function ProductPicker() {
             <ProductSelector
               firstPage={picker}
               ids={picker.selectedIds}
+              lockedIds={picker.lockedIds ?? []}
               disabled={false}
               onSelecting={setSelecting}
               onChange={(selectedIds) =>

@@ -43,7 +43,11 @@ export function DropActions({ drop, busy, edit, action }: Props) {
         </IconButton>
       )}
     >
-      <PopoverMenu.MenuItem text={t("edit")} disabled={busy} onClick={() => run(edit)} />
+      <PopoverMenu.MenuItem
+        text={t("edit")}
+        disabled={busy}
+        onClick={() => run(edit)}
+      />
       <PopoverMenu.MenuItem
         text={t("duplicate")}
         disabled={busy}

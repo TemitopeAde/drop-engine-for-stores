@@ -4,8 +4,8 @@ import {
   Plus,
   Rocket,
   LoaderCircle,
-  ArrowUpRight,
   CalendarClock,
+  CircleHelp,
   Search,
 } from "lucide-react";
 import { Button } from "../../../../components/ui/button";
@@ -17,6 +17,8 @@ import {
 } from "../../../../dashboard/api";
 import { DropForm } from "../../../../dashboard/DropForm";
 import { DropActions } from "../../../../dashboard/DropActions";
+import { Guide } from "../../../../dashboard/Guide";
+import { PluginPlacementStatus } from "../../../../dashboard/PluginPlacementStatus";
 import { BusinessManagerTheme } from "../../BusinessManagerTheme";
 import { phase, type Drop } from "../../../../domain/drop";
 import { t } from "../../../../locales/en";
@@ -33,6 +35,7 @@ function DropDashboard() {
   const [data, setData] = useState<DashboardData>();
   const [error, setError] = useState("");
   const [editing, setEditing] = useState<Drop | "new" | null>(null);
+  const [view, setView] = useState<"drops" | "guide">("drops");
   const [search, setSearch] = useState(""),
     [status, setStatus] = useState("");
   const [busy, setBusy] = useState(false),
@@ -79,16 +82,33 @@ function DropDashboard() {
       <Toaster richColors position="bottom-right" />
       <aside className="de-sidebar">
         <div className="de-brand">
-          <span>
+          <span className="de-brand-icon">
             <Rocket size={20} />
           </span>
-          {t("app")}
+          <span className="de-brand-name">{data?.siteName || t("site")}</span>
         </div>
         <nav>
-          <Button variant="ghost" onClick={() => setEditing(null)}>
+          <Button
+            variant="ghost"
+            aria-current={view === "drops" && !editing ? "page" : undefined}
+            onClick={() => {
+              setEditing(null);
+              setView("drops");
+            }}
+          >
             <CalendarClock size={18} />
             {t("drops")}
-            <ArrowUpRight size={14} />
+          </Button>
+          <Button
+            variant="ghost"
+            aria-current={view === "guide" && !editing ? "page" : undefined}
+            onClick={() => {
+              setEditing(null);
+              setView("guide");
+            }}
+          >
+            <CircleHelp size={18} />
+            {t("guide")}
           </Button>
         </nav>
         <div className="de-sidebar-footer">
@@ -97,7 +117,14 @@ function DropDashboard() {
         </div>
       </aside>
       <main className="de-main">
-        {error ? (
+        {view === "guide" && !editing ? (
+          <Guide
+            create={() => {
+              setView("drops");
+              setEditing("new");
+            }}
+          />
+        ) : error ? (
           <section className="de-card de-state" role="alert">
             <h1>{t("unavailable")}</h1>
             <p>{error}</p>
@@ -126,11 +153,18 @@ function DropDashboard() {
                 <h1>{t("drops")}</h1>
                 <p>{t("subtitle")}</p>
               </div>
-              <Button onClick={() => setEditing("new")}>
-                <Plus size={17} />
-                {t("create")}
-              </Button>
+              <div className="de-header-actions">
+                <Button variant="outline" onClick={() => setView("guide")}>
+                  <CircleHelp size={17} />
+                  {t("guide")}
+                </Button>
+                <Button onClick={() => setEditing("new")}>
+                  <Plus size={17} />
+                  {t("create")}
+                </Button>
+              </div>
             </header>
+            <PluginPlacementStatus />
             <section className="de-card de-list">
               <div className="de-toolbar">
                 <label className="de-search">

@@ -66,6 +66,29 @@ describe("authoritative launch window", () => {
     ).toThrow("activeLimit");
   });
 });
+describe("one drop per product", () => {
+  const other = {
+    ...base,
+    id: crypto.randomUUID(),
+    status: "DRAFT" as const,
+  };
+  it("rejects a product already held by a draft or gating drop", () => {
+    expect(() =>
+      replaceDrop([{ ...base, status: "DRAFT" }], other, 500),
+    ).toThrow("productInUse");
+    expect(() =>
+      replaceDrop([{ ...base, endBehavior: "BLOCK" }], other, 3000),
+    ).toThrow("productInUse");
+  });
+  it("releases products from cancelled, archived and restored drops", () => {
+    for (const status of ["CANCELLED", "ARCHIVED"] as const)
+      expect(replaceDrop([{ ...base, status }], other, 500)).toHaveLength(2);
+    expect(replaceDrop([base], other, 3000)).toHaveLength(2);
+  });
+  it("allows the same drop to be saved again", () => {
+    expect(replaceDrop([base], { ...base, version: 2 }, 500)).toHaveLength(1);
+  });
+});
 describe("merchant schedule validation", () => {
   it("rejects publication at or after the end while allowing a future end", () => {
     expect(() => assertPublishable(2000, 2000)).toThrow("expiredSchedule");
@@ -132,6 +155,7 @@ describe("merchant schedule validation", () => {
           {
             ...drop,
             id: crypto.randomUUID(),
+            productIds: drop.productIds.map(() => crypto.randomUUID()),
             status: "DRAFT",
           },
         ],

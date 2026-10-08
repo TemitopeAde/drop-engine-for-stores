@@ -1,7 +1,8 @@
 import { extensions } from "@wix/astro/builders";
+import { DROP_COUNTDOWN_PLUGIN_ID } from "../../../../domain/site-plugin";
 
 export default extensions.sitePlugin({
-  id: "12b07634-7fb4-4e6b-a53d-8e26cdfd58bb",
+  id: DROP_COUNTDOWN_PLUGIN_ID,
   name: "drop-countdown",
   marketData: {
     name: "Drop countdown",
