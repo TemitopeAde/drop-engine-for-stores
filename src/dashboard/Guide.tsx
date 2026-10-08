@@ -24,8 +24,9 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { Button } from "../components/ui/button";
-import { guide, type FaqCategory } from "../locales/guide.en";
-import { t } from "../locales/en";
+import type { FaqCategory } from "../locales/guide.en";
+import { getGuide } from "../locales/translations";
+import { useTranslation } from "../locales/use-translation";
 
 const icons: Record<string, LucideIcon> = {
   create: Package,
@@ -52,6 +53,8 @@ function scrollTo(id: string) {
 }
 
 function Checkout({ state }: { state: keyof typeof checkoutIcons }) {
+  const { locale } = useTranslation();
+  const guide = getGuide(locale);
   const Icon = checkoutIcons[state];
   return (
     <span className={`de-checkout de-checkout-${state}`}>
@@ -86,6 +89,8 @@ function SectionHeading({
 }
 
 export function Guide({ create }: { create: () => void }) {
+  const { t, locale } = useTranslation();
+  const guide = useMemo(() => getGuide(locale), [locale]);
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<FaqCategory | "">("");
   const questions = useMemo(() => {
@@ -97,7 +102,7 @@ export function Guide({ create }: { create: () => void }) {
           item.q.toLowerCase().includes(needle) ||
           item.a.toLowerCase().includes(needle)),
     );
-  }, [query, category]);
+  }, [query, category, guide]);
   const categories = Object.entries(guide.faqCategories) as [
     FaqCategory,
     string,
@@ -277,7 +282,11 @@ export function Guide({ create }: { create: () => void }) {
         {questions.length ? (
           <Accordion.Root type="multiple" className="de-faq">
             {questions.map((item) => (
-              <Accordion.Item value={item.q} key={item.q} className="de-faq-item">
+              <Accordion.Item
+                value={item.q}
+                key={item.q}
+                className="de-faq-item"
+              >
                 <Accordion.Header asChild>
                   <h3>
                     <Accordion.Trigger className="de-faq-trigger">

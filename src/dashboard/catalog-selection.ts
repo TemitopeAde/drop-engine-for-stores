@@ -1,5 +1,5 @@
 import { MAX_PRODUCTS_PER_DROP, CATALOG_PAGE_SIZE } from "../domain/limits";
-import { t } from "../locales/en";
+import { t } from "../locales/translations";
 import type { CatalogPage } from "./api";
 
 type LoadPage = (

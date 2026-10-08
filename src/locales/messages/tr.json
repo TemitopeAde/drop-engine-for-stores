@@ -1,0 +1,303 @@
+{
+  "messages": {
+    "selectProduct": "Sayacı bağlamak için bir Wix Stores ürün kimliği belirleyin.",
+    "noLaunch": "Bu ürün için yayımlanmış bir lansman yok.",
+    "app": "Drop Engine",
+    "language": "Dil",
+    "site": "Siteniz",
+    "subtitle": "Bir sonraki lansmanınız fark yaratsın.",
+    "drops": "Lansmanlar",
+    "create": "Lansman oluştur",
+    "edit": "Lansmanı düzenle",
+    "actions": "İşlemler",
+    "save": "Taslağı kaydet",
+    "publish": "Lansmanı yayımla",
+    "cancel": "Lansmanı iptal et",
+    "archive": "Arşivle",
+    "restore": "Taslağı geri yükle",
+    "duplicate": "Çoğalt",
+    "name": "Lansman adı",
+    "products": "Ürünler",
+    "start": "Başlangıç",
+    "now": "Şimdi",
+    "end": "Bitiş",
+    "zone": "Saat dilimi",
+    "endBehavior": "Lansman bittikten sonra",
+    "RESTORE": "Normal alışverişi aç",
+    "BLOCK": "Alışverişi engelli tut",
+    "DRAFT": "Taslak",
+    "SCHEDULED": "Planlandı",
+    "LIVE": "Yayında",
+    "ENDED": "Bitti",
+    "CANCELLED": "İptal edildi",
+    "ARCHIVED": "Arşivlendi",
+    "empty": "Bir sonraki lansmanınız burada başlıyor",
+    "emptyHelp": "Ürünleri ve zaman aralığını seçin. Alışveriş engelliyken ürünler görünür kalır.",
+    "loading": "Mağazanız yükleniyor…",
+    "retry": "Tekrar dene",
+    "back": "Lansmanlara dön",
+    "search": "Lansman ara",
+    "all": "Tüm durumlar",
+    "catalog": "Ürün seç",
+    "done": "Tamam",
+    "dismiss": "İptal",
+    "loadMore": "Daha fazla ürün yükle",
+    "selectAllProducts": "Tüm ürünleri seç",
+    "selectAllHelp": "Tüm sayfalardaki görünür ürünleri içerir.",
+    "selectingProducts": "Ürünler seçiliyor…",
+    "productsFound": "ürün bulundu",
+    "stopSelecting": "Seçimi durdur",
+    "selectionTooLarge": "Lansman başına en fazla 10.000 ürün seçebilirsiniz.",
+    "previousProducts": "Önceki ürünler",
+    "nextProducts": "Sonraki ürünler",
+    "productPage": "Sayfa",
+    "selected": "seçildi",
+    "saved": "Lansman kaydedildi",
+    "failed": "İstek tamamlanamadı. Tekrar deneyin.",
+    "invalidSchedule": "Geçerli saat dilimi ve başlangıçtan sonra bir bitiş seçin. Yaz saati geçişlerindeki belirsiz veya atlanan saatleri değiştirin.",
+    "activeLimit": "Ücretsiz plan bir etkin lansman içerir. Yenisi için mevcut lansmanı iptal edin.",
+    "conflict": "Lansman başka oturumda değişti. Kaydetmeden önce yenileyin.",
+    "productInUse": "Bazı ürünler başka bir lansmanda. Kaldırın veya o lansmanı iptal edin.",
+    "inOtherDrop": "Başka bir lansmanda",
+    "storageLimit": "Bu kurulum depolama sınırına ulaştı.",
+    "expiredSchedule": "Yayımlamadan önce gelecekte bir bitiş seçin.",
+    "forbidden": "Uygulamayı site sahibi veya yetkili ortak olarak açın.",
+    "unavailable": "Mağaza verileri geçici olarak kullanılamıyor.",
+    "setup": "Uygulama koleksiyonları hazır değil. Koleksiyonları içeren sürümü yükleyip Wix'in hazırlamasını bekleyin.",
+    "fieldsRequired": "Vurgulanan alanları kontrol edin.",
+    "noProducts": "Bu sayfada görünür ürün yok.",
+    "gatingHelp": "Sunucu saati alışverişi yönetir. İptal, normal alışverişi hemen açar.",
+    "free": "Ücretsiz plan · 1 etkin lansman",
+    "stage": "Lansman kontrolleri",
+    "waitlist": "Bekleme listesi",
+    "waitlistTitle": "Açılıştan haberdar olun",
+    "waitlistEmail": "E-posta adresi",
+    "waitlistConsent": "Bu lansman hakkında e-posta gönderin. İstediğim zaman abonelikten çıkabilirim.",
+    "waitlistJoin": "Bekleme listesine katıl",
+    "waitlistJoining": "Katılıyor…",
+    "waitlistJoined": "Bekleme listesindesiniz.",
+    "waitlistAlready": "Bu e-posta zaten listede.",
+    "waitlistLeave": "Bekleme listesinden ayrıl",
+    "waitlistLeaving": "Ayrılıyor…",
+    "waitlistLeft": "Bekleme listesinden ayrıldınız.",
+    "waitlistInvalid": "Geçerli e-posta girin ve onay verin.",
+    "waitlistFull": "Liste dolu. Lansman açılınca tekrar gelin.",
+    "waitlistClosed": "Bu lansmanın kayıtları kapalı.",
+    "rateLimited": "Çok fazla deneme. Daha sonra deneyin.",
+    "proRequired": "CSV dışa aktarımı Pro planında kullanılabilir.",
+    "waitlistSetting": "Bekleme listesi kayıtlarını topla",
+    "waitlistSettingHelp": "Müşteriler açılışa kadar sayaçtan kaydolabilir. Lansman e-postaları henüz gönderilmiyor.",
+    "viewWaitlist": "Bekleme listesini gör",
+    "waitlistFor": "Bekleme listesi",
+    "waitlistSubscribed": "abone",
+    "waitlistTotal": "toplam kayıt",
+    "waitlistUsage": "ücretsiz plandaki tüm lansmanlarda kullanılan kayıt",
+    "waitlistEmpty": "Henüz kayıt yok",
+    "waitlistEmptyHelp": "Lansman planlıyken müşteriler ürün sayfasından kaydolabilir.",
+    "waitlistOff": "Bu lansmanın kayıtları kapatıldı.",
+    "waitlistJoinedAt": "Katılma tarihi",
+    "waitlistStatus": "Durum",
+    "SUBSCRIBED": "Abone",
+    "UNSUBSCRIBED": "Abonelikten çıktı",
+    "markUnsubscribed": "Abonelikten çıktı olarak işaretle",
+    "removeEntry": "Sil",
+    "confirmRemove": "Silmeyi onayla",
+    "removeHelp": "Silmek e-postayı kaldırır ve ücretsiz kapasite açar. Abonelikten çıkarmak kaydı saklar ve sonraki e-postaları engeller.",
+    "exportCsv": "CSV dışa aktar",
+    "exporting": "Dışa aktarılıyor…",
+    "entryUpdated": "Bekleme listesi güncellendi",
+    "previousPage": "Önceki",
+    "nextPage": "Sonraki",
+    "notificationsPending": "Lansman e-postaları henüz bağlanmadı. Bildirimleri kurduktan sonra iletişim kurmanız için kayıtlar ve onaylar saklanır.",
+    "opens": "Bu lansman yakında açılıyor",
+    "live": "Lansman yayında",
+    "ended": "Bu lansman bitti",
+    "beforeViolation": "Bu ürün lansman açılana kadar satın alınamaz.",
+    "afterViolation": "Bu lansman bitti. Alışveriş kapalı.",
+    "outageViolation": "Uygunluk doğrulanamadı. Biraz sonra tekrar deneyin.",
+    "days": "Gün",
+    "hours": "Saat",
+    "minutes": "Dakika",
+    "seconds": "Saniye",
+    "editor": "Lansman sayacı",
+    "content": "İçerik",
+    "typography": "Tipografi",
+    "colors": "Renkler",
+    "countdown": "Geri sayım",
+    "form": "Form",
+    "layout": "Düzen",
+    "borders": "Kenarlıklar",
+    "responsive": "Duyarlı tasarım",
+    "advanced": "Gelişmiş",
+    "heading": "Başlık",
+    "textColor": "Metin rengi",
+    "background": "Arka plan",
+    "font": "Yazı tipi",
+    "reset": "Temayı sıfırla",
+    "padding": "İç boşluk",
+    "gap": "Aralık",
+    "radius": "Köşe yarıçapı",
+    "maxWidth": "En fazla genişlik",
+    "compact": "Mobilde kompakt",
+    "showSeconds": "Saniyeleri göster",
+    "saveSettings": "Ayarları kaydet",
+    "settingsSaved": "Ayarlar kaydedildi",
+    "pluginPlacement": "Sayaç eklentisinin yerleşimi",
+    "pluginAdded": "Eklendi",
+    "pluginNotAdded": "Eklenmedi",
+    "pluginUnknown": "Kontrol edilemedi",
+    "pluginChecking": "Yerleşim kontrol ediliyor…",
+    "pluginAdding": "Eklenti ekleniyor…",
+    "pluginCheck": "Yerleşimi kontrol et",
+    "pluginAdd": "Eklenti ekle",
+    "pluginCheckingHelp": "Ürün sayfasındaki sayaç yerleşimi kontrol ediliyor.",
+    "pluginAddingHelp": "Sayacı ürün sayfasına eklemek için Wix adımlarını izleyin.",
+    "pluginAddedHelp": "Sayacınız ürün sayfasında.",
+    "pluginMissingHelp": "Lansman zamanını göstermek için sayacı ürün sayfasına ekleyin.",
+    "pluginCheckFailed": "Yerleşim kontrol edilemedi. Tekrar deneyin.",
+    "pluginConfirmationFailed": "Ekleme isteği tamamlandı ama yerleşim kontrol edilemedi. Tekrar kontrol edin.",
+    "pluginStillMissing": "Sayaç henüz yerleştirilmedi. Kontrol edin veya yeniden ekleyin.",
+    "pluginAddCancelled": "Ekleme iptal edildi. Yeniden deneyebilirsiniz.",
+    "pluginPublishFirst": "Önce sitenizi yayımlayın, sonra eklentiyi ekleyin.",
+    "pluginSlotOccupied": "Alan dolu. Editörde yerleşimi değiştirip tekrar kontrol edin.",
+    "pluginAddFailed": "Eklenti eklenemedi. Tekrar deneyin.",
+    "guide": "Rehber ve SSS",
+    "guideEyebrow": "Yardım merkezi",
+    "guideTitle": "Drop Engine nasıl çalışır?",
+    "guideIntro": "Alışverişi tam zamanında açan lansmanlar planlayın ve müşterilere geri sayım gösterin.",
+    "guideSteps": "Beş adımda başlayın",
+    "guideStepsHelp": "Boş panelden etkin lansmana birkaç dakikada.",
+    "guideStep": "Adım",
+    "guideStatuses": "Lansman döngüsü",
+    "guideStatusesHelp": "Yayımlanan lansmanlar sunucu saatine göre bu aşamalardan geçer.",
+    "guideSidePaths": "İhtiyacınız olduğunda",
+    "guideActions": "Lansman işlemleri",
+    "guideActionsHelp": "Listedeki lansmanın ⋯ menüsünü açın.",
+    "faq": "Sık sorulan sorular",
+    "faqHelp": "Lansman, alışveriş ve mağazanız hakkında yanıtlar.",
+    "faqSearch": "Soruları ara",
+    "faqAll": "Tümü",
+    "faqEmpty": "Aramayla eşleşen soru yok.",
+    "faqClear": "Aramayı temizle",
+    "guideJump": "Bölüme git",
+    "guideCta": "İlk lansmanınızı oluşturun",
+    "guideCtaTitle": "Sonraki lansmana hazır mısınız?"
+  },
+  "guide": {
+    "steps": [
+      {
+        "title": "Lansman oluşturun",
+        "body": "Lansman oluştur'u seçip ad ve Wix Stores ürünleri belirleyin. En fazla 10.000 ürün veya Tüm ürünleri seç ile tüm katalog."
+      },
+      {
+        "title": "Zaman aralığını ayarlayın",
+        "body": "Başlangıç, bitiş ve saat dilimini seçin. Şimdi hemen başlatır. Bitiş sonra olmalı; yaz saati geçişindeki belirsiz veya atlanan saatleri değiştirin."
+      },
+      {
+        "title": "Sonrasını seçin",
+        "body": "Normal alışverişi aç bitişte alışverişi açar. Alışverişi engelli tut, iptale kadar engeller."
+      },
+      {
+        "title": "Kaydedin veya yayımlayın",
+        "body": "Taslak mağazayı etkilemez. Yayımlama zaman aralığını etkinleştirir: Planlandı, Yayında, Bitti."
+      },
+      {
+        "title": "Sayacı gösterin",
+        "body": "Eklenti Wix Stores ürün sayfasına otomatik eklenir. Editörde Drop launch countdown öğesini de ekleyip ürün kimliğini ayarlayabilirsiniz."
+      }
+    ],
+    "lifecycle": [
+      "Kaydedildi, yayımlanmadı. Alışveriş değişmez.",
+      "Yayımlandı, açılmayı bekliyor. Alışveriş engelli.",
+      "Lansman süresinde. Müşteriler satın alabilir.",
+      "Süre bitti. Alışveriş son ayarı izler."
+    ],
+    "sidePaths": [
+      "Siz iptal ettiniz. Normal alışveriş açıldı.",
+      "Etkin işlerden gizli. Düzenlemek için geri yükleyin."
+    ],
+    "checkout": {
+      "open": "Alışveriş açık",
+      "locked": "Alışveriş engelli",
+      "depends": "Sizin seçiminiz"
+    },
+    "actions": [
+      {
+        "title": "Düzenle",
+        "body": "Adı, ürünleri, zamanı veya bitiş davranışını değiştirin."
+      },
+      {
+        "title": "Çoğalt",
+        "body": "Lansmanı yeni taslak olarak kopyalayın."
+      },
+      {
+        "title": "Lansmanı iptal et",
+        "body": "Yayımlanan lansmanı durdurup alışverişi hemen açın."
+      },
+      {
+        "title": "Arşivle",
+        "body": "Taslak, bitmiş veya iptal edilmiş lansmanı kaldırın."
+      },
+      {
+        "title": "Taslağı geri yükle",
+        "body": "Arşivlenen lansmanı taslak olarak geri getirin."
+      }
+    ],
+    "faqCategories": {
+      "launching": "Lansman",
+      "checkout": "Alışveriş",
+      "managing": "Yönetim",
+      "storefront": "Mağaza"
+    },
+    "faq": [
+      {
+        "q": "Ürünler açılıştan önce görünür mü?",
+        "a": "Evet. Ürünler ve sayaç görünür kalır. Açılışa kadar sadece alışveriş engellenir."
+      },
+      {
+        "q": "Ürün erkenden sepete eklenebilir mi?",
+        "a": "Evet, ancak ödeme ürünün açılışa kadar kullanılamadığını gösterir ve siparişi tamamlatmaz."
+      },
+      {
+        "q": "Açılışı hangi saat belirler?",
+        "a": "Sunucu saati. Cihaz saatini değiştirmek erken açmaz. Sayaç sunucuyu 15 saniyede bir kontrol eder."
+      },
+      {
+        "q": "Hangi saat dilimini seçmeliyim?",
+        "a": "Duyurduğunuz saat dilimini. Başlangıç ve bitiş kesin anlardır; lansman her yerde aynı anda açılır."
+      },
+      {
+        "q": "Kaç etkin lansman olabilir?",
+        "a": "Ücretsiz planda bir: planlı, yayında veya bitmiş ama alışveriş engelli. Taslaklar sınırsızdır. Yenisi için mevcut lansmanı iptal edin."
+      },
+      {
+        "q": "Lansmanı hemen nasıl durdururum?",
+        "a": "⋯ menüsünden Lansmanı iptal et'i seçin. Normal alışveriş hemen açılır."
+      },
+      {
+        "q": "Yayımladıktan sonra düzenleyebilir miyim?",
+        "a": "Evet. Açın, değiştirip kaydedin. Yayımlanmış kalır. Başka oturumda değiştirildiyse önce yenileyin."
+      },
+      {
+        "q": "Neden arşivleyemiyorum?",
+        "a": "Yayımlanan lansmanlar hâlâ alışverişi yönetir. Önce iptal edip sonra arşivleyin."
+      },
+      {
+        "q": "Neden yayımlanamıyor?",
+        "a": "Bitişin gelecekte ve başlangıçtan sonra olduğunu, ürün seçildiğini ve başka etkin lansman olmadığını kontrol edin."
+      },
+      {
+        "q": "Sayaç neden görünmüyor?",
+        "a": "Lansmanın yayımlanıp ürünü içerdiğini kontrol edin. Editör öğesinin ürün kimliği eşleşmeli."
+      },
+      {
+        "q": "Uygunluk kontrol edilemezse ne olur?",
+        "a": "Kesintide süre dışı satışları önlemek için alışveriş bir mesajla duraklatılır. Hizmet yanıt verince açılır."
+      },
+      {
+        "q": "Lansmanı yeniden kullanabilir miyim?",
+        "a": "Evet. Çoğalt ile ürün ve ayarları yeni taslağa kopyalayıp tarihleri değiştirin."
+      }
+    ]
+  }
+}

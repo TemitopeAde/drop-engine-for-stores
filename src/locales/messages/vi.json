@@ -1,0 +1,303 @@
+{
+  "messages": {
+    "selectProduct": "Đặt ID sản phẩm Wix Stores để kết nối bộ đếm này.",
+    "noLaunch": "Chưa có đợt mở bán đã công bố cho sản phẩm này.",
+    "app": "Drop Engine",
+    "language": "Ngôn ngữ",
+    "site": "Trang của bạn",
+    "subtitle": "Tạo dấu ấn cho đợt mở bán tiếp theo.",
+    "drops": "Đợt mở bán",
+    "create": "Tạo đợt mở bán",
+    "edit": "Sửa đợt mở bán",
+    "actions": "Thao tác",
+    "save": "Lưu bản nháp",
+    "publish": "Công bố đợt mở bán",
+    "cancel": "Hủy đợt mở bán",
+    "archive": "Lưu trữ",
+    "restore": "Khôi phục bản nháp",
+    "duplicate": "Nhân bản",
+    "name": "Tên đợt mở bán",
+    "products": "Sản phẩm",
+    "start": "Bắt đầu",
+    "now": "Bây giờ",
+    "end": "Kết thúc",
+    "zone": "Múi giờ",
+    "endBehavior": "Sau khi kết thúc",
+    "RESTORE": "Khôi phục mua hàng bình thường",
+    "BLOCK": "Tiếp tục chặn mua hàng",
+    "DRAFT": "Bản nháp",
+    "SCHEDULED": "Đã lên lịch",
+    "LIVE": "Đang mở",
+    "ENDED": "Đã kết thúc",
+    "CANCELLED": "Đã hủy",
+    "ARCHIVED": "Đã lưu trữ",
+    "empty": "Đợt mở bán tiếp theo bắt đầu ở đây",
+    "emptyHelp": "Chọn sản phẩm và thời gian. Sản phẩm vẫn hiển thị khi mua hàng bị chặn.",
+    "loading": "Đang tải cửa hàng…",
+    "retry": "Thử lại",
+    "back": "Về các đợt mở bán",
+    "search": "Tìm đợt mở bán",
+    "all": "Mọi trạng thái",
+    "catalog": "Chọn sản phẩm",
+    "done": "Xong",
+    "dismiss": "Hủy",
+    "loadMore": "Tải thêm sản phẩm",
+    "selectAllProducts": "Chọn tất cả sản phẩm",
+    "selectAllHelp": "Bao gồm mọi sản phẩm hiển thị trên tất cả trang.",
+    "selectingProducts": "Đang chọn sản phẩm…",
+    "productsFound": "sản phẩm tìm thấy",
+    "stopSelecting": "Dừng chọn",
+    "selectionTooLarge": "Có thể chọn tối đa 10.000 sản phẩm mỗi đợt.",
+    "previousProducts": "Sản phẩm trước",
+    "nextProducts": "Sản phẩm tiếp",
+    "productPage": "Trang",
+    "selected": "đã chọn",
+    "saved": "Đã lưu đợt mở bán",
+    "failed": "Không thể hoàn tất yêu cầu. Hãy thử lại.",
+    "invalidSchedule": "Dùng múi giờ hợp lệ và kết thúc sau bắt đầu. Đổi giờ mơ hồ hoặc bị bỏ qua khi chuyển giờ mùa hè.",
+    "activeLimit": "Gói miễn phí có một đợt đang hoạt động. Hủy đợt hiện tại trước khi công bố đợt khác.",
+    "conflict": "Đợt này đã thay đổi trong phiên khác. Tải lại trước khi lưu.",
+    "productInUse": "Một số sản phẩm thuộc đợt khác. Bỏ chúng hoặc hủy đợt đó.",
+    "inOtherDrop": "Trong đợt khác",
+    "storageLimit": "Bản cài đặt đã đạt giới hạn lưu trữ.",
+    "expiredSchedule": "Chọn thời gian kết thúc trong tương lai trước khi công bố.",
+    "forbidden": "Mở ứng dụng với tư cách chủ trang hoặc cộng tác viên được phép.",
+    "unavailable": "Dữ liệu cửa hàng tạm thời không khả dụng.",
+    "setup": "Bộ sưu tập ứng dụng chưa sẵn sàng. Cài phiên bản có bộ sưu tập và để Wix thiết lập.",
+    "fieldsRequired": "Kiểm tra các ô được đánh dấu.",
+    "noProducts": "Không có sản phẩm hiển thị trên trang này.",
+    "gatingHelp": "Giờ máy chủ điều khiển mua hàng. Hủy sẽ khôi phục mua hàng bình thường ngay.",
+    "free": "Gói miễn phí · 1 đợt đang hoạt động",
+    "stage": "Điều khiển đợt mở bán",
+    "waitlist": "Danh sách chờ",
+    "waitlistTitle": "Nhận thông báo khi mở",
+    "waitlistEmail": "Địa chỉ email",
+    "waitlistConsent": "Gửi email về đợt này. Tôi có thể hủy đăng ký bất kỳ lúc nào.",
+    "waitlistJoin": "Tham gia danh sách chờ",
+    "waitlistJoining": "Đang tham gia…",
+    "waitlistJoined": "Bạn đã ở trong danh sách chờ.",
+    "waitlistAlready": "Email này đã có trong danh sách.",
+    "waitlistLeave": "Rời danh sách chờ",
+    "waitlistLeaving": "Đang rời…",
+    "waitlistLeft": "Bạn đã rời danh sách chờ.",
+    "waitlistInvalid": "Nhập email hợp lệ và xác nhận đồng ý.",
+    "waitlistFull": "Danh sách đã đầy. Quay lại khi đợt mở bán bắt đầu.",
+    "waitlistClosed": "Đã đóng đăng ký cho đợt này.",
+    "rateLimited": "Quá nhiều lần thử. Hãy thử sau.",
+    "proRequired": "Xuất CSV có trong gói Pro.",
+    "waitlistSetting": "Thu thập đăng ký danh sách chờ",
+    "waitlistSettingHelp": "Khách có thể đăng ký qua bộ đếm đến lúc mở. Email mở bán chưa được gửi.",
+    "viewWaitlist": "Xem danh sách chờ",
+    "waitlistFor": "Danh sách chờ",
+    "waitlistSubscribed": "đã đăng ký",
+    "waitlistTotal": "tổng mục",
+    "waitlistUsage": "mục đã dùng trong mọi đợt của gói miễn phí",
+    "waitlistEmpty": "Chưa có đăng ký",
+    "waitlistEmptyHelp": "Khách có thể đăng ký từ trang sản phẩm khi đợt đã lên lịch.",
+    "waitlistOff": "Đăng ký danh sách chờ đã tắt cho đợt này.",
+    "waitlistJoinedAt": "Ngày tham gia",
+    "waitlistStatus": "Trạng thái",
+    "SUBSCRIBED": "Đã đăng ký",
+    "UNSUBSCRIBED": "Đã hủy đăng ký",
+    "markUnsubscribed": "Đánh dấu đã hủy đăng ký",
+    "removeEntry": "Xóa",
+    "confirmRemove": "Xác nhận xóa",
+    "removeHelp": "Xóa bỏ email và giải phóng dung lượng miễn phí. Hủy đăng ký giữ bản ghi và chặn email về sau.",
+    "exportCsv": "Xuất CSV",
+    "exporting": "Đang xuất…",
+    "entryUpdated": "Đã cập nhật danh sách chờ",
+    "previousPage": "Trước",
+    "nextPage": "Tiếp",
+    "notificationsPending": "Email mở bán chưa kết nối. Đăng ký và sự đồng ý được lưu để liên hệ sau khi thiết lập thông báo.",
+    "opens": "Đợt này sắp mở",
+    "live": "Đợt mở bán đang mở",
+    "ended": "Đợt này đã kết thúc",
+    "beforeViolation": "Không thể mua sản phẩm trước khi đợt mở bán bắt đầu.",
+    "afterViolation": "Đợt này đã kết thúc. Mua hàng đang đóng.",
+    "outageViolation": "Không thể xác minh tình trạng bán. Hãy thử lại sau ít phút.",
+    "days": "Ngày",
+    "hours": "Giờ",
+    "minutes": "Phút",
+    "seconds": "Giây",
+    "editor": "Đếm ngược mở bán",
+    "content": "Nội dung",
+    "typography": "Kiểu chữ",
+    "colors": "Màu sắc",
+    "countdown": "Đếm ngược",
+    "form": "Biểu mẫu",
+    "layout": "Bố cục",
+    "borders": "Đường viền",
+    "responsive": "Thích ứng",
+    "advanced": "Nâng cao",
+    "heading": "Tiêu đề",
+    "textColor": "Màu chữ",
+    "background": "Nền",
+    "font": "Phông chữ",
+    "reset": "Đặt lại giao diện",
+    "padding": "Khoảng đệm",
+    "gap": "Khoảng cách",
+    "radius": "Bán kính góc",
+    "maxWidth": "Chiều rộng tối đa",
+    "compact": "Gọn trên di động",
+    "showSeconds": "Hiện giây",
+    "saveSettings": "Lưu cài đặt",
+    "settingsSaved": "Đã lưu cài đặt",
+    "pluginPlacement": "Vị trí plugin đếm ngược",
+    "pluginAdded": "Đã thêm",
+    "pluginNotAdded": "Chưa thêm",
+    "pluginUnknown": "Không thể kiểm tra",
+    "pluginChecking": "Đang kiểm tra vị trí…",
+    "pluginAdding": "Đang thêm plugin…",
+    "pluginCheck": "Kiểm tra vị trí",
+    "pluginAdd": "Thêm plugin",
+    "pluginCheckingHelp": "Đang kiểm tra bộ đếm trên trang sản phẩm.",
+    "pluginAddingHelp": "Làm theo các bước Wix để thêm bộ đếm vào trang sản phẩm.",
+    "pluginAddedHelp": "Bộ đếm đã đặt trên trang sản phẩm.",
+    "pluginMissingHelp": "Thêm bộ đếm vào trang sản phẩm để hiển thị thời gian mở bán.",
+    "pluginCheckFailed": "Không thể kiểm tra vị trí. Hãy thử lại.",
+    "pluginConfirmationFailed": "Yêu cầu thêm đã xong nhưng chưa kiểm tra được vị trí. Hãy kiểm tra lại.",
+    "pluginStillMissing": "Bộ đếm chưa được đặt. Kiểm tra hoặc thêm lại.",
+    "pluginAddCancelled": "Đã hủy việc thêm. Bạn có thể thử lại.",
+    "pluginPublishFirst": "Công bố trang trước, rồi thêm plugin.",
+    "pluginSlotOccupied": "Vị trí đã có nội dung. Chỉnh trong trình sửa trang rồi kiểm tra lại.",
+    "pluginAddFailed": "Không thể thêm plugin. Hãy thử lại.",
+    "guide": "Hướng dẫn và FAQ",
+    "guideEyebrow": "Trung tâm trợ giúp",
+    "guideTitle": "Cách Drop Engine hoạt động",
+    "guideIntro": "Lên lịch mở bán đúng thời điểm và hiển thị đếm ngược cho khách.",
+    "guideSteps": "Bắt đầu với năm bước",
+    "guideStepsHelp": "Từ bảng điều khiển trống đến mở bán trong vài phút.",
+    "guideStep": "Bước",
+    "guideStatuses": "Vòng đời mở bán",
+    "guideStatusesHelp": "Mọi đợt đã công bố đi qua các giai đoạn theo giờ máy chủ.",
+    "guideSidePaths": "Khi cần",
+    "guideActions": "Thao tác đợt mở bán",
+    "guideActionsHelp": "Mở menu ⋯ của đợt trong danh sách.",
+    "faq": "Câu hỏi thường gặp",
+    "faqHelp": "Giải đáp về mở bán, mua hàng và cửa hàng.",
+    "faqSearch": "Tìm câu hỏi",
+    "faqAll": "Tất cả",
+    "faqEmpty": "Không có câu hỏi khớp tìm kiếm.",
+    "faqClear": "Xóa tìm kiếm",
+    "guideJump": "Đi tới",
+    "guideCta": "Tạo đợt mở bán đầu tiên",
+    "guideCtaTitle": "Sẵn sàng cho đợt tiếp theo?"
+  },
+  "guide": {
+    "steps": [
+      {
+        "title": "Tạo đợt mở bán",
+        "body": "Chọn Tạo đợt mở bán, đặt tên và chọn sản phẩm Wix Stores. Tối đa 10.000 sản phẩm hoặc cả danh mục bằng Chọn tất cả sản phẩm."
+      },
+      {
+        "title": "Đặt thời gian",
+        "body": "Chọn bắt đầu, kết thúc và múi giờ. Bây giờ bắt đầu ngay. Kết thúc phải sau bắt đầu; đổi giờ mơ hồ hoặc bị bỏ qua khi chuyển giờ mùa hè."
+      },
+      {
+        "title": "Chọn hành vi sau kết thúc",
+        "body": "Khôi phục mua hàng bình thường mở mua hàng khi kết thúc. Tiếp tục chặn mua hàng giữ chặn đến khi hủy đợt."
+      },
+      {
+        "title": "Lưu hoặc công bố",
+        "body": "Bản nháp không ảnh hưởng cửa hàng. Công bố kích hoạt lịch: Đã lên lịch, Đang mở, Đã kết thúc."
+      },
+      {
+        "title": "Hiện bộ đếm",
+        "body": "Plugin tự thêm vào trang sản phẩm Wix Stores. Bạn cũng có thể thêm Drop launch countdown trong trình sửa và đặt ID sản phẩm."
+      }
+    ],
+    "lifecycle": [
+      "Đã lưu, chưa công bố. Không ảnh hưởng mua hàng.",
+      "Đã công bố, chờ mở. Mua hàng bị chặn.",
+      "Trong thời gian mở. Khách có thể mua.",
+      "Thời gian đã hết. Mua hàng theo cài đặt kết thúc."
+    ],
+    "sidePaths": [
+      "Bạn đã hủy. Mua hàng bình thường được khôi phục.",
+      "Ẩn khỏi công việc đang làm. Khôi phục để sửa."
+    ],
+    "checkout": {
+      "open": "Mua hàng mở",
+      "locked": "Mua hàng bị chặn",
+      "depends": "Tùy bạn"
+    },
+    "actions": [
+      {
+        "title": "Sửa",
+        "body": "Đổi tên, sản phẩm, lịch hoặc hành vi kết thúc."
+      },
+      {
+        "title": "Nhân bản",
+        "body": "Sao chép đợt thành bản nháp mới."
+      },
+      {
+        "title": "Hủy đợt mở bán",
+        "body": "Dừng đợt đã công bố và mở mua hàng ngay."
+      },
+      {
+        "title": "Lưu trữ",
+        "body": "Cất bản nháp hoặc đợt đã kết thúc hay hủy."
+      },
+      {
+        "title": "Khôi phục bản nháp",
+        "body": "Đưa đợt đã lưu trữ về bản nháp."
+      }
+    ],
+    "faqCategories": {
+      "launching": "Mở bán",
+      "checkout": "Mua hàng",
+      "managing": "Quản lý",
+      "storefront": "Cửa hàng"
+    },
+    "faq": [
+      {
+        "q": "Sản phẩm có hiển thị trước khi mở không?",
+        "a": "Có. Sản phẩm và bộ đếm vẫn hiển thị. Chỉ mua hàng bị chặn đến khi mở."
+      },
+      {
+        "q": "Có thể thêm sản phẩm vào giỏ sớm không?",
+        "a": "Có, nhưng thanh toán báo chưa bán đến lúc mở và không cho hoàn tất đơn."
+      },
+      {
+        "q": "Đồng hồ nào quyết định lúc mở?",
+        "a": "Đồng hồ máy chủ. Đổi giờ thiết bị không mở sớm. Bộ đếm kiểm tra máy chủ mỗi 15 giây."
+      },
+      {
+        "q": "Nên dùng múi giờ nào?",
+        "a": "Múi giờ trong thông báo mở bán. Bắt đầu và kết thúc là thời điểm chính xác nên mở đồng thời mọi nơi."
+      },
+      {
+        "q": "Có thể có bao nhiêu đợt hoạt động?",
+        "a": "Gói miễn phí có một: lên lịch, đang mở hoặc kết thúc nhưng vẫn chặn mua. Bản nháp không giới hạn. Hủy đợt hiện tại trước khi công bố đợt khác."
+      },
+      {
+        "q": "Làm sao dừng ngay?",
+        "a": "Mở menu ⋯ và chọn Hủy đợt mở bán. Mua hàng bình thường được khôi phục ngay."
+      },
+      {
+        "q": "Có thể sửa sau khi công bố không?",
+        "a": "Có. Mở, sửa và lưu. Đợt vẫn được công bố. Nếu người khác đã sửa, tải lại trước khi lưu."
+      },
+      {
+        "q": "Tại sao không lưu trữ được?",
+        "a": "Đợt đã công bố còn điều khiển mua hàng. Hủy trước, rồi lưu trữ."
+      },
+      {
+        "q": "Tại sao không công bố được?",
+        "a": "Kiểm tra kết thúc trong tương lai và sau bắt đầu, có sản phẩm được chọn và không có đợt khác đang hoạt động."
+      },
+      {
+        "q": "Tại sao bộ đếm không hiện?",
+        "a": "Kiểm tra đợt đã công bố và chứa sản phẩm. ID của phần tử trong trình sửa phải khớp."
+      },
+      {
+        "q": "Nếu không kiểm tra được tình trạng bán?",
+        "a": "Mua hàng tạm dừng kèm thông báo để tránh bán ngoài thời gian khi có sự cố. Mở lại khi dịch vụ phản hồi."
+      },
+      {
+        "q": "Có thể dùng lại đợt mở bán không?",
+        "a": "Có. Nhân bản sao chép sản phẩm và cài đặt sang bản nháp mới, rồi đổi ngày."
+      }
+    ]
+  }
+}

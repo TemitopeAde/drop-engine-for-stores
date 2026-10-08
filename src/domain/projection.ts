@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { blocked, controlsPurchasing, phase, type Drop } from "./drop";
+import { acceptsSignups } from "./waitlist";
 export const projectionSchema = z.object({
   serverNow: z.number(),
   drop: z
@@ -9,6 +10,7 @@ export const projectionSchema = z.object({
       phase: z.enum(["SCHEDULED", "LIVE", "ENDED"]),
       startsAt: z.number(),
       endsAt: z.number(),
+      waitlist: z.boolean().default(false),
     })
     .nullable(),
 });
@@ -31,5 +33,6 @@ export function projectDrop(drop: Drop, now: number) {
     startsAt: drop.startsAt,
     endsAt: drop.endsAt,
     blocked: blocked(drop, now),
+    waitlist: acceptsSignups(drop, now),
   };
 }

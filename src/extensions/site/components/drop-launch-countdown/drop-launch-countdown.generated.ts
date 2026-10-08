@@ -161,10 +161,87 @@ export const editorElement = {
           "marginBottom": {},
           "marginInlineStart": {},
           "marginInlineEnd": {},
+          "gap": {
+            "defaultValue": "20px"
+          },
           "flexDirection": {},
           "justifyContent": {},
           "alignItems": {},
           "alignSelf": {}
+        },
+        "elements": {
+          "dropLaunchCountdownNumber": {
+            "elementType": "inlineElement",
+            "inlineElement": {
+              "selector": ".drop-launch-countdown-number",
+              "displayName": "Number",
+              "behaviors": {
+                "removable": true,
+                "selectable": false
+              },
+              "cssProperties": {
+                "font": {
+                  "defaultValue": "700 28.8px/1.2 system-ui,sans-serif"
+                },
+                "lineHeight": {
+                  "defaultValue": "1.2"
+                },
+                "letterSpacing": {},
+                "textDecorationLine": {},
+                "textTransform": {},
+                "textAlign": {},
+                "textShadow": {},
+                "color": {},
+                "marginInlineStart": {},
+                "marginInlineEnd": {},
+                "display": {
+                  "display": {
+                    "displayValues": [
+                      "none",
+                      "inline"
+                    ]
+                  }
+                },
+                "alignSelf": {}
+              }
+            }
+          },
+          "dropLaunchCountdownLabel": {
+            "elementType": "inlineElement",
+            "inlineElement": {
+              "selector": ".drop-launch-countdown-label",
+              "displayName": "Label",
+              "behaviors": {
+                "removable": true,
+                "selectable": false
+              },
+              "cssProperties": {
+                "font": {
+                  "defaultValue": "16px/1.5 system-ui,sans-serif"
+                },
+                "lineHeight": {
+                  "defaultValue": "1.5"
+                },
+                "letterSpacing": {},
+                "textDecorationLine": {},
+                "textTransform": {},
+                "textAlign": {},
+                "textShadow": {},
+                "color": {},
+                "marginInlineStart": {},
+                "marginInlineEnd": {},
+                "display": {
+                  "display": {
+                    "displayValues": [
+                      "none",
+                      "inline"
+                    ]
+                  }
+                },
+                "alignSelf": {}
+              }
+            }
+          }
         }
       }
     }

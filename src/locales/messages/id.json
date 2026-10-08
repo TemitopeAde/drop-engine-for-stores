@@ -1,0 +1,303 @@
+{
+  "messages": {
+    "selectProduct": "Atur ID produk Wix Stores untuk menghubungkan hitung mundur ini.",
+    "noLaunch": "Belum ada peluncuran terbit untuk produk ini.",
+    "app": "Drop Engine",
+    "language": "Bahasa",
+    "site": "Situs Anda",
+    "subtitle": "Buat peluncuran berikutnya berkesan.",
+    "drops": "Peluncuran",
+    "create": "Buat peluncuran",
+    "edit": "Edit peluncuran",
+    "actions": "Tindakan",
+    "save": "Simpan draf",
+    "publish": "Terbitkan peluncuran",
+    "cancel": "Batalkan peluncuran",
+    "archive": "Arsipkan",
+    "restore": "Pulihkan draf",
+    "duplicate": "Duplikat",
+    "name": "Nama peluncuran",
+    "products": "Produk",
+    "start": "Mulai",
+    "now": "Sekarang",
+    "end": "Selesai",
+    "zone": "Zona waktu",
+    "endBehavior": "Setelah peluncuran berakhir",
+    "RESTORE": "Pulihkan pembelian normal",
+    "BLOCK": "Tetap blokir pembelian",
+    "DRAFT": "Draf",
+    "SCHEDULED": "Terjadwal",
+    "LIVE": "Berlangsung",
+    "ENDED": "Berakhir",
+    "CANCELLED": "Dibatalkan",
+    "ARCHIVED": "Diarsipkan",
+    "empty": "Peluncuran berikutnya dimulai di sini",
+    "emptyHelp": "Pilih produk dan periode. Produk tetap terlihat saat pembelian diblokir.",
+    "loading": "Memuat toko Anda…",
+    "retry": "Coba lagi",
+    "back": "Kembali ke peluncuran",
+    "search": "Cari peluncuran",
+    "all": "Semua status",
+    "catalog": "Pilih produk",
+    "done": "Selesai",
+    "dismiss": "Batal",
+    "loadMore": "Muat produk lain",
+    "selectAllProducts": "Pilih semua produk",
+    "selectAllHelp": "Mencakup semua produk terlihat di semua halaman.",
+    "selectingProducts": "Memilih produk…",
+    "productsFound": "produk ditemukan",
+    "stopSelecting": "Hentikan pemilihan",
+    "selectionTooLarge": "Anda dapat memilih hingga 10.000 produk per peluncuran.",
+    "previousProducts": "Produk sebelumnya",
+    "nextProducts": "Produk berikutnya",
+    "productPage": "Halaman",
+    "selected": "dipilih",
+    "saved": "Peluncuran disimpan",
+    "failed": "Permintaan gagal diselesaikan. Coba lagi.",
+    "invalidSchedule": "Gunakan zona waktu valid dan akhir setelah mulai. Ubah waktu ambigu atau terlewati akibat pergantian waktu musim panas.",
+    "activeLimit": "Paket gratis mencakup satu peluncuran aktif. Batalkan yang saat ini sebelum menerbitkan lainnya.",
+    "conflict": "Peluncuran berubah di sesi lain. Muat ulang sebelum menyimpan.",
+    "productInUse": "Beberapa produk sudah ada dalam peluncuran lain. Hapus atau batalkan peluncuran itu.",
+    "inOtherDrop": "Dalam peluncuran lain",
+    "storageLimit": "Instalasi ini mencapai batas penyimpanan.",
+    "expiredSchedule": "Pilih waktu akhir mendatang sebelum menerbitkan.",
+    "forbidden": "Buka aplikasi sebagai pemilik situs atau kolaborator berwenang.",
+    "unavailable": "Data toko sementara tidak tersedia.",
+    "setup": "Koleksi aplikasi belum siap. Instal versi yang memuat koleksi dan biarkan Wix menyiapkannya.",
+    "fieldsRequired": "Periksa kolom yang ditandai.",
+    "noProducts": "Tidak ada produk terlihat di halaman ini.",
+    "gatingHelp": "Waktu server mengatur pembelian. Pembatalan langsung memulihkan pembelian normal.",
+    "free": "Paket gratis · 1 peluncuran aktif",
+    "stage": "Kontrol peluncuran",
+    "waitlist": "Daftar tunggu",
+    "waitlistTitle": "Dapatkan kabar saat dibuka",
+    "waitlistEmail": "Alamat email",
+    "waitlistConsent": "Kirim email tentang peluncuran ini. Saya dapat berhenti berlangganan kapan saja.",
+    "waitlistJoin": "Gabung daftar tunggu",
+    "waitlistJoining": "Bergabung…",
+    "waitlistJoined": "Anda ada dalam daftar tunggu.",
+    "waitlistAlready": "Email ini sudah terdaftar.",
+    "waitlistLeave": "Keluar dari daftar tunggu",
+    "waitlistLeaving": "Keluar…",
+    "waitlistLeft": "Anda keluar dari daftar tunggu.",
+    "waitlistInvalid": "Masukkan email valid dan konfirmasikan persetujuan.",
+    "waitlistFull": "Daftar penuh. Kembali saat peluncuran dibuka.",
+    "waitlistClosed": "Pendaftaran peluncuran ini ditutup.",
+    "rateLimited": "Terlalu banyak percobaan. Coba nanti.",
+    "proRequired": "Ekspor CSV tersedia dalam paket Pro.",
+    "waitlistSetting": "Kumpulkan pendaftaran daftar tunggu",
+    "waitlistSettingHelp": "Pelanggan dapat bergabung lewat hitung mundur hingga pembukaan. Email peluncuran belum dikirim.",
+    "viewWaitlist": "Lihat daftar tunggu",
+    "waitlistFor": "Daftar tunggu",
+    "waitlistSubscribed": "berlangganan",
+    "waitlistTotal": "total entri",
+    "waitlistUsage": "entri terpakai di semua peluncuran paket gratis",
+    "waitlistEmpty": "Belum ada pendaftar",
+    "waitlistEmptyHelp": "Pelanggan dapat mendaftar di halaman produk saat peluncuran terjadwal.",
+    "waitlistOff": "Pendaftaran dinonaktifkan untuk peluncuran ini.",
+    "waitlistJoinedAt": "Tanggal bergabung",
+    "waitlistStatus": "Status",
+    "SUBSCRIBED": "Berlangganan",
+    "UNSUBSCRIBED": "Berhenti berlangganan",
+    "markUnsubscribed": "Tandai berhenti berlangganan",
+    "removeEntry": "Hapus",
+    "confirmRemove": "Konfirmasi hapus",
+    "removeHelp": "Menghapus menghilangkan email dan membebaskan kapasitas gratis. Berhenti berlangganan menyimpan entri dan memblokir email mendatang.",
+    "exportCsv": "Ekspor CSV",
+    "exporting": "Mengekspor…",
+    "entryUpdated": "Daftar tunggu diperbarui",
+    "previousPage": "Sebelumnya",
+    "nextPage": "Berikutnya",
+    "notificationsPending": "Email peluncuran belum terhubung. Pendaftaran dan persetujuan disimpan agar Anda dapat menghubungi pelanggan setelah notifikasi disiapkan.",
+    "opens": "Peluncuran ini segera dibuka",
+    "live": "Peluncuran berlangsung",
+    "ended": "Peluncuran ini berakhir",
+    "beforeViolation": "Produk ini belum dapat dibeli hingga peluncuran dibuka.",
+    "afterViolation": "Peluncuran ini berakhir. Pembelian ditutup.",
+    "outageViolation": "Ketersediaan tidak dapat diperiksa. Coba sebentar lagi.",
+    "days": "Hari",
+    "hours": "Jam",
+    "minutes": "Menit",
+    "seconds": "Detik",
+    "editor": "Hitung mundur peluncuran",
+    "content": "Konten",
+    "typography": "Tipografi",
+    "colors": "Warna",
+    "countdown": "Hitung mundur",
+    "form": "Formulir",
+    "layout": "Tata letak",
+    "borders": "Batas",
+    "responsive": "Responsif",
+    "advanced": "Lanjutan",
+    "heading": "Judul",
+    "textColor": "Warna teks",
+    "background": "Latar belakang",
+    "font": "Font",
+    "reset": "Atur ulang tema",
+    "padding": "Ruang dalam",
+    "gap": "Jarak",
+    "radius": "Radius sudut",
+    "maxWidth": "Lebar maksimum",
+    "compact": "Ringkas di ponsel",
+    "showSeconds": "Tampilkan detik",
+    "saveSettings": "Simpan pengaturan",
+    "settingsSaved": "Pengaturan disimpan",
+    "pluginPlacement": "Penempatan plugin hitung mundur",
+    "pluginAdded": "Ditambahkan",
+    "pluginNotAdded": "Belum ditambahkan",
+    "pluginUnknown": "Tidak dapat diperiksa",
+    "pluginChecking": "Memeriksa penempatan…",
+    "pluginAdding": "Menambahkan plugin…",
+    "pluginCheck": "Periksa penempatan",
+    "pluginAdd": "Tambahkan plugin",
+    "pluginCheckingHelp": "Memeriksa hitung mundur di halaman produk.",
+    "pluginAddingHelp": "Ikuti langkah Wix untuk menambahkan hitung mundur ke halaman produk.",
+    "pluginAddedHelp": "Hitung mundur ditempatkan di halaman produk.",
+    "pluginMissingHelp": "Tambahkan hitung mundur ke halaman produk untuk menampilkan periode peluncuran.",
+    "pluginCheckFailed": "Penempatan tidak dapat diperiksa. Coba lagi.",
+    "pluginConfirmationFailed": "Permintaan penambahan selesai, tetapi penempatan belum diperiksa. Periksa lagi.",
+    "pluginStillMissing": "Hitung mundur belum ditempatkan. Periksa atau tambahkan lagi.",
+    "pluginAddCancelled": "Penambahan dibatalkan. Anda dapat mencoba lagi.",
+    "pluginPublishFirst": "Terbitkan situs dahulu, lalu tambahkan plugin.",
+    "pluginSlotOccupied": "Slot terisi. Ubah penempatan di editor situs dan periksa lagi.",
+    "pluginAddFailed": "Plugin tidak dapat ditambahkan. Coba lagi.",
+    "guide": "Panduan dan FAQ",
+    "guideEyebrow": "Pusat bantuan",
+    "guideTitle": "Cara kerja Drop Engine",
+    "guideIntro": "Jadwalkan peluncuran yang membuka pembelian tepat waktu dan menampilkan hitung mundur kepada pelanggan.",
+    "guideSteps": "Mulai dalam lima langkah",
+    "guideStepsHelp": "Dari dasbor kosong ke peluncuran aktif dalam beberapa menit.",
+    "guideStep": "Langkah",
+    "guideStatuses": "Siklus peluncuran",
+    "guideStatusesHelp": "Setiap peluncuran terbit melewati tahap ini sesuai waktu server.",
+    "guideSidePaths": "Saat Anda membutuhkan",
+    "guideActions": "Tindakan peluncuran",
+    "guideActionsHelp": "Buka menu ⋯ pada peluncuran di daftar.",
+    "faq": "Pertanyaan umum",
+    "faqHelp": "Jawaban tentang peluncuran, pembelian, dan toko.",
+    "faqSearch": "Cari pertanyaan",
+    "faqAll": "Semua",
+    "faqEmpty": "Tidak ada pertanyaan yang sesuai pencarian.",
+    "faqClear": "Hapus pencarian",
+    "guideJump": "Lompat ke",
+    "guideCta": "Buat peluncuran pertama",
+    "guideCtaTitle": "Siap untuk peluncuran berikutnya?"
+  },
+  "guide": {
+    "steps": [
+      {
+        "title": "Buat peluncuran",
+        "body": "Pilih Buat peluncuran, beri nama, lalu pilih produk Wix Stores. Hingga 10.000 produk atau seluruh katalog lewat Pilih semua produk."
+      },
+      {
+        "title": "Atur periode",
+        "body": "Pilih mulai, selesai, dan zona waktu. Sekarang langsung memulai. Akhir harus setelah mulai; ubah waktu ambigu atau terlewati saat pergantian waktu musim panas."
+      },
+      {
+        "title": "Pilih perilaku akhir",
+        "body": "Pulihkan pembelian normal membuka pembelian setelah selesai. Tetap blokir pembelian menahannya hingga Anda membatalkan peluncuran."
+      },
+      {
+        "title": "Simpan atau terbitkan",
+        "body": "Draf tidak mengubah toko. Terbitkan mengaktifkan periode: Terjadwal, Berlangsung, Berakhir."
+      },
+      {
+        "title": "Tampilkan hitung mundur",
+        "body": "Plugin ditambahkan otomatis ke halaman produk Wix Stores. Anda juga dapat menambah Drop launch countdown di editor dan menentukan ID produk."
+      }
+    ],
+    "lifecycle": [
+      "Disimpan, belum terbit. Pembelian tidak terpengaruh.",
+      "Terbit, menunggu pembukaan. Pembelian diblokir.",
+      "Dalam periode. Pelanggan dapat membeli.",
+      "Periode berakhir. Pembelian mengikuti pengaturan akhir."
+    ],
+    "sidePaths": [
+      "Dibatalkan oleh Anda. Pembelian normal dipulihkan.",
+      "Disembunyikan dari pekerjaan aktif. Pulihkan untuk mengedit."
+    ],
+    "checkout": {
+      "open": "Pembelian terbuka",
+      "locked": "Pembelian diblokir",
+      "depends": "Pilihan Anda"
+    },
+    "actions": [
+      {
+        "title": "Edit",
+        "body": "Ubah nama, produk, periode, atau perilaku akhir."
+      },
+      {
+        "title": "Duplikat",
+        "body": "Salin peluncuran menjadi draf baru."
+      },
+      {
+        "title": "Batalkan peluncuran",
+        "body": "Hentikan peluncuran terbit dan langsung buka pembelian."
+      },
+      {
+        "title": "Arsipkan",
+        "body": "Simpan draf atau peluncuran berakhir atau dibatalkan."
+      },
+      {
+        "title": "Pulihkan draf",
+        "body": "Kembalikan peluncuran yang diarsipkan sebagai draf."
+      }
+    ],
+    "faqCategories": {
+      "launching": "Peluncuran",
+      "checkout": "Pembelian",
+      "managing": "Pengelolaan",
+      "storefront": "Toko"
+    },
+    "faq": [
+      {
+        "q": "Apakah produk terlihat sebelum pembukaan?",
+        "a": "Ya. Produk dan hitung mundur tetap terlihat. Hanya pembelian diblokir hingga pembukaan."
+      },
+      {
+        "q": "Bisakah produk masuk keranjang lebih awal?",
+        "a": "Ya, tetapi checkout memberi tahu produk belum tersedia hingga pembukaan dan mencegah penyelesaian pesanan."
+      },
+      {
+        "q": "Jam mana menentukan pembukaan?",
+        "a": "Jam server. Mengubah waktu perangkat tidak membuka lebih awal. Hitung mundur memeriksa server setiap 15 detik."
+      },
+      {
+        "q": "Zona waktu mana yang dipakai?",
+        "a": "Zona yang diumumkan. Awal dan akhir adalah saat tepat, jadi peluncuran dibuka serentak di mana pun."
+      },
+      {
+        "q": "Berapa peluncuran aktif yang diizinkan?",
+        "a": "Gratis mencakup satu: terjadwal, berlangsung, atau berakhir dengan pembelian diblokir. Draf tidak dibatasi. Batalkan yang saat ini sebelum menerbitkan lainnya."
+      },
+      {
+        "q": "Bagaimana menghentikannya langsung?",
+        "a": "Buka menu ⋯ dan pilih Batalkan peluncuran. Pembelian normal langsung dipulihkan."
+      },
+      {
+        "q": "Bisakah mengedit setelah terbit?",
+        "a": "Ya. Buka, ubah, dan simpan. Tetap terbit. Jika orang lain mengubahnya, muat ulang dahulu."
+      },
+      {
+        "q": "Mengapa tidak bisa diarsipkan?",
+        "a": "Peluncuran terbit masih mengatur pembelian. Batalkan dulu, lalu arsipkan."
+      },
+      {
+        "q": "Mengapa gagal diterbitkan?",
+        "a": "Periksa akhir mendatang setelah awal, produk dipilih, dan tidak ada peluncuran aktif lain."
+      },
+      {
+        "q": "Mengapa hitung mundur tidak terlihat?",
+        "a": "Periksa peluncuran terbit dan memuat produk tersebut. ID produk elemen editor harus cocok."
+      },
+      {
+        "q": "Bagaimana jika ketersediaan tidak dapat diperiksa?",
+        "a": "Pembelian dijeda dengan pesan untuk mencegah penjualan di luar periode saat gangguan. Dibuka lagi ketika layanan merespons."
+      },
+      {
+        "q": "Bisakah menggunakan peluncuran lagi?",
+        "a": "Ya. Duplikat menyalin produk dan pengaturan ke draf baru, lalu ubah tanggalnya."
+      }
+    ]
+  }
+}

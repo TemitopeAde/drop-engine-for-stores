@@ -1,229 +1,359 @@
-import { useEffect, useState } from "react";
-import { widget, inputs } from "@wix/editor";
+import { useEffect, useState, type ReactNode } from "react";
+import { inputs } from "@wix/editor";
 import {
-  SidePanel,
-  WixDesignSystemProvider,
-  Input,
-  FormField,
+  Box,
   Button,
+  FillPreview,
+  FormField,
+  Input,
+  SegmentedToggle,
+  SidePanel,
+  Slider,
+  Text,
+  TextButton,
+  ToggleSwitch,
+  WixDesignSystemProvider,
 } from "@wix/design-system";
+import { RevertReset } from "@wix/wix-ui-icons-common";
 import "@wix/design-system/styles.global.css";
 import {
-  defaultWidgetSettings,
-  parseWidgetSettings,
   widgetSettingsSchema,
   type WidgetSettings,
 } from "../../../../domain/widget-settings";
+import { useWidgetSettings } from "./use-widget-settings";
 import { t, type MessageKey } from "../../../../locales/en";
-const sections: MessageKey[] = [
-  "content",
-  "typography",
-  "colors",
-  "countdown",
-  "layout",
-  "borders",
-  "responsive",
-  "advanced",
-];
-export default function Panel() {
-  const [settings, setSettings] = useState<WidgetSettings>(
-    defaultWidgetSettings,
+import { tp } from "../../../../locales/plugin.en";
+
+type Tab = "settings" | "design";
+type NumberKey = "padding" | "gap" | "radius" | "maxWidth";
+type ToggleKey = "showName" | "showSeconds" | "compact";
+type ColorKey = "textColor" | "background" | "accentColor";
+
+// Theme tokens (var(--wst-…)) resolve on the site; the panel shows the fallback.
+function fontLabel(font: string) {
+  if (font.trim().startsWith("var(")) return tp("themeFont");
+  const match = font.match(/(\d+(?:\.\d+)?px)(?:\/\S+)?\s+(.+)$/);
+  if (!match) return tp("customFont");
+  const family = match[2].split(",")[0].replace(/["']/g, "").trim();
+  return `${family} · ${match[1]}`;
+}
+
+function Row({
+  label,
+  help,
+  children,
+}: {
+  label: string;
+  help?: string;
+  children: ReactNode;
+}) {
+  return (
+    <Box verticalAlign="middle" align="space-between" gap="SP2">
+      <Box direction="vertical" style={{ flex: "1 1 auto", minWidth: 0 }}>
+        <Text size="small" weight="normal">
+          {label}
+        </Text>
+        {help && (
+          <Text size="tiny" secondary>
+            {help}
+          </Text>
+        )}
+      </Box>
+      {children}
+    </Box>
   );
-  const [ready, setReady] = useState(false),
-    [busy, setBusy] = useState(false),
-    [message, setMessage] = useState("");
-  useEffect(() => {
-    let active = true;
-    widget
-      .getProp("drop-settings")
-      .then((value) => {
-        if (active) {
-          setSettings(parseWidgetSettings(value || null));
-          setReady(true);
-        }
-      })
-      .catch(() => {
-        if (active) setMessage(t("failed"));
-      });
-    return () => {
-      active = false;
-    };
-  }, []);
-  function change<K extends keyof WidgetSettings>(
-    key: K,
-    value: WidgetSettings[K],
-  ) {
-    setSettings((old) => ({ ...old, [key]: value }));
-    setMessage("");
-  }
-  async function save() {
-    setBusy(true);
-    setMessage("");
-    try {
-      const value = widgetSettingsSchema.parse(settings);
-      // Wix replaces the preload list. This widget currently has a single font token.
-      await widget.setPreloadFonts([value.font]);
-      const serialized = JSON.stringify(value);
-      await widget.setProp("drop-settings", serialized);
-      if ((await widget.getProp("drop-settings")) !== serialized)
-        throw new Error("persistence");
-      setMessage(t("settingsSaved"));
-    } catch {
-      setMessage(t("failed"));
-    } finally {
-      setBusy(false);
-    }
-  }
-  const number = (
-    key: "padding" | "gap" | "radius" | "maxWidth",
-    min: number,
-    max: number,
-  ) => (
-    <FormField label={t(key)}>
-      <Input
-        ariaLabel={t(key)}
-        type="number"
-        value={String(settings[key])}
-        min={min}
-        max={max}
-        disabled={busy || !ready}
-        onChange={(event) => change(key, Number(event.target.value))}
-      />
+}
+
+function RangeField({
+  label,
+  value,
+  min,
+  max,
+  step = 1,
+  disabled,
+  onCommit,
+}: {
+  label: string;
+  value: number;
+  min: number;
+  max: number;
+  step?: number;
+  disabled: boolean;
+  onCommit: (value: number) => void;
+}) {
+  // Local draft keeps dragging and typing smooth; the setting is written once committed.
+  const [draft, setDraft] = useState(String(value));
+  useEffect(() => setDraft(String(value)), [value]);
+  const commit = (raw: string | number) => {
+    const next = Math.min(max, Math.max(min, Math.round(Number(raw))));
+    if (Number.isFinite(next) && next !== value) onCommit(next);
+    else setDraft(String(value));
+  };
+  return (
+    <FormField label={label}>
+      <Box verticalAlign="middle" gap="SP2">
+        <Box direction="vertical" width="100%">
+          <Slider
+            min={min}
+            max={max}
+            step={step}
+            value={Number(draft) || min}
+            displayMarks={false}
+            displayTooltip={false}
+            disabled={disabled}
+            onChange={(next) => setDraft(String(next))}
+            onAfterChange={(next) => commit(next as number)}
+          />
+        </Box>
+        <Box width="76px" minWidth="76px">
+          <Input
+            size="small"
+            type="number"
+            ariaLabel={label}
+            value={draft}
+            min={min}
+            max={max}
+            disabled={disabled}
+            suffix={<Input.Affix>px</Input.Affix>}
+            onChange={(event) => setDraft(event.target.value)}
+            onBlur={() => commit(draft)}
+            onEnterPressed={() => commit(draft)}
+          />
+        </Box>
+      </Box>
     </FormField>
   );
-  const toggle = (
-    key: "compact" | "showSeconds" | "showName",
-    label: MessageKey,
-  ) => (
-    <label style={{ display: "flex", gap: 8, padding: "8px 0" }}>
-      <input
-        type="checkbox"
-        checked={settings[key]}
-        disabled={busy || !ready}
-        onChange={(event) => change(key, event.target.checked)}
-      />
-      {t(label)}
-    </label>
+}
+
+export default function Panel() {
+  const { settings, ready, busy, message, change, update, reset, save } =
+    useWidgetSettings();
+  const [tab, setTab] = useState<Tab>("settings");
+  const disabled = !ready;
+  const failed = message === t("failed");
+
+  const toggle = (key: ToggleKey, label: string, help: string) => (
+    <SidePanel.Field>
+      <Row label={label} help={help}>
+        <ToggleSwitch
+          size="small"
+          checked={settings[key]}
+          disabled={disabled}
+          onChange={(event) => change(key, event.target.checked)}
+        />
+      </Row>
+    </SidePanel.Field>
   );
+  const range = (
+    key: NumberKey,
+    label: MessageKey,
+    min: number,
+    max: number,
+    step?: number,
+  ) => (
+    <SidePanel.Field>
+      <RangeField
+        label={t(label)}
+        value={settings[key]}
+        min={min}
+        max={max}
+        step={step}
+        disabled={disabled}
+        onCommit={(value) => change(key, value)}
+      />
+    </SidePanel.Field>
+  );
+  const color = (key: ColorKey, label: string) => (
+    <SidePanel.Field>
+      <Row label={label}>
+        <Box width="30px" height="30px">
+          <FillPreview
+            fill={settings[key]}
+            disabled={disabled}
+            onClick={() =>
+              inputs.selectColor(settings[key], {
+                onChange: (value) => {
+                  if (value) change(key, value);
+                },
+              })
+            }
+          />
+        </Box>
+      </Row>
+    </SidePanel.Field>
+  );
+  const chooseFont = () =>
+    inputs.selectFont(
+      { font: settings.font, textDecoration: settings.textDecoration },
+      {
+        onChange: (value) => {
+          if (!value) return;
+          const parsed = widgetSettingsSchema
+            .pick({ font: true, textDecoration: true })
+            .safeParse(value);
+          if (parsed.success) update(parsed.data);
+        },
+      },
+    );
+
+  const status = busy ? tp("saving") : message;
+  const section = (title: string, body: ReactNode) => (
+    <SidePanel.Section title={title}>{body}</SidePanel.Section>
+  );
+
   return (
     <WixDesignSystemProvider>
-      <SidePanel width="300" height="100vh">
-        <SidePanel.Content>
-          <SidePanel.Field>
-            <h2 style={{ fontSize: 18 }}>{t("editor")}</h2>
-          </SidePanel.Field>
-          {sections.map((section) => (
-            <SidePanel.Field key={section}>
-              <details open={section === "content"}>
-                <summary
-                  style={{
-                    padding: "8px 0",
-                    fontWeight: 600,
-                    cursor: "pointer",
-                  }}
-                >
-                  {t(section)}
-                </summary>
-                <div style={{ padding: "12px 0", display: "grid", gap: 12 }}>
-                  {section === "content" && (
-                    <>
-                      <FormField label={t("heading")}>
-                        <Input
-                          ariaLabel={t("heading")}
-                          value={settings.headline}
-                          disabled={busy || !ready}
-                          onChange={(event) =>
-                            change("headline", event.target.value)
-                          }
-                        />
-                      </FormField>
-                      {toggle("showName", "name")}
-                    </>
-                  )}
-                  {section === "typography" && (
-                    <Button
-                      disabled={busy || !ready}
-                      onClick={() =>
-                        inputs.selectFont(
-                          {
-                            font: settings.font,
-                            textDecoration: settings.textDecoration,
-                          },
-                          {
-                            onChange: (value) => {
-                              if (!value) return;
-                              const parsed = widgetSettingsSchema.safeParse({
-                                ...settings,
-                                font: value.font,
-                                textDecoration: value.textDecoration || "none",
-                              });
-                              if (parsed.success) setSettings(parsed.data);
-                            },
-                          },
-                        )
+      <SidePanel width="100%" height="100vh">
+        <Box padding="SP3 SP4">
+          <SegmentedToggle
+            fullWidth
+            size="small"
+            selected={tab}
+            ariaLabel={t("editor")}
+            onClick={(_, value) => setTab(value as Tab)}
+          >
+            <SegmentedToggle.Button value="settings">
+              {tp("tabSettings")}
+            </SegmentedToggle.Button>
+            <SegmentedToggle.Button value="design">
+              {tp("tabDesign")}
+            </SegmentedToggle.Button>
+          </SegmentedToggle>
+        </Box>
+        <SidePanel.Divider />
+        <SidePanel.Content noPadding>
+          {tab === "settings" ? (
+            <>
+              {section(
+                t("content"),
+                <SidePanel.Field>
+                  <FormField label={t("heading")}>
+                    <Input
+                      size="small"
+                      ariaLabel={t("heading")}
+                      placeholder={tp("headlinePlaceholder")}
+                      value={settings.headline}
+                      maxLength={120}
+                      disabled={disabled}
+                      onChange={(event) =>
+                        change("headline", event.target.value)
                       }
-                    >
-                      {t("font")}
-                    </Button>
+                    />
+                  </FormField>
+                  <Box marginTop="SP1">
+                    <Text size="tiny" secondary>
+                      {tp("headlineHelp")}
+                    </Text>
+                  </Box>
+                </SidePanel.Field>,
+              )}
+              {section(
+                tp("display"),
+                <>
+                  {toggle("showName", tp("showName"), tp("showNameHelp"))}
+                  {toggle(
+                    "showSeconds",
+                    t("showSeconds"),
+                    tp("showSecondsHelp"),
                   )}
-                  {section === "colors" &&
-                    (["textColor", "background"] as const).map((key) => (
-                      <Button
-                        key={key}
-                        disabled={busy || !ready}
-                        onClick={() =>
-                          inputs.selectColor(settings[key], {
-                            onChange: (value) => {
-                              if (value) change(key, value);
-                            },
-                          })
+                </>,
+              )}
+            </>
+          ) : (
+            <>
+              {section(
+                t("typography"),
+                <SidePanel.Field>
+                  <Row label={t("font")} help={fontLabel(settings.font)}>
+                    <Button
+                      size="small"
+                      priority="secondary"
+                      disabled={disabled}
+                      onClick={chooseFont}
+                    >
+                      {tp("changeFont")}
+                    </Button>
+                  </Row>
+                </SidePanel.Field>,
+              )}
+              {section(
+                t("colors"),
+                <>
+                  {color("textColor", t("textColor"))}
+                  {color("background", t("background"))}
+                  {color("accentColor", tp("accentColor"))}
+                </>,
+              )}
+              {section(
+                t("layout"),
+                <>
+                  <SidePanel.Field>
+                    <FormField label={tp("alignment")}>
+                      <SegmentedToggle
+                        size="small"
+                        selected={settings.align}
+                        disabled={disabled}
+                        ariaLabel={tp("alignment")}
+                        onClick={(_, value) =>
+                          change("align", value as WidgetSettings["align"])
                         }
                       >
-                        {t(key)}
-                      </Button>
-                    ))}
-                  {section === "countdown" &&
-                    toggle("showSeconds", "showSeconds")}
-                  {section === "layout" && (
-                    <>
-                      {number("padding", 0, 80)}
-                      {number("gap", 0, 48)}
-                    </>
-                  )}
-                  {section === "borders" && number("radius", 0, 80)}
-                  {section === "responsive" && (
-                    <>
-                      {number("maxWidth", 200, 1600)}
-                      {toggle("compact", "compact")}
-                    </>
-                  )}
-                  {section === "advanced" && (
-                    <Button
-                      disabled={busy || !ready}
-                      onClick={() => setSettings(defaultWidgetSettings)}
-                    >
-                      {t("reset")}
-                    </Button>
-                  )}
-                </div>
-              </details>
-            </SidePanel.Field>
-          ))}
-          <SidePanel.Field>
-            <Button disabled={busy || !ready} onClick={() => void save()}>
-              {t("saveSettings")}
-            </Button>
-            {busy && (
-              <span role="status" aria-label={t("loading")}>
-                {" "}
-                …
-              </span>
-            )}
-            <p role="status" style={{ fontSize: 12 }}>
-              {message}
-            </p>
-          </SidePanel.Field>
+                        <SegmentedToggle.Button value="start">
+                          {tp("alignStart")}
+                        </SegmentedToggle.Button>
+                        <SegmentedToggle.Button value="center">
+                          {tp("alignCenter")}
+                        </SegmentedToggle.Button>
+                      </SegmentedToggle>
+                    </FormField>
+                  </SidePanel.Field>
+                  {range("radius", "radius", 0, 80)}
+                </>,
+              )}
+              {section(
+                tp("spacing"),
+                <>
+                  {range("padding", "padding", 0, 80)}
+                  {range("gap", "gap", 0, 48)}
+                </>,
+              )}
+              {section(
+                tp("size"),
+                <>
+                  {range("maxWidth", "maxWidth", 200, 1600, 10)}
+                  {toggle("compact", t("compact"), tp("compactHelp"))}
+                </>,
+              )}
+            </>
+          )}
         </SidePanel.Content>
+        <SidePanel.Footer>
+          <Box align="space-between" verticalAlign="middle" gap="SP2">
+            <Box role="status" style={{ flex: "1 1 auto", minWidth: 0 }}>
+              <Text
+                size="tiny"
+                skin={failed ? "error" : "standard"}
+                secondary={!failed}
+              >
+                {status}
+              </Text>
+            </Box>
+            {failed ? (
+              <TextButton size="small" onClick={save}>
+                {t("retry")}
+              </TextButton>
+            ) : (
+              <TextButton
+                size="small"
+                prefixIcon={<RevertReset />}
+                disabled={disabled}
+                onClick={reset}
+              >
+                {t("reset")}
+              </TextButton>
+            )}
+          </Box>
+        </SidePanel.Footer>
       </SidePanel>
     </WixDesignSystemProvider>
   );

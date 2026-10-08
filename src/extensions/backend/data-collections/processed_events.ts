@@ -9,6 +9,9 @@ export default {
     { key: "eventId", displayName: "eventId", type: "TEXT" },
     { key: "eventType", displayName: "eventType", type: "TEXT" },
     { key: "processedAt", displayName: "processedAt", type: "DATETIME" },
+    { key: "revision", displayName: "revision", type: "NUMBER" },
+    { key: "count", displayName: "count", type: "NUMBER" },
+    { key: "windowStart", displayName: "windowStart", type: "NUMBER" },
   ],
   dataPermissions: {
     itemInsert: "PRIVILEGED",

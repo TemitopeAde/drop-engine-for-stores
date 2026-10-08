@@ -59,7 +59,10 @@ describe("merchant form", () => {
     fireEvent.change(screen.getByLabelText("Ends"), {
       target: { value: "2026-10-09T13:00" },
     });
-    expect(screen.queryByRole("checkbox")).toBeNull();
+    // Products are chosen in the modal; the only inline checkbox is the waitlist toggle.
+    expect(
+      screen.getAllByRole("checkbox").map((box) => box.getAttribute("name")),
+    ).toEqual(["waitlist"]);
     spies.openModal.mockReturnValueOnce({
       modalClosed: Promise.resolve({ productIds: [data.products[0].id] }),
     });
@@ -75,6 +78,7 @@ describe("merchant form", () => {
           input: expect.objectContaining({
             name: "Friday launch",
             productIds: [data.products[0].id],
+            waitlist: true,
           }),
         }),
       ),

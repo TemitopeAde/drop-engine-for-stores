@@ -1,0 +1,303 @@
+{
+  "messages": {
+    "selectProduct": "Configura un ID de producto de Wix Stores para conectar esta cuenta regresiva.",
+    "noLaunch": "No hay un lanzamiento publicado para este producto.",
+    "app": "Drop Engine",
+    "language": "Idioma",
+    "site": "Tu sitio",
+    "subtitle": "Haz que tu próximo lanzamiento cuente.",
+    "drops": "Lanzamientos",
+    "create": "Crear lanzamiento",
+    "edit": "Editar lanzamiento",
+    "actions": "Acciones",
+    "save": "Guardar borrador",
+    "publish": "Publicar lanzamiento",
+    "cancel": "Cancelar lanzamiento",
+    "archive": "Archivar",
+    "restore": "Restaurar borrador",
+    "duplicate": "Duplicar",
+    "name": "Nombre del lanzamiento",
+    "products": "Productos",
+    "start": "Inicio",
+    "now": "Ahora",
+    "end": "Fin",
+    "zone": "Zona horaria",
+    "endBehavior": "Después del lanzamiento",
+    "RESTORE": "Restablecer las compras normales",
+    "BLOCK": "Mantener las compras bloqueadas",
+    "DRAFT": "Borrador",
+    "SCHEDULED": "Programado",
+    "LIVE": "En curso",
+    "ENDED": "Finalizado",
+    "CANCELLED": "Cancelado",
+    "ARCHIVED": "Archivado",
+    "empty": "Tu próximo lanzamiento empieza aquí",
+    "emptyHelp": "Elige productos y un horario. Los productos siguen visibles mientras las compras están bloqueadas.",
+    "loading": "Cargando tu tienda…",
+    "retry": "Reintentar",
+    "back": "Volver a los lanzamientos",
+    "search": "Buscar lanzamientos",
+    "all": "Todos los estados",
+    "catalog": "Elegir productos",
+    "done": "Listo",
+    "dismiss": "Cancelar",
+    "loadMore": "Cargar más productos",
+    "selectAllProducts": "Seleccionar todos los productos",
+    "selectAllHelp": "Incluye todos los productos visibles de todas las páginas.",
+    "selectingProducts": "Seleccionando productos…",
+    "productsFound": "productos encontrados",
+    "stopSelecting": "Detener selección",
+    "selectionTooLarge": "Puedes seleccionar hasta 10.000 productos por lanzamiento.",
+    "previousProducts": "Productos anteriores",
+    "nextProducts": "Productos siguientes",
+    "productPage": "Página",
+    "selected": "seleccionados",
+    "saved": "Lanzamiento guardado",
+    "failed": "No se pudo completar la solicitud. Inténtalo de nuevo.",
+    "invalidSchedule": "Usa una zona horaria válida y un fin posterior al inicio. Cambia las horas ambiguas o inexistentes por el horario de verano.",
+    "activeLimit": "El plan gratuito incluye un lanzamiento activo. Cancela el actual antes de publicar otro.",
+    "conflict": "Este lanzamiento cambió en otra sesión. Recarga antes de guardar.",
+    "productInUse": "Algunos productos ya pertenecen a otro lanzamiento. Quítalos o cancela ese lanzamiento.",
+    "inOtherDrop": "En otro lanzamiento",
+    "storageLimit": "Esta instalación alcanzó su límite de almacenamiento.",
+    "expiredSchedule": "Elige un fin futuro antes de publicar.",
+    "forbidden": "Abre la app como propietario del sitio o colaborador autorizado.",
+    "unavailable": "Los datos de la tienda no están disponibles temporalmente.",
+    "setup": "Las colecciones de la app aún no están listas. Instala la versión que las incluye y deja que Wix las configure.",
+    "fieldsRequired": "Revisa los campos resaltados.",
+    "noProducts": "No hay productos visibles en esta página.",
+    "gatingHelp": "La hora del servidor controla las compras. Cancelar restablece las compras normales inmediatamente.",
+    "free": "Plan gratuito · 1 lanzamiento activo",
+    "stage": "Controles del lanzamiento",
+    "waitlist": "Lista de espera",
+    "waitlistTitle": "Recibe un aviso cuando abra",
+    "waitlistEmail": "Correo electrónico",
+    "waitlistConsent": "Quiero recibir correos sobre este lanzamiento. Puedo darme de baja cuando quiera.",
+    "waitlistJoin": "Unirme a la lista de espera",
+    "waitlistJoining": "Uniéndote…",
+    "waitlistJoined": "Estás en la lista de espera.",
+    "waitlistAlready": "Este correo ya está en la lista de espera.",
+    "waitlistLeave": "Salir de la lista de espera",
+    "waitlistLeaving": "Saliendo…",
+    "waitlistLeft": "Has salido de la lista de espera.",
+    "waitlistInvalid": "Introduce un correo válido y confirma tu consentimiento.",
+    "waitlistFull": "La lista está llena. Vuelve cuando abra el lanzamiento.",
+    "waitlistClosed": "Las inscripciones para este lanzamiento están cerradas.",
+    "rateLimited": "Demasiados intentos. Inténtalo más tarde.",
+    "proRequired": "La exportación CSV está disponible en el plan Pro.",
+    "waitlistSetting": "Recopilar inscripciones a la lista de espera",
+    "waitlistSettingHelp": "Los clientes pueden inscribirse desde la cuenta regresiva hasta el inicio. Todavía no se envían correos de lanzamiento.",
+    "viewWaitlist": "Ver lista de espera",
+    "waitlistFor": "Lista de espera",
+    "waitlistSubscribed": "suscritos",
+    "waitlistTotal": "registros totales",
+    "waitlistUsage": "registros utilizados en todos los lanzamientos del plan gratuito",
+    "waitlistEmpty": "Aún no hay inscripciones",
+    "waitlistEmptyHelp": "Los clientes pueden inscribirse desde la página del producto mientras el lanzamiento está programado.",
+    "waitlistOff": "Las inscripciones están desactivadas para este lanzamiento.",
+    "waitlistJoinedAt": "Fecha de inscripción",
+    "waitlistStatus": "Estado",
+    "SUBSCRIBED": "Suscrito",
+    "UNSUBSCRIBED": "Dado de baja",
+    "markUnsubscribed": "Marcar como dado de baja",
+    "removeEntry": "Eliminar",
+    "confirmRemove": "Confirmar eliminación",
+    "removeHelp": "Eliminar borra el correo y libera capacidad del plan gratuito. Dar de baja conserva el registro e impide futuros correos.",
+    "exportCsv": "Exportar CSV",
+    "exporting": "Exportando…",
+    "entryUpdated": "Lista de espera actualizada",
+    "previousPage": "Anterior",
+    "nextPage": "Siguiente",
+    "notificationsPending": "Los correos de lanzamiento aún no están conectados. Las inscripciones y el consentimiento se guardan para contactar a los suscriptores cuando se configuren las notificaciones.",
+    "opens": "Este lanzamiento abre pronto",
+    "live": "El lanzamiento está en curso",
+    "ended": "Este lanzamiento ha terminado",
+    "beforeViolation": "Este producto no se puede comprar hasta que abra el lanzamiento.",
+    "afterViolation": "Este lanzamiento ha terminado. Las compras están cerradas.",
+    "outageViolation": "No se pudo verificar la disponibilidad. Inténtalo de nuevo en breve.",
+    "days": "Días",
+    "hours": "Horas",
+    "minutes": "Minutos",
+    "seconds": "Segundos",
+    "editor": "Cuenta regresiva del lanzamiento",
+    "content": "Contenido",
+    "typography": "Tipografía",
+    "colors": "Colores",
+    "countdown": "Cuenta regresiva",
+    "form": "Formulario",
+    "layout": "Diseño",
+    "borders": "Bordes",
+    "responsive": "Adaptable",
+    "advanced": "Avanzado",
+    "heading": "Título",
+    "textColor": "Color del texto",
+    "background": "Fondo",
+    "font": "Fuente",
+    "reset": "Restablecer tema",
+    "padding": "Relleno",
+    "gap": "Espaciado",
+    "radius": "Radio de las esquinas",
+    "maxWidth": "Ancho máximo",
+    "compact": "Compacto en móviles",
+    "showSeconds": "Mostrar segundos",
+    "saveSettings": "Guardar ajustes",
+    "settingsSaved": "Ajustes guardados",
+    "pluginPlacement": "Ubicación del plugin de cuenta regresiva",
+    "pluginAdded": "Añadido",
+    "pluginNotAdded": "No añadido",
+    "pluginUnknown": "No se pudo comprobar",
+    "pluginChecking": "Comprobando ubicación…",
+    "pluginAdding": "Añadiendo plugin…",
+    "pluginCheck": "Comprobar ubicación",
+    "pluginAdd": "Añadir plugin",
+    "pluginCheckingHelp": "Comprobando la ubicación de la cuenta regresiva en la página del producto.",
+    "pluginAddingHelp": "Sigue los pasos de Wix para añadir la cuenta regresiva a la página del producto.",
+    "pluginAddedHelp": "La cuenta regresiva está en la página del producto.",
+    "pluginMissingHelp": "Añade la cuenta regresiva a la página del producto para mostrar el horario del lanzamiento.",
+    "pluginCheckFailed": "No se pudo comprobar la ubicación. Inténtalo de nuevo.",
+    "pluginConfirmationFailed": "La solicitud de añadir se completó, pero no se pudo comprobar la ubicación. Vuelve a comprobarla.",
+    "pluginStillMissing": "La cuenta regresiva aún no está ubicada. Comprueba de nuevo o vuelve a añadirla.",
+    "pluginAddCancelled": "Se canceló la adición del plugin. Puedes intentarlo de nuevo.",
+    "pluginPublishFirst": "Publica primero tu sitio y vuelve a añadir el plugin.",
+    "pluginSlotOccupied": "El espacio está ocupado. Actualiza la ubicación en el editor y vuelve a comprobarla.",
+    "pluginAddFailed": "No se pudo añadir el plugin. Inténtalo de nuevo.",
+    "guide": "Guía y preguntas frecuentes",
+    "guideEyebrow": "Centro de ayuda",
+    "guideTitle": "Cómo funciona Drop Engine",
+    "guideIntro": "Programa lanzamientos que habilitan las compras en un instante exacto y muestran una cuenta regresiva a los clientes.",
+    "guideSteps": "Empieza en cinco pasos",
+    "guideStepsHelp": "De un panel vacío a un lanzamiento activo en pocos minutos.",
+    "guideStep": "Paso",
+    "guideStatuses": "Ciclo del lanzamiento",
+    "guideStatusesHelp": "Cada lanzamiento publicado recorre estas etapas según la hora del servidor.",
+    "guideSidePaths": "Cuando lo necesites",
+    "guideActions": "Acciones del lanzamiento",
+    "guideActionsHelp": "Abre el menú ⋯ de cualquier lanzamiento de la lista.",
+    "faq": "Preguntas frecuentes",
+    "faqHelp": "Respuestas sobre lanzamientos, compras y tu tienda.",
+    "faqSearch": "Buscar preguntas",
+    "faqAll": "Todas",
+    "faqEmpty": "No hay preguntas que coincidan con la búsqueda.",
+    "faqClear": "Borrar búsqueda",
+    "guideJump": "Ir a",
+    "guideCta": "Crea tu primer lanzamiento",
+    "guideCtaTitle": "¿Listo para tu próximo lanzamiento?"
+  },
+  "guide": {
+    "steps": [
+      {
+        "title": "Crear un lanzamiento",
+        "body": "Selecciona Crear lanzamiento, dale un nombre y elige los productos de Wix Stores. Puedes incluir hasta 10.000 productos o seleccionar todo el catálogo."
+      },
+      {
+        "title": "Definir el horario",
+        "body": "Elige inicio, fin y zona horaria. Ahora inicia inmediatamente. El fin debe ser posterior al inicio; cambia las horas ambiguas o inexistentes por el horario de verano."
+      },
+      {
+        "title": "Elegir qué sucede después",
+        "body": "Restablecer las compras normales reabre las compras al finalizar. Mantener las compras bloqueadas las impide hasta que canceles el lanzamiento."
+      },
+      {
+        "title": "Guardar o publicar",
+        "body": "Guardar borrador conserva los cambios sin afectar la tienda. Publicar activa el horario: Programado, En curso y Finalizado."
+      },
+      {
+        "title": "Mostrar la cuenta regresiva",
+        "body": "El plugin se añade automáticamente a la página del producto de Wix Stores. También puedes añadir el elemento Drop launch countdown en el editor y configurar el ID del producto."
+      }
+    ],
+    "lifecycle": [
+      "Guardado sin publicar. Las compras no cambian.",
+      "Publicado y esperando abrir. Las compras están bloqueadas.",
+      "Dentro del horario. Los clientes pueden comprar.",
+      "El horario terminó. Las compras siguen el ajuste posterior al lanzamiento."
+    ],
+    "sidePaths": [
+      "Cancelado por ti. Las compras normales se restablecen.",
+      "Oculto del trabajo activo. Restáuralo para volver a editarlo."
+    ],
+    "checkout": {
+      "open": "Compras abiertas",
+      "locked": "Compras bloqueadas",
+      "depends": "Tú eliges"
+    },
+    "actions": [
+      {
+        "title": "Editar",
+        "body": "Cambia el nombre, los productos, el horario o el comportamiento final."
+      },
+      {
+        "title": "Duplicar",
+        "body": "Copia el lanzamiento como un nuevo borrador."
+      },
+      {
+        "title": "Cancelar lanzamiento",
+        "body": "Detén un lanzamiento publicado y reabre las compras inmediatamente."
+      },
+      {
+        "title": "Archivar",
+        "body": "Guarda un lanzamiento en borrador, finalizado o cancelado."
+      },
+      {
+        "title": "Restaurar borrador",
+        "body": "Recupera un lanzamiento archivado como borrador."
+      }
+    ],
+    "faqCategories": {
+      "launching": "Lanzamientos",
+      "checkout": "Compras",
+      "managing": "Gestión",
+      "storefront": "Tienda"
+    },
+    "faq": [
+      {
+        "q": "¿Los productos se ven antes del lanzamiento?",
+        "a": "Sí. Los productos siguen visibles y muestran la cuenta regresiva. Solo las compras están bloqueadas hasta el inicio."
+      },
+      {
+        "q": "¿Qué pasa si alguien añade un producto al carrito antes?",
+        "a": "Puede añadirlo, pero el proceso de compra indica que el producto no está disponible hasta que abra el lanzamiento e impide completar el pedido."
+      },
+      {
+        "q": "¿Qué reloj determina el inicio?",
+        "a": "El del servidor. Cambiar la hora del dispositivo no adelanta el inicio. La cuenta regresiva consulta el servidor cada 15 segundos."
+      },
+      {
+        "q": "¿Qué zona horaria debo usar?",
+        "a": "La que anuncies para el lanzamiento. Inicio y fin se guardan como instantes exactos, de modo que abre simultáneamente en todas partes."
+      },
+      {
+        "q": "¿Cuántos lanzamientos puedo tener activos?",
+        "a": "El plan gratuito permite uno: programado, en curso o finalizado con las compras bloqueadas. Puedes tener tantos borradores como quieras. Cancela el actual antes de publicar otro."
+      },
+      {
+        "q": "¿Cómo detengo un lanzamiento inmediatamente?",
+        "a": "Abre el menú ⋯ del lanzamiento y elige Cancelar lanzamiento. Las compras normales se restablecen inmediatamente."
+      },
+      {
+        "q": "¿Puedo editar después de publicar?",
+        "a": "Sí. Abre el lanzamiento, cambia los campos y guarda. Sigue publicado. Si otra persona lo cambió, recarga antes de guardar."
+      },
+      {
+        "q": "¿Por qué no puedo archivar?",
+        "a": "Los lanzamientos publicados siguen controlando las compras. Primero cancélalo y luego archívalo."
+      },
+      {
+        "q": "¿Por qué no puedo publicar?",
+        "a": "Comprueba que el fin sea futuro y posterior al inicio, que haya algún producto seleccionado y que no exista otro lanzamiento activo."
+      },
+      {
+        "q": "¿Por qué no aparece la cuenta regresiva?",
+        "a": "Comprueba que el lanzamiento esté publicado e incluya ese producto. Si añadiste el elemento en el editor, verifica que su ID coincida con el producto."
+      },
+      {
+        "q": "¿Qué ocurre si no se puede verificar la disponibilidad?",
+        "a": "Las compras se pausan con un mensaje de error para evitar ventas fuera del horario durante una interrupción. Se reanudan cuando responde el servicio."
+      },
+      {
+        "q": "¿Puedo reutilizar un lanzamiento?",
+        "a": "Sí. Elige Duplicar en el menú de acciones para copiar productos y ajustes a un borrador nuevo y cambia las fechas."
+      }
+    ]
+  }
+}

@@ -11,7 +11,7 @@ import {
   type Drop,
   type DropInput,
 } from "../domain/drop";
-import { t } from "../locales/en";
+import { useTranslation } from "../locales/use-translation";
 import { Button } from "../components/ui/button";
 import { mutate, type DashboardData } from "./api";
 import {
@@ -25,6 +25,7 @@ interface Props {
   saved: () => Promise<void>;
 }
 export function DropForm({ drop, data, back, saved }: Props) {
+  const { t, locale } = useTranslation();
   const [busy, setBusy] = useState(false),
     [selecting, setSelecting] = useState(false);
   const form = useForm<DropInput>({
@@ -36,6 +37,7 @@ export function DropForm({ drop, data, back, saved }: Props) {
       localEnd: "",
       timeZone: data.timeZone,
       endBehavior: "RESTORE",
+      waitlist: true,
     },
   });
   const ids = form.watch("productIds");
@@ -57,6 +59,7 @@ export function DropForm({ drop, data, back, saved }: Props) {
       const { modalClosed } = dashboard.openModal({
         modalId: productPickerModalId,
         params: {
+          locale,
           products: data.products,
           selectedIds: form.getValues("productIds"),
           lockedIds: [...heldProductIds(data.drops, drop?.id, data.serverNow)],
@@ -189,6 +192,17 @@ export function DropForm({ drop, data, back, saved }: Props) {
                   <option value="BLOCK">{t("BLOCK")}</option>
                 </select>
               </label>
+              <label className="de-check" htmlFor="drop-waitlist">
+                <input
+                  id="drop-waitlist"
+                  type="checkbox"
+                  {...form.register("waitlist")}
+                />
+                <span>
+                  {t("waitlistSetting")}
+                  <small>{t("waitlistSettingHelp")}</small>
+                </span>
+              </label>
               {Object.keys(form.formState.errors).length > 0 && (
                 <p className="de-error" role="alert">
                   {t("fieldsRequired")}
@@ -199,7 +213,7 @@ export function DropForm({ drop, data, back, saved }: Props) {
               <div className="de-card-heading">
                 <h2>{t("products")}</h2>
                 <span role="status">
-                  {ids.length.toLocaleString()} {t("selected")}
+                  {ids.length.toLocaleString(locale)} {t("selected")}
                 </span>
               </div>
               <Button

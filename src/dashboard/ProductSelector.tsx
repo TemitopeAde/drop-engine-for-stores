@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { LoaderCircle, Rocket } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { MAX_PRODUCTS_PER_DROP } from "../domain/limits";
-import { t } from "../locales/en";
+import { useTranslation } from "../locales/use-translation";
 import { loadCatalog, type CatalogPage } from "./api";
 import { collectProductIds } from "./catalog-selection";
 
@@ -23,6 +23,7 @@ export function ProductSelector({
   onChange,
   onSelecting,
 }: Props) {
+  const { t, locale } = useTranslation();
   const [current, setCurrent] = useState(firstPage);
   const [page, setPage] = useState(0);
   const [cursors, setCursors] = useState<(string | undefined)[]>([undefined]);
@@ -138,7 +139,7 @@ export function ProductSelector({
       <div className="de-card-heading">
         <h2>{t("catalog")}</h2>
         <span aria-live="polite">
-          {ids.length.toLocaleString()} {t("selected")}
+          {ids.length.toLocaleString(locale)} {t("selected")}
         </span>
       </div>
       <div className="de-product-selection">
@@ -161,7 +162,7 @@ export function ProductSelector({
         <div className="de-selection-progress">
           <span role="status">
             <LoaderCircle className="de-spin" size={16} aria-hidden="true" />
-            {t("selectingProducts")} {found.toLocaleString()}{" "}
+            {t("selectingProducts")} {found.toLocaleString(locale)}{" "}
             {t("productsFound")}
           </span>
           <Button

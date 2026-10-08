@@ -50,6 +50,6 @@ node tests/browser/verify.mjs
 
 The core MVP enforces the Free allowance of one active drop. All drafts/history and canonical launch definitions currently fit in one installation item, bounded to 100 records and 200 KB; this is an explicit implementation capacity limit, not a Pro unlimited entitlement. The other eight collections are defined for later features and are not yet written by this stage.
 
-Notifications, waitlist signup, purchase limits, order analytics, billing/Pro entitlements, promotional pricing and the full 20-language resource set remain later stages. No fake signup, stock, conversion, billing or delivery data is shown. All current UI copy uses the English resource with fallback.
+Notifications, purchase limits, order analytics, billing/Pro entitlements, promotional pricing and the full 20-language resource set remain later stages. No fake signup, stock, conversion, billing or delivery data is shown. All current UI copy uses the English resource with fallback.
 
 Platform timeout/outage enforcement, real cart/checkout, Aria discovery and Harmony editor persistence require live-site acceptance. Dependency audit and browser scanner limitations are recorded in [implementation verification](docs/implementation-verification.md).

@@ -13,7 +13,9 @@ export function json(value: unknown, status = 200) {
 }
 export async function handle(operation: () => Promise<unknown>) {
   try {
-    return json(await operation());
+    const value = await operation();
+    // Non-JSON responses (e.g. CSV exports) are returned as built.
+    return value instanceof Response ? value : json(value);
   } catch (error) {
     if (error instanceof DomainError)
       return json({ error: error.code }, error.status);

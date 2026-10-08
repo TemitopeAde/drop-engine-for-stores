@@ -4,7 +4,8 @@ import { CustomModalLayout, Loader } from "@wix/design-system";
 import { BusinessManagerTheme } from "../../BusinessManagerTheme";
 import { ProductSelector } from "../../../../dashboard/ProductSelector";
 import type { ProductPickerParams } from "../../../../dashboard/product-picker";
-import { t } from "../../../../locales/en";
+import { useTranslation } from "../../../../locales/use-translation";
+import { isLanguageCode } from "../../../../locales/languages";
 import config from "./choose-products.config";
 import "../../../../dashboard/dashboard.css";
 import "./choose-products.css";
@@ -18,17 +19,19 @@ export default function ChooseProductsModal() {
 }
 
 function ProductPicker() {
+  const { t, locale, direction, setLanguage } = useTranslation();
   const [picker, setPicker] = useState<ProductPickerParams>();
   const [selecting, setSelecting] = useState(false);
 
   useEffect(() => {
     const subscription = dashboard.observeState<ProductPickerParams>(
       (params) => {
+        if (isLanguageCode(params.locale)) setLanguage(params.locale);
         setPicker((current) => current ?? params);
       },
     );
     return () => subscription.disconnect();
-  }, []);
+  }, [setLanguage]);
 
   return (
     <CustomModalLayout
@@ -54,7 +57,7 @@ function ProductPicker() {
       secondaryButtonOnClick={() => dashboard.closeModal()}
       content={
         picker ? (
-          <div className="de-product-picker">
+          <div className="de-product-picker" lang={locale} dir={direction}>
             <ProductSelector
               firstPage={picker}
               ids={picker.selectedIds}

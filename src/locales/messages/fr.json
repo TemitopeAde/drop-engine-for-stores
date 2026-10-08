@@ -1,0 +1,303 @@
+{
+  "messages": {
+    "selectProduct": "Définissez un ID de produit Wix Stores pour connecter ce compte à rebours.",
+    "noLaunch": "Aucun lancement publié n'est configuré pour ce produit.",
+    "app": "Drop Engine",
+    "language": "Langue",
+    "site": "Votre site",
+    "subtitle": "Faites de votre prochain lancement un succès.",
+    "drops": "Lancements",
+    "create": "Créer un lancement",
+    "edit": "Modifier le lancement",
+    "actions": "Actions",
+    "save": "Enregistrer le brouillon",
+    "publish": "Publier le lancement",
+    "cancel": "Annuler le lancement",
+    "archive": "Archiver",
+    "restore": "Restaurer le brouillon",
+    "duplicate": "Dupliquer",
+    "name": "Nom du lancement",
+    "products": "Produits",
+    "start": "Début",
+    "now": "Maintenant",
+    "end": "Fin",
+    "zone": "Fuseau horaire",
+    "endBehavior": "Après le lancement",
+    "RESTORE": "Rétablir les achats normaux",
+    "BLOCK": "Maintenir les achats bloqués",
+    "DRAFT": "Brouillon",
+    "SCHEDULED": "Programmé",
+    "LIVE": "En cours",
+    "ENDED": "Terminé",
+    "CANCELLED": "Annulé",
+    "ARCHIVED": "Archivé",
+    "empty": "Votre prochain lancement commence ici",
+    "emptyHelp": "Choisissez des produits et une période. Les produits restent visibles pendant que les achats sont bloqués.",
+    "loading": "Chargement de votre boutique…",
+    "retry": "Réessayer",
+    "back": "Retour aux lancements",
+    "search": "Rechercher des lancements",
+    "all": "Tous les statuts",
+    "catalog": "Choisir des produits",
+    "done": "Terminé",
+    "dismiss": "Annuler",
+    "loadMore": "Charger plus de produits",
+    "selectAllProducts": "Sélectionner tous les produits",
+    "selectAllHelp": "Inclut tous les produits visibles de toutes les pages.",
+    "selectingProducts": "Sélection des produits…",
+    "productsFound": "produits trouvés",
+    "stopSelecting": "Arrêter la sélection",
+    "selectionTooLarge": "Vous pouvez sélectionner jusqu'à 10 000 produits par lancement.",
+    "previousProducts": "Produits précédents",
+    "nextProducts": "Produits suivants",
+    "productPage": "Page",
+    "selected": "sélectionnés",
+    "saved": "Lancement enregistré",
+    "failed": "Impossible de terminer cette demande. Réessayez.",
+    "invalidSchedule": "Utilisez un fuseau valide et une fin après le début. Modifiez les heures ambiguës ou inexistantes dues au changement d'heure.",
+    "activeLimit": "Le forfait gratuit inclut un lancement actif. Annulez-le avant d'en publier un autre.",
+    "conflict": "Ce lancement a changé dans une autre session. Rechargez avant d'enregistrer.",
+    "productInUse": "Certains produits appartiennent déjà à un autre lancement. Retirez-les ou annulez ce lancement.",
+    "inOtherDrop": "Dans un autre lancement",
+    "storageLimit": "Cette installation a atteint sa limite de stockage.",
+    "expiredSchedule": "Choisissez une fin future avant de publier.",
+    "forbidden": "Ouvrez l'app en tant que propriétaire du site ou collaborateur autorisé.",
+    "unavailable": "Les données de la boutique sont temporairement indisponibles.",
+    "setup": "Les collections de l'app ne sont pas prêtes. Installez la version qui les inclut et laissez Wix les configurer.",
+    "fieldsRequired": "Vérifiez les champs surlignés.",
+    "noProducts": "Aucun produit visible sur cette page.",
+    "gatingHelp": "L'heure du serveur contrôle les achats. L'annulation rétablit immédiatement les achats normaux.",
+    "free": "Forfait gratuit · 1 lancement actif",
+    "stage": "Commandes du lancement",
+    "waitlist": "Liste d'attente",
+    "waitlistTitle": "Soyez informé de l'ouverture",
+    "waitlistEmail": "Adresse e-mail",
+    "waitlistConsent": "Envoyez-moi des e-mails sur ce lancement. Je peux me désinscrire à tout moment.",
+    "waitlistJoin": "Rejoindre la liste d'attente",
+    "waitlistJoining": "Inscription…",
+    "waitlistJoined": "Vous êtes sur la liste d'attente.",
+    "waitlistAlready": "Cette adresse est déjà sur la liste d'attente.",
+    "waitlistLeave": "Quitter la liste d'attente",
+    "waitlistLeaving": "Désinscription…",
+    "waitlistLeft": "Vous avez quitté la liste d'attente.",
+    "waitlistInvalid": "Saisissez une adresse valide et confirmez votre consentement.",
+    "waitlistFull": "La liste est complète. Revenez à l'ouverture du lancement.",
+    "waitlistClosed": "Les inscriptions à ce lancement sont fermées.",
+    "rateLimited": "Trop de tentatives. Réessayez plus tard.",
+    "proRequired": "L'export CSV est disponible avec le forfait Pro.",
+    "waitlistSetting": "Recueillir les inscriptions",
+    "waitlistSettingHelp": "Les clients peuvent s'inscrire depuis le compte à rebours jusqu'à l'ouverture. Les e-mails de lancement ne sont pas encore envoyés.",
+    "viewWaitlist": "Voir la liste d'attente",
+    "waitlistFor": "Liste d'attente",
+    "waitlistSubscribed": "inscrits",
+    "waitlistTotal": "entrées au total",
+    "waitlistUsage": "entrées utilisées sur tous les lancements du forfait gratuit",
+    "waitlistEmpty": "Aucune inscription pour le moment",
+    "waitlistEmptyHelp": "Les clients peuvent s'inscrire depuis la page produit lorsque le lancement est programmé.",
+    "waitlistOff": "Les inscriptions sont désactivées pour ce lancement.",
+    "waitlistJoinedAt": "Date d'inscription",
+    "waitlistStatus": "Statut",
+    "SUBSCRIBED": "Inscrit",
+    "UNSUBSCRIBED": "Désinscrit",
+    "markUnsubscribed": "Marquer comme désinscrit",
+    "removeEntry": "Supprimer",
+    "confirmRemove": "Confirmer la suppression",
+    "removeHelp": "La suppression efface l'e-mail et libère de la capacité gratuite. La désinscription conserve l'entrée et bloque les futurs e-mails.",
+    "exportCsv": "Exporter en CSV",
+    "exporting": "Export…",
+    "entryUpdated": "Liste d'attente mise à jour",
+    "previousPage": "Précédent",
+    "nextPage": "Suivant",
+    "notificationsPending": "Les e-mails de lancement ne sont pas encore connectés. Les inscriptions et le consentement sont conservés pour contacter les abonnés après la configuration des notifications.",
+    "opens": "Ce lancement ouvre bientôt",
+    "live": "Le lancement est en cours",
+    "ended": "Ce lancement est terminé",
+    "beforeViolation": "Ce produit ne peut pas être acheté avant l'ouverture du lancement.",
+    "afterViolation": "Ce lancement est terminé. Les achats sont actuellement fermés.",
+    "outageViolation": "La disponibilité ne peut pas être vérifiée. Réessayez dans un instant.",
+    "days": "Jours",
+    "hours": "Heures",
+    "minutes": "Minutes",
+    "seconds": "Secondes",
+    "editor": "Compte à rebours du lancement",
+    "content": "Contenu",
+    "typography": "Typographie",
+    "colors": "Couleurs",
+    "countdown": "Compte à rebours",
+    "form": "Formulaire",
+    "layout": "Mise en page",
+    "borders": "Bordures",
+    "responsive": "Adaptatif",
+    "advanced": "Avancé",
+    "heading": "Titre",
+    "textColor": "Couleur du texte",
+    "background": "Arrière-plan",
+    "font": "Police",
+    "reset": "Réinitialiser le thème",
+    "padding": "Marge intérieure",
+    "gap": "Espacement",
+    "radius": "Rayon des coins",
+    "maxWidth": "Largeur maximale",
+    "compact": "Compact sur mobile",
+    "showSeconds": "Afficher les secondes",
+    "saveSettings": "Enregistrer les paramètres",
+    "settingsSaved": "Paramètres enregistrés",
+    "pluginPlacement": "Emplacement du plugin de compte à rebours",
+    "pluginAdded": "Ajouté",
+    "pluginNotAdded": "Non ajouté",
+    "pluginUnknown": "Vérification impossible",
+    "pluginChecking": "Vérification de l'emplacement…",
+    "pluginAdding": "Ajout du plugin…",
+    "pluginCheck": "Vérifier l'emplacement",
+    "pluginAdd": "Ajouter le plugin",
+    "pluginCheckingHelp": "Vérification du compte à rebours sur la page produit.",
+    "pluginAddingHelp": "Suivez les étapes Wix pour ajouter le compte à rebours à la page produit.",
+    "pluginAddedHelp": "Votre compte à rebours est placé sur la page produit.",
+    "pluginMissingHelp": "Ajoutez le compte à rebours à la page produit pour afficher la période du lancement.",
+    "pluginCheckFailed": "Impossible de vérifier l'emplacement. Réessayez.",
+    "pluginConfirmationFailed": "La demande d'ajout est terminée, mais l'emplacement n'a pas pu être vérifié. Vérifiez à nouveau.",
+    "pluginStillMissing": "Le compte à rebours n'est pas encore placé. Vérifiez ou ajoutez-le à nouveau.",
+    "pluginAddCancelled": "L'ajout du plugin a été annulé. Vous pouvez réessayer.",
+    "pluginPublishFirst": "Publiez d'abord votre site, puis ajoutez le plugin.",
+    "pluginSlotOccupied": "L'emplacement est occupé. Modifiez-le dans l'éditeur du site, puis vérifiez à nouveau.",
+    "pluginAddFailed": "Impossible d'ajouter le plugin. Réessayez.",
+    "guide": "Guide et FAQ",
+    "guideEyebrow": "Centre d'aide",
+    "guideTitle": "Comment fonctionne Drop Engine",
+    "guideIntro": "Programmez des lancements qui ouvrent les achats à un instant précis et affichent un compte à rebours aux clients.",
+    "guideSteps": "Démarrez en cinq étapes",
+    "guideStepsHelp": "D'un tableau de bord vide à un lancement actif en quelques minutes.",
+    "guideStep": "Étape",
+    "guideStatuses": "Cycle du lancement",
+    "guideStatusesHelp": "Chaque lancement publié suit ces étapes selon l'heure du serveur.",
+    "guideSidePaths": "Quand vous en avez besoin",
+    "guideActions": "Actions du lancement",
+    "guideActionsHelp": "Ouvrez le menu ⋯ d'un lancement dans la liste.",
+    "faq": "Questions fréquentes",
+    "faqHelp": "Des réponses sur les lancements, les achats et votre boutique.",
+    "faqSearch": "Rechercher des questions",
+    "faqAll": "Toutes",
+    "faqEmpty": "Aucune question ne correspond à votre recherche.",
+    "faqClear": "Effacer la recherche",
+    "guideJump": "Aller à",
+    "guideCta": "Créez votre premier lancement",
+    "guideCtaTitle": "Prêt pour votre prochain lancement ?"
+  },
+  "guide": {
+    "steps": [
+      {
+        "title": "Créer un lancement",
+        "body": "Choisissez Créer un lancement, nommez-le et sélectionnez les produits Wix Stores. Jusqu'à 10 000 produits, ou tout le catalogue avec Sélectionner tous les produits."
+      },
+      {
+        "title": "Définir la période",
+        "body": "Choisissez début, fin et fuseau. Maintenant démarre immédiatement. La fin doit suivre le début ; modifiez les heures ambiguës ou inexistantes liées au changement d'heure."
+      },
+      {
+        "title": "Choisir le comportement final",
+        "body": "Rétablir les achats normaux rouvre les achats à la fin. Maintenir les achats bloqués les interdit jusqu'à l'annulation du lancement."
+      },
+      {
+        "title": "Enregistrer ou publier",
+        "body": "Enregistrer le brouillon conserve le travail sans affecter la boutique. Publier active la période : Programmé, En cours, puis Terminé."
+      },
+      {
+        "title": "Afficher le compte à rebours",
+        "body": "Le plugin s'ajoute automatiquement à la page produit Wix Stores. Vous pouvez aussi ajouter l'élément Drop launch countdown dans l'éditeur et définir son ID de produit."
+      }
+    ],
+    "lifecycle": [
+      "Enregistré sans publication. Les achats ne changent pas.",
+      "Publié et en attente. Les achats sont bloqués.",
+      "Pendant la période. Les clients peuvent acheter.",
+      "La période est terminée. Les achats suivent le réglage final."
+    ],
+    "sidePaths": [
+      "Annulé par vous. Les achats normaux sont rétablis.",
+      "Masqué du travail actif. Restaurez-le pour le modifier."
+    ],
+    "checkout": {
+      "open": "Achats ouverts",
+      "locked": "Achats bloqués",
+      "depends": "À votre choix"
+    },
+    "actions": [
+      {
+        "title": "Modifier",
+        "body": "Changez le nom, les produits, la période ou le comportement final."
+      },
+      {
+        "title": "Dupliquer",
+        "body": "Copiez le lancement dans un nouveau brouillon."
+      },
+      {
+        "title": "Annuler le lancement",
+        "body": "Arrêtez un lancement publié et rouvrez immédiatement les achats."
+      },
+      {
+        "title": "Archiver",
+        "body": "Rangez un brouillon ou un lancement terminé ou annulé."
+      },
+      {
+        "title": "Restaurer le brouillon",
+        "body": "Récupérez un lancement archivé comme brouillon."
+      }
+    ],
+    "faqCategories": {
+      "launching": "Lancement",
+      "checkout": "Achats",
+      "managing": "Gestion",
+      "storefront": "Boutique"
+    },
+    "faq": [
+      {
+        "q": "Les produits sont-ils visibles avant l'ouverture ?",
+        "a": "Oui. Les clients peuvent voir les produits et le compte à rebours. Seuls les achats sont bloqués jusqu'à l'ouverture."
+      },
+      {
+        "q": "Peut-on ajouter un produit au panier avant l'ouverture ?",
+        "a": "Oui, mais le paiement indique que le produit n'est pas disponible avant l'ouverture et empêche de finaliser la commande."
+      },
+      {
+        "q": "Quelle horloge décide de l'ouverture ?",
+        "a": "Celle du serveur. Modifier l'heure de l'appareil ne change rien. Le compte à rebours interroge le serveur toutes les 15 secondes."
+      },
+      {
+        "q": "Quel fuseau horaire utiliser ?",
+        "a": "Celui annoncé pour le lancement. Début et fin sont des instants précis : le lancement ouvre au même moment partout."
+      },
+      {
+        "q": "Combien de lancements puis-je avoir actifs ?",
+        "a": "Le forfait gratuit en autorise un : programmé, en cours, ou terminé avec les achats bloqués. Les brouillons sont illimités. Annulez l'actuel avant d'en publier un autre."
+      },
+      {
+        "q": "Comment arrêter immédiatement un lancement ?",
+        "a": "Ouvrez son menu ⋯ et choisissez Annuler le lancement. Les achats normaux sont immédiatement rétablis."
+      },
+      {
+        "q": "Puis-je modifier un lancement publié ?",
+        "a": "Oui. Ouvrez-le, modifiez et enregistrez. Il reste publié. Si quelqu'un l'a modifié dans une autre session, rechargez avant d'enregistrer."
+      },
+      {
+        "q": "Pourquoi ne puis-je pas archiver ?",
+        "a": "Les lancements publiés contrôlent encore les achats. Annulez d'abord, puis archivez."
+      },
+      {
+        "q": "Pourquoi la publication échoue-t-elle ?",
+        "a": "Vérifiez que la fin est future et après le début, qu'un produit est sélectionné et qu'aucun autre lancement n'est actif."
+      },
+      {
+        "q": "Pourquoi le compte à rebours est-il absent ?",
+        "a": "Vérifiez que le lancement est publié et inclut le produit. Si vous avez ajouté l'élément dans l'éditeur, vérifiez que son ID correspond."
+      },
+      {
+        "q": "Que se passe-t-il si la disponibilité ne peut pas être vérifiée ?",
+        "a": "Les achats sont suspendus avec un message pour éviter les ventes hors période pendant une panne. Ils reprennent lorsque le service répond."
+      },
+      {
+        "q": "Puis-je réutiliser un lancement ?",
+        "a": "Oui. Choisissez Dupliquer pour copier les produits et paramètres dans un nouveau brouillon, puis changez les dates."
+      }
+    ]
+  }
+}

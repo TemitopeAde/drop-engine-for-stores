@@ -93,6 +93,32 @@
   align-items: center;
   gap: 7px;
 }
+.de-language-selector {
+  margin-top: auto;
+  padding: 24px 8px 16px;
+  min-width: 0;
+}
+.de-language-selector label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12px;
+  color: var(--de-muted);
+}
+/* The design-system input draws its own focus ring. */
+.de-app .de-language-selector :focus-visible {
+  outline: none;
+}
+.de-language-selector + .de-sidebar-footer {
+  margin-top: 0;
+}
+.de-sidebar {
+  border-right: 0;
+  border-inline-end: 1px solid var(--de-line);
+}
+.de-app[dir="rtl"] .de-form-page > .de-button svg,
+.de-app[dir="rtl"] .de-guide-cta > .de-button svg {
+  transform: scaleX(-1);
+}
 .de-plan-dot {
   width: 6px;
   height: 6px;
@@ -384,6 +410,23 @@
 .de-field select[aria-invalid="true"] {
   border-color: #b94130;
 }
+.de-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 20px;
+  font-size: 13px;
+  font-weight: 500;
+}
+.de-check input {
+  margin-top: 3px;
+  accent-color: var(--de-green);
+}
+.de-check small {
+  display: block;
+  color: var(--de-muted);
+  font-weight: 400;
+}
 .de-date-input {
   display: flex;
   align-items: center;
@@ -432,7 +475,7 @@
   opacity: 0.6;
 }
 .de-product-locked {
-  margin-left: auto;
+  margin-inline-start: auto;
   font-size: 11px;
   color: var(--de-muted);
   white-space: nowrap;
@@ -635,7 +678,7 @@
   color: var(--de-muted);
 }
 .de-guide-jump span {
-  margin-right: 4px;
+  margin-inline-end: 4px;
 }
 .de-guide-jump button,
 .de-pills button {
@@ -758,10 +801,16 @@
   content: "";
   position: absolute;
   top: 7px;
-  left: 8px;
-  right: 8px;
+  inset-inline-start: 8px;
+  inset-inline-end: 8px;
   height: 2px;
-  background: linear-gradient(90deg, #cfd8d3, #12654e 40%, #12654e 70%, #cfd8d3);
+  background: linear-gradient(
+    90deg,
+    #cfd8d3,
+    #12654e 40%,
+    #12654e 70%,
+    #cfd8d3
+  );
 }
 .de-lifecycle li {
   position: relative;
@@ -774,7 +823,7 @@
 .de-lifecycle-dot {
   position: absolute;
   top: 0;
-  left: 0;
+  inset-inline-start: 0;
   width: 16px;
   height: 16px;
   border-radius: 50%;
@@ -1043,6 +1092,17 @@
   .de-sidebar-footer {
     display: none;
   }
+  .de-sidebar {
+    flex-wrap: wrap;
+    gap: 16px;
+    border-inline-end: 0;
+  }
+  .de-language-selector {
+    margin-top: 0;
+    padding: 0;
+    width: 180px;
+    max-width: 100%;
+  }
   .de-header {
     align-items: flex-start;
     flex-direction: column;
@@ -1066,20 +1126,27 @@
   .de-lifecycle::before {
     top: 8px;
     bottom: 8px;
-    left: 7px;
-    right: auto;
+    inset-inline-start: 7px;
+    inset-inline-end: auto;
     width: 2px;
     height: auto;
-    background: linear-gradient(180deg, #cfd8d3, #12654e 40%, #12654e 70%, #cfd8d3);
+    background: linear-gradient(
+      180deg,
+      #cfd8d3,
+      #12654e 40%,
+      #12654e 70%,
+      #cfd8d3
+    );
   }
   .de-lifecycle li {
-    padding: 0 0 0 30px;
+    padding: 0;
+    padding-inline-start: 30px;
   }
   .de-faq-toolbar .de-search {
     width: 100%;
   }
   .de-faq-content p {
-    padding-right: 20px;
+    padding-inline-end: 20px;
   }
   .de-guide-cta {
     flex-direction: column;

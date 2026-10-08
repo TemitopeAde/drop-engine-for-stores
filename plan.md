@@ -30,7 +30,7 @@ See [implementation verification](docs/implementation-verification.md), [Aria/Ha
 - [x] Implement authenticated tenant-bound endpoints and explicit mutation authorization.
 - [x] Detect and persist site catalog version/timezone; implement separate V1/V3 catalog adapters.
 - [x] Build shadcn/ui dashboard create/edit/list flows with shared Zod validation, localization resources, stable submit labels, and inline spinners.
-- [x] Build visible product-page countdown with independent editor settings and live product context. Notifications are explicitly unconfigured; variant inventory and waitlist signup remain later work.
+- [x] Build visible product-page countdown with independent editor settings and live product context. Notifications are explicitly unconfigured; variant inventory remains later work (waitlist signup added in Stage 2).
 - [x] Implement registered `ECOM_VALIDATIONS` handler with cart validation enabled and authoritative server-time gating.
 - [x] Run local unit/contract/form/SSR checks, TypeScript and Wix builds; generate the Harmony manifest.
 - [ ] Demonstrate checkout gating on actual V1 and V3 sites after a test release.
@@ -46,7 +46,8 @@ See [implementation verification](docs/implementation-verification.md), [Aria/Ha
 
 ## Stage 2 — Waitlist and notifications
 
-- [ ] Consent, normalization, persistent deduplication, abuse protection, unsubscribe, private counts, and Pro CSV export.
+- [x] Consent, normalization, persistent deduplication, abuse protection, unsubscribe, private counts, and Pro CSV export. Signup is on the product-page countdown plugin while a published drop is scheduled (per-drop toggle); entries use deterministic SHA-256 IDs; the Free 200-entry cap and per-visitor rate limit use compare-and-set counters in `processed_events`; bot protection is honeypot + minimum fill time (no CAPTCHA contract verified); export is gated server-side on `appInstances.getAppInstance().isFree === false`.
+- [ ] Verify waitlist signup, cap, unsubscribe and Pro export on a released installation with a real Pro plan. Email-link unsubscribe and double opt-in arrive with the notification provider; emails are stored unencrypted in the PRIVILEGED collection; rate-limit documents are not yet pruned.
 - [ ] Implement only the approved trigger/provider: durable jobs, fenced versions, retry/reconciliation, delivery records, and suppression.
 
 ## Stage 3 — Purchase limits and analytics

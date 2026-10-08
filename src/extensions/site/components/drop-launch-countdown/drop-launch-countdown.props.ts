@@ -12,6 +12,8 @@ export type DropLaunchCountdownProps = {
     heading?: { className?: string };
     status?: { className?: string };
     countdown?: { className?: string };
+    number?: { className?: string };
+    label?: { className?: string };
   };
 };
 export const defaultProps = {

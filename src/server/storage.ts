@@ -17,7 +17,7 @@ const installationSchema = z
   .passthrough();
 export type Installation = z.infer<typeof installationSchema>;
 export type Tenant = { instanceId: string; siteId: string };
-export async function tenant(admin = false): Promise<Tenant> {
+export async function caller(admin = false) {
   const token = await auth.getTokenInfo();
   if (
     !token.active ||
@@ -26,7 +26,13 @@ export async function tenant(admin = false): Promise<Tenant> {
     (admin && token.subjectType !== "USER")
   )
     throw new DomainError("forbidden", 403);
-  return { instanceId: token.instanceId, siteId: token.siteId };
+  return {
+    scope: { instanceId: token.instanceId, siteId: token.siteId } as Tenant,
+    subjectId: token.subjectId,
+  };
+}
+export async function tenant(admin = false): Promise<Tenant> {
+  return (await caller(admin)).scope;
 }
 async function find(instanceId: string, elevated: boolean) {
   const query = (elevated ? auth.elevate(items.query) : items.query)(COLLECTION)

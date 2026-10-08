@@ -1,0 +1,303 @@
+{
+  "messages": {
+    "selectProduct": "Stel een Wix Stores-product-ID in om deze afteller te koppelen.",
+    "noLaunch": "Er is geen gepubliceerde lancering voor dit product.",
+    "app": "Drop Engine",
+    "language": "Taal",
+    "site": "Je website",
+    "subtitle": "Laat je volgende lancering tellen.",
+    "drops": "Lanceringen",
+    "create": "Lancering maken",
+    "edit": "Lancering bewerken",
+    "actions": "Acties",
+    "save": "Concept opslaan",
+    "publish": "Lancering publiceren",
+    "cancel": "Lancering annuleren",
+    "archive": "Archiveren",
+    "restore": "Concept herstellen",
+    "duplicate": "Dupliceren",
+    "name": "Naam van lancering",
+    "products": "Producten",
+    "start": "Begin",
+    "now": "Nu",
+    "end": "Einde",
+    "zone": "Tijdzone",
+    "endBehavior": "Na de lancering",
+    "RESTORE": "Normale aankopen herstellen",
+    "BLOCK": "Aankopen geblokkeerd houden",
+    "DRAFT": "Concept",
+    "SCHEDULED": "Gepland",
+    "LIVE": "Live",
+    "ENDED": "Afgelopen",
+    "CANCELLED": "Geannuleerd",
+    "ARCHIVED": "Gearchiveerd",
+    "empty": "Je volgende lancering begint hier",
+    "emptyHelp": "Kies producten en een periode. Producten blijven zichtbaar terwijl aankopen geblokkeerd zijn.",
+    "loading": "Je winkel laden…",
+    "retry": "Opnieuw proberen",
+    "back": "Terug naar lanceringen",
+    "search": "Lanceringen zoeken",
+    "all": "Alle statussen",
+    "catalog": "Producten kiezen",
+    "done": "Gereed",
+    "dismiss": "Annuleren",
+    "loadMore": "Meer producten laden",
+    "selectAllProducts": "Alle producten selecteren",
+    "selectAllHelp": "Bevat alle zichtbare producten op alle pagina's.",
+    "selectingProducts": "Producten selecteren…",
+    "productsFound": "producten gevonden",
+    "stopSelecting": "Selectie stoppen",
+    "selectionTooLarge": "Je kunt maximaal 10.000 producten per lancering selecteren.",
+    "previousProducts": "Vorige producten",
+    "nextProducts": "Volgende producten",
+    "productPage": "Pagina",
+    "selected": "geselecteerd",
+    "saved": "Lancering opgeslagen",
+    "failed": "De aanvraag kon niet worden voltooid. Probeer opnieuw.",
+    "invalidSchedule": "Gebruik een geldige tijdzone en een einde na het begin. Pas dubbelzinnige of overgeslagen tijden bij zomertijd aan.",
+    "activeLimit": "Gratis bevat één actieve lancering. Annuleer de huidige voordat je een andere publiceert.",
+    "conflict": "Deze lancering is elders gewijzigd. Vernieuw voordat je opslaat.",
+    "productInUse": "Sommige producten horen bij een andere lancering. Verwijder ze of annuleer die lancering.",
+    "inOtherDrop": "In een andere lancering",
+    "storageLimit": "Deze installatie heeft de opslaglimiet bereikt.",
+    "expiredSchedule": "Kies een toekomstig einde voordat je publiceert.",
+    "forbidden": "Open de app als website-eigenaar of bevoegde medewerker.",
+    "unavailable": "Winkelgegevens zijn tijdelijk niet beschikbaar.",
+    "setup": "App-verzamelingen zijn nog niet klaar. Installeer de versie die ze bevat en laat Wix ze instellen.",
+    "fieldsRequired": "Controleer de gemarkeerde velden.",
+    "noProducts": "Geen zichtbare producten op deze pagina.",
+    "gatingHelp": "De servertijd bepaalt aankopen. Annuleren herstelt normale aankopen direct.",
+    "free": "Gratis abonnement · 1 actieve lancering",
+    "stage": "Lanceringsinstellingen",
+    "waitlist": "Wachtlijst",
+    "waitlistTitle": "Ontvang bericht bij opening",
+    "waitlistEmail": "E-mailadres",
+    "waitlistConsent": "Mail me over deze lancering. Ik kan me altijd afmelden.",
+    "waitlistJoin": "Op de wachtlijst",
+    "waitlistJoining": "Aanmelden…",
+    "waitlistJoined": "Je staat op de wachtlijst.",
+    "waitlistAlready": "Dit e-mailadres staat al op de wachtlijst.",
+    "waitlistLeave": "Wachtlijst verlaten",
+    "waitlistLeaving": "Afmelden…",
+    "waitlistLeft": "Je hebt de wachtlijst verlaten.",
+    "waitlistInvalid": "Voer een geldig e-mailadres in en bevestig toestemming.",
+    "waitlistFull": "De wachtlijst is vol. Kom terug bij de opening.",
+    "waitlistClosed": "Aanmeldingen voor deze lancering zijn gesloten.",
+    "rateLimited": "Te veel pogingen. Probeer later opnieuw.",
+    "proRequired": "CSV-export is beschikbaar met Pro.",
+    "waitlistSetting": "Wachtlijstaanmeldingen verzamelen",
+    "waitlistSettingHelp": "Klanten kunnen zich via de afteller aanmelden tot de opening. Lanceringsmails worden nog niet verstuurd.",
+    "viewWaitlist": "Wachtlijst bekijken",
+    "waitlistFor": "Wachtlijst",
+    "waitlistSubscribed": "aangemeld",
+    "waitlistTotal": "vermeldingen totaal",
+    "waitlistUsage": "gebruikte vermeldingen voor alle lanceringen in het gratis abonnement",
+    "waitlistEmpty": "Nog geen aanmeldingen",
+    "waitlistEmptyHelp": "Klanten kunnen zich aanmelden op de productpagina zolang de lancering gepland is.",
+    "waitlistOff": "Aanmeldingen zijn voor deze lancering uitgeschakeld.",
+    "waitlistJoinedAt": "Aangemeld op",
+    "waitlistStatus": "Status",
+    "SUBSCRIBED": "Aangemeld",
+    "UNSUBSCRIBED": "Afgemeld",
+    "markUnsubscribed": "Als afgemeld markeren",
+    "removeEntry": "Verwijderen",
+    "confirmRemove": "Verwijderen bevestigen",
+    "removeHelp": "Verwijderen wist het e-mailadres en maakt gratis capaciteit vrij. Afmelden bewaart de vermelding en voorkomt toekomstige mails.",
+    "exportCsv": "CSV exporteren",
+    "exporting": "Exporteren…",
+    "entryUpdated": "Wachtlijst bijgewerkt",
+    "previousPage": "Vorige",
+    "nextPage": "Volgende",
+    "notificationsPending": "Lanceringsmails zijn nog niet gekoppeld. Aanmeldingen en toestemming worden bewaard om abonnees na het instellen van meldingen te bereiken.",
+    "opens": "Deze lancering opent binnenkort",
+    "live": "De lancering is live",
+    "ended": "Deze lancering is afgelopen",
+    "beforeViolation": "Dit product kan pas bij de opening van de lancering worden gekocht.",
+    "afterViolation": "Deze lancering is afgelopen. Aankopen zijn gesloten.",
+    "outageViolation": "Beschikbaarheid kan niet worden gecontroleerd. Probeer zo opnieuw.",
+    "days": "Dagen",
+    "hours": "Uren",
+    "minutes": "Minuten",
+    "seconds": "Seconden",
+    "editor": "Lanceringsafteller",
+    "content": "Inhoud",
+    "typography": "Typografie",
+    "colors": "Kleuren",
+    "countdown": "Afteller",
+    "form": "Formulier",
+    "layout": "Indeling",
+    "borders": "Randen",
+    "responsive": "Responsief",
+    "advanced": "Geavanceerd",
+    "heading": "Kop",
+    "textColor": "Tekstkleur",
+    "background": "Achtergrond",
+    "font": "Lettertype",
+    "reset": "Thema herstellen",
+    "padding": "Binnenruimte",
+    "gap": "Afstand",
+    "radius": "Hoekradius",
+    "maxWidth": "Maximale breedte",
+    "compact": "Compact op mobiel",
+    "showSeconds": "Seconden tonen",
+    "saveSettings": "Instellingen opslaan",
+    "settingsSaved": "Instellingen opgeslagen",
+    "pluginPlacement": "Plaatsing van aftelplugin",
+    "pluginAdded": "Toegevoegd",
+    "pluginNotAdded": "Niet toegevoegd",
+    "pluginUnknown": "Controle mislukt",
+    "pluginChecking": "Plaatsing controleren…",
+    "pluginAdding": "Plugin toevoegen…",
+    "pluginCheck": "Plaatsing controleren",
+    "pluginAdd": "Plugin toevoegen",
+    "pluginCheckingHelp": "De afteller op je productpagina wordt gecontroleerd.",
+    "pluginAddingHelp": "Volg de Wix-stappen om de afteller toe te voegen aan je productpagina.",
+    "pluginAddedHelp": "Je afteller staat op de productpagina.",
+    "pluginMissingHelp": "Voeg de afteller toe aan de productpagina om de lanceringsperiode te tonen.",
+    "pluginCheckFailed": "Plaatsing kon niet worden gecontroleerd. Probeer opnieuw.",
+    "pluginConfirmationFailed": "Toevoegen is afgerond, maar plaatsing kon niet worden gecontroleerd. Controleer opnieuw.",
+    "pluginStillMissing": "De afteller is nog niet geplaatst. Controleer of voeg opnieuw toe.",
+    "pluginAddCancelled": "Toevoegen is geannuleerd. Je kunt opnieuw proberen.",
+    "pluginPublishFirst": "Publiceer eerst je website en voeg daarna de plugin toe.",
+    "pluginSlotOccupied": "De plek is bezet. Wijzig de plaatsing in de editor en controleer opnieuw.",
+    "pluginAddFailed": "De plugin kon niet worden toegevoegd. Probeer opnieuw.",
+    "guide": "Handleiding en FAQ",
+    "guideEyebrow": "Helpcentrum",
+    "guideTitle": "Zo werkt Drop Engine",
+    "guideIntro": "Plan lanceringen die aankopen op een exact moment openen en klanten een afteller tonen.",
+    "guideSteps": "Start in vijf stappen",
+    "guideStepsHelp": "Van een leeg dashboard naar een actieve lancering in enkele minuten.",
+    "guideStep": "Stap",
+    "guideStatuses": "Lanceringscyclus",
+    "guideStatusesHelp": "Elke gepubliceerde lancering doorloopt deze fasen volgens de serverklok.",
+    "guideSidePaths": "Wanneer nodig",
+    "guideActions": "Lanceringsacties",
+    "guideActionsHelp": "Open het ⋯-menu van een lancering in de lijst.",
+    "faq": "Veelgestelde vragen",
+    "faqHelp": "Antwoorden over lanceringen, aankopen en je winkel.",
+    "faqSearch": "Vragen zoeken",
+    "faqAll": "Alle",
+    "faqEmpty": "Geen vragen komen overeen met je zoekopdracht.",
+    "faqClear": "Zoekopdracht wissen",
+    "guideJump": "Ga naar",
+    "guideCta": "Maak je eerste lancering",
+    "guideCtaTitle": "Klaar voor je volgende lancering?"
+  },
+  "guide": {
+    "steps": [
+      {
+        "title": "Lancering maken",
+        "body": "Kies Lancering maken, geef een naam en selecteer Wix Stores-producten. Maximaal 10.000 producten of de hele catalogus met Alle producten selecteren."
+      },
+      {
+        "title": "Periode instellen",
+        "body": "Kies begin, einde en tijdzone. Nu start direct. Het einde moet later liggen; wijzig dubbelzinnige of overgeslagen tijden bij zomertijd."
+      },
+      {
+        "title": "Gedrag na afloop kiezen",
+        "body": "Normale aankopen herstellen opent aankopen bij afloop. Aankopen geblokkeerd houden blokkeert ze tot je de lancering annuleert."
+      },
+      {
+        "title": "Opslaan of publiceren",
+        "body": "Concept opslaan verandert de winkel niet. Publiceren activeert de periode: Gepland, Live, Afgelopen."
+      },
+      {
+        "title": "Afteller tonen",
+        "body": "De plugin wordt automatisch op de Wix Stores-productpagina geplaatst. Je kunt ook Drop launch countdown in de editor toevoegen en de product-ID instellen."
+      }
+    ],
+    "lifecycle": [
+      "Opgeslagen zonder publicatie. Aankopen veranderen niet.",
+      "Gepubliceerd, wacht op opening. Aankopen geblokkeerd.",
+      "Binnen de periode. Klanten kunnen kopen.",
+      "Periode afgelopen. Aankopen volgen de instelling voor daarna."
+    ],
+    "sidePaths": [
+      "Door jou geannuleerd. Normale aankopen hersteld.",
+      "Verborgen uit actief werk. Herstel om opnieuw te bewerken."
+    ],
+    "checkout": {
+      "open": "Aankopen open",
+      "locked": "Aankopen geblokkeerd",
+      "depends": "Jouw keuze"
+    },
+    "actions": [
+      {
+        "title": "Bewerken",
+        "body": "Wijzig naam, producten, periode of gedrag na afloop."
+      },
+      {
+        "title": "Dupliceren",
+        "body": "Kopieer de lancering als nieuw concept."
+      },
+      {
+        "title": "Lancering annuleren",
+        "body": "Stop een gepubliceerde lancering en open aankopen direct."
+      },
+      {
+        "title": "Archiveren",
+        "body": "Berg een concept of afgelopen of geannuleerde lancering op."
+      },
+      {
+        "title": "Concept herstellen",
+        "body": "Herstel een gearchiveerde lancering als concept."
+      }
+    ],
+    "faqCategories": {
+      "launching": "Lanceren",
+      "checkout": "Aankopen",
+      "managing": "Beheer",
+      "storefront": "Winkel"
+    },
+    "faq": [
+      {
+        "q": "Zijn producten zichtbaar vóór de opening?",
+        "a": "Ja. Producten en afteller blijven zichtbaar. Alleen aankopen zijn tot de opening geblokkeerd."
+      },
+      {
+        "q": "Kan een product vooraf in de winkelwagen?",
+        "a": "Ja, maar afrekenen meldt dat het product pas bij opening beschikbaar is en voorkomt het afronden van de bestelling."
+      },
+      {
+        "q": "Welke klok bepaalt de opening?",
+        "a": "De serverklok. Een andere apparaattijd opent niet eerder. De afteller controleert de server elke 15 seconden."
+      },
+      {
+        "q": "Welke tijdzone moet ik gebruiken?",
+        "a": "Die van je aankondiging. Begin en einde zijn exacte momenten, zodat de lancering overal tegelijk opent."
+      },
+      {
+        "q": "Hoeveel actieve lanceringen zijn toegestaan?",
+        "a": "Gratis bevat er één: gepland, live of afgelopen met geblokkeerde aankopen. Concepten zijn onbeperkt. Annuleer de huidige voordat je een andere publiceert."
+      },
+      {
+        "q": "Hoe stop ik een lancering direct?",
+        "a": "Open het ⋯-menu en kies Lancering annuleren. Normale aankopen worden direct hersteld."
+      },
+      {
+        "q": "Kan ik na publicatie bewerken?",
+        "a": "Ja. Open, wijzig en sla op. De lancering blijft gepubliceerd. Vernieuw eerst als iemand anders iets heeft gewijzigd."
+      },
+      {
+        "q": "Waarom kan ik niet archiveren?",
+        "a": "Gepubliceerde lanceringen bepalen nog steeds aankopen. Annuleer eerst en archiveer daarna."
+      },
+      {
+        "q": "Waarom lukt publiceren niet?",
+        "a": "Controleer of het einde toekomstig en na het begin is, producten zijn geselecteerd en geen andere lancering actief is."
+      },
+      {
+        "q": "Waarom ontbreekt de afteller?",
+        "a": "Controleer of de lancering gepubliceerd is en het product bevat. Controleer bij het editor-element of de product-ID overeenkomt."
+      },
+      {
+        "q": "Wat als beschikbaarheid niet kan worden gecontroleerd?",
+        "a": "Aankopen pauzeren met een melding om verkopen buiten de periode tijdens een storing te voorkomen. Ze heropenen zodra de dienst reageert."
+      },
+      {
+        "q": "Kan ik een lancering hergebruiken?",
+        "a": "Ja. Kies Dupliceren om producten en instellingen naar een nieuw concept te kopiëren en wijzig de datums."
+      }
+    ]
+  }
+}

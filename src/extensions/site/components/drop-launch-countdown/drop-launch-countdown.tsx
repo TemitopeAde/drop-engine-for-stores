@@ -132,10 +132,26 @@ const DropLaunchCountdown: FC<DropLaunchCountdownProps> = (props) => {
         {(["days", "hours", "minutes", "seconds"] as const).map(
           (label, index) => (
             <div className={styles.unit} key={label}>
-              <strong className={styles.number}>
+              <strong
+                {...elementProps?.number}
+                className={classNames(
+                  "drop-launch-countdown-number",
+                  styles.number,
+                  elementProps?.number?.className,
+                )}
+              >
                 {String(parts[index]).padStart(2, "0")}
               </strong>
-              <span className={styles.label}>{t(label)}</span>
+              <span
+                {...elementProps?.label}
+                className={classNames(
+                  "drop-launch-countdown-label",
+                  styles.label,
+                  elementProps?.label?.className,
+                )}
+              >
+                {t(label)}
+              </span>
             </div>
           ),
         )}

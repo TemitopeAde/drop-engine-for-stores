@@ -1,0 +1,303 @@
+{
+  "messages": {
+    "selectProduct": "Imposta un ID prodotto Wix Stores per collegare questo conto alla rovescia.",
+    "noLaunch": "Nessun lancio pubblicato è configurato per questo prodotto.",
+    "app": "Drop Engine",
+    "language": "Lingua",
+    "site": "Il tuo sito",
+    "subtitle": "Fai contare il tuo prossimo lancio.",
+    "drops": "Lanci",
+    "create": "Crea lancio",
+    "edit": "Modifica lancio",
+    "actions": "Azioni",
+    "save": "Salva bozza",
+    "publish": "Pubblica lancio",
+    "cancel": "Annulla lancio",
+    "archive": "Archivia",
+    "restore": "Ripristina bozza",
+    "duplicate": "Duplica",
+    "name": "Nome del lancio",
+    "products": "Prodotti",
+    "start": "Inizio",
+    "now": "Ora",
+    "end": "Fine",
+    "zone": "Fuso orario",
+    "endBehavior": "Dopo il lancio",
+    "RESTORE": "Ripristina gli acquisti normali",
+    "BLOCK": "Mantieni gli acquisti bloccati",
+    "DRAFT": "Bozza",
+    "SCHEDULED": "Programmato",
+    "LIVE": "In corso",
+    "ENDED": "Terminato",
+    "CANCELLED": "Annullato",
+    "ARCHIVED": "Archiviato",
+    "empty": "Il tuo prossimo lancio inizia qui",
+    "emptyHelp": "Scegli prodotti e periodo. I prodotti restano visibili mentre gli acquisti sono bloccati.",
+    "loading": "Caricamento del negozio…",
+    "retry": "Riprova",
+    "back": "Torna ai lanci",
+    "search": "Cerca lanci",
+    "all": "Tutti gli stati",
+    "catalog": "Scegli prodotti",
+    "done": "Fatto",
+    "dismiss": "Annulla",
+    "loadMore": "Carica altri prodotti",
+    "selectAllProducts": "Seleziona tutti i prodotti",
+    "selectAllHelp": "Include tutti i prodotti visibili di tutte le pagine.",
+    "selectingProducts": "Selezione dei prodotti…",
+    "productsFound": "prodotti trovati",
+    "stopSelecting": "Interrompi selezione",
+    "selectionTooLarge": "Puoi selezionare fino a 10.000 prodotti per lancio.",
+    "previousProducts": "Prodotti precedenti",
+    "nextProducts": "Prodotti successivi",
+    "productPage": "Pagina",
+    "selected": "selezionati",
+    "saved": "Lancio salvato",
+    "failed": "Impossibile completare la richiesta. Riprova.",
+    "invalidSchedule": "Usa un fuso valido e una fine successiva all'inizio. Modifica gli orari ambigui o inesistenti dovuti all'ora legale.",
+    "activeLimit": "Il piano gratuito include un lancio attivo. Annulla quello attuale prima di pubblicarne un altro.",
+    "conflict": "Il lancio è cambiato in un'altra sessione. Ricarica prima di salvare.",
+    "productInUse": "Alcuni prodotti appartengono a un altro lancio. Rimuovili o annulla quel lancio.",
+    "inOtherDrop": "In un altro lancio",
+    "storageLimit": "Questa installazione ha raggiunto il limite di archiviazione.",
+    "expiredSchedule": "Scegli una fine futura prima di pubblicare.",
+    "forbidden": "Apri l'app come proprietario del sito o collaboratore autorizzato.",
+    "unavailable": "I dati del negozio sono temporaneamente indisponibili.",
+    "setup": "Le raccolte dell'app non sono pronte. Installa la versione che le include e lascia che Wix le configuri.",
+    "fieldsRequired": "Controlla i campi evidenziati.",
+    "noProducts": "Nessun prodotto visibile in questa pagina.",
+    "gatingHelp": "L'ora del server controlla gli acquisti. Annullare ripristina subito gli acquisti normali.",
+    "free": "Piano gratuito · 1 lancio attivo",
+    "stage": "Controlli del lancio",
+    "waitlist": "Lista d'attesa",
+    "waitlistTitle": "Ricevi un avviso all'apertura",
+    "waitlistEmail": "Indirizzo e-mail",
+    "waitlistConsent": "Inviami e-mail su questo lancio. Posso annullare l'iscrizione in qualsiasi momento.",
+    "waitlistJoin": "Iscriviti alla lista d'attesa",
+    "waitlistJoining": "Iscrizione…",
+    "waitlistJoined": "Sei nella lista d'attesa.",
+    "waitlistAlready": "Questa e-mail è già nella lista d'attesa.",
+    "waitlistLeave": "Esci dalla lista d'attesa",
+    "waitlistLeaving": "Uscita…",
+    "waitlistLeft": "Hai lasciato la lista d'attesa.",
+    "waitlistInvalid": "Inserisci un'e-mail valida e conferma il consenso.",
+    "waitlistFull": "La lista è piena. Torna all'apertura del lancio.",
+    "waitlistClosed": "Le iscrizioni per questo lancio sono chiuse.",
+    "rateLimited": "Troppi tentativi. Riprova più tardi.",
+    "proRequired": "L'esportazione CSV è disponibile nel piano Pro.",
+    "waitlistSetting": "Raccogli iscrizioni alla lista d'attesa",
+    "waitlistSettingHelp": "I clienti possono iscriversi dal conto alla rovescia fino all'apertura. Le e-mail di lancio non vengono ancora inviate.",
+    "viewWaitlist": "Visualizza lista d'attesa",
+    "waitlistFor": "Lista d'attesa",
+    "waitlistSubscribed": "iscritti",
+    "waitlistTotal": "voci totali",
+    "waitlistUsage": "voci utilizzate per tutti i lanci nel piano gratuito",
+    "waitlistEmpty": "Ancora nessuna iscrizione",
+    "waitlistEmptyHelp": "I clienti possono iscriversi dalla pagina prodotto mentre il lancio è programmato.",
+    "waitlistOff": "Le iscrizioni sono disattivate per questo lancio.",
+    "waitlistJoinedAt": "Iscritto il",
+    "waitlistStatus": "Stato",
+    "SUBSCRIBED": "Iscritto",
+    "UNSUBSCRIBED": "Non iscritto",
+    "markUnsubscribed": "Segna come non iscritto",
+    "removeEntry": "Elimina",
+    "confirmRemove": "Conferma eliminazione",
+    "removeHelp": "Eliminare cancella l'e-mail e libera spazio gratuito. Annullare l'iscrizione conserva la voce e blocca le future e-mail.",
+    "exportCsv": "Esporta CSV",
+    "exporting": "Esportazione…",
+    "entryUpdated": "Lista d'attesa aggiornata",
+    "previousPage": "Precedente",
+    "nextPage": "Successiva",
+    "notificationsPending": "Le e-mail di lancio non sono ancora collegate. Iscrizioni e consenso vengono salvati per contattare gli iscritti dopo aver configurato le notifiche.",
+    "opens": "Questo lancio apre presto",
+    "live": "Il lancio è in corso",
+    "ended": "Questo lancio è terminato",
+    "beforeViolation": "Questo prodotto non è acquistabile prima dell'apertura del lancio.",
+    "afterViolation": "Questo lancio è terminato. Gli acquisti sono chiusi.",
+    "outageViolation": "Impossibile verificare la disponibilità. Riprova tra poco.",
+    "days": "Giorni",
+    "hours": "Ore",
+    "minutes": "Minuti",
+    "seconds": "Secondi",
+    "editor": "Conto alla rovescia del lancio",
+    "content": "Contenuto",
+    "typography": "Tipografia",
+    "colors": "Colori",
+    "countdown": "Conto alla rovescia",
+    "form": "Modulo",
+    "layout": "Layout",
+    "borders": "Bordi",
+    "responsive": "Adattivo",
+    "advanced": "Avanzate",
+    "heading": "Titolo",
+    "textColor": "Colore del testo",
+    "background": "Sfondo",
+    "font": "Carattere",
+    "reset": "Ripristina tema",
+    "padding": "Spaziatura interna",
+    "gap": "Spaziatura",
+    "radius": "Raggio degli angoli",
+    "maxWidth": "Larghezza massima",
+    "compact": "Compatto su mobile",
+    "showSeconds": "Mostra secondi",
+    "saveSettings": "Salva impostazioni",
+    "settingsSaved": "Impostazioni salvate",
+    "pluginPlacement": "Posizionamento del plugin conto alla rovescia",
+    "pluginAdded": "Aggiunto",
+    "pluginNotAdded": "Non aggiunto",
+    "pluginUnknown": "Impossibile verificare",
+    "pluginChecking": "Verifica del posizionamento…",
+    "pluginAdding": "Aggiunta del plugin…",
+    "pluginCheck": "Verifica posizionamento",
+    "pluginAdd": "Aggiungi plugin",
+    "pluginCheckingHelp": "Verifica del conto alla rovescia nella pagina prodotto.",
+    "pluginAddingHelp": "Segui i passaggi Wix per aggiungere il conto alla rovescia alla pagina prodotto.",
+    "pluginAddedHelp": "Il conto alla rovescia è nella pagina prodotto.",
+    "pluginMissingHelp": "Aggiungi il conto alla rovescia alla pagina prodotto per mostrare il periodo del lancio.",
+    "pluginCheckFailed": "Impossibile verificare il posizionamento. Riprova.",
+    "pluginConfirmationFailed": "La richiesta di aggiunta è completata, ma non è stato possibile verificare il posizionamento. Verifica di nuovo.",
+    "pluginStillMissing": "Il conto alla rovescia non è ancora posizionato. Verifica o aggiungilo di nuovo.",
+    "pluginAddCancelled": "L'aggiunta del plugin è stata annullata. Puoi riprovare.",
+    "pluginPublishFirst": "Pubblica prima il sito, poi aggiungi il plugin.",
+    "pluginSlotOccupied": "Lo spazio è occupato. Modifica il posizionamento nell'editor e verifica di nuovo.",
+    "pluginAddFailed": "Impossibile aggiungere il plugin. Riprova.",
+    "guide": "Guida e FAQ",
+    "guideEyebrow": "Centro assistenza",
+    "guideTitle": "Come funziona Drop Engine",
+    "guideIntro": "Programma lanci che aprono gli acquisti a un istante preciso e mostrano un conto alla rovescia ai clienti.",
+    "guideSteps": "Inizia in cinque passaggi",
+    "guideStepsHelp": "Da un pannello vuoto a un lancio attivo in pochi minuti.",
+    "guideStep": "Passaggio",
+    "guideStatuses": "Ciclo del lancio",
+    "guideStatusesHelp": "Ogni lancio pubblicato segue queste fasi secondo l'ora del server.",
+    "guideSidePaths": "Quando serve",
+    "guideActions": "Azioni del lancio",
+    "guideActionsHelp": "Apri il menu ⋯ di un lancio nell'elenco.",
+    "faq": "Domande frequenti",
+    "faqHelp": "Risposte su lanci, acquisti e negozio.",
+    "faqSearch": "Cerca domande",
+    "faqAll": "Tutte",
+    "faqEmpty": "Nessuna domanda corrisponde alla ricerca.",
+    "faqClear": "Cancella ricerca",
+    "guideJump": "Vai a",
+    "guideCta": "Crea il tuo primo lancio",
+    "guideCtaTitle": "Pronto per il prossimo lancio?"
+  },
+  "guide": {
+    "steps": [
+      {
+        "title": "Crea un lancio",
+        "body": "Scegli Crea lancio, assegna un nome e seleziona i prodotti Wix Stores. Fino a 10.000 prodotti o tutto il catalogo con Seleziona tutti i prodotti."
+      },
+      {
+        "title": "Definisci il periodo",
+        "body": "Scegli inizio, fine e fuso. Ora avvia subito. La fine deve seguire l'inizio; modifica gli orari ambigui o inesistenti dell'ora legale."
+      },
+      {
+        "title": "Scegli cosa accade dopo",
+        "body": "Ripristina gli acquisti normali riapre gli acquisti alla fine. Mantieni gli acquisti bloccati li impedisce finché non annulli il lancio."
+      },
+      {
+        "title": "Salva o pubblica",
+        "body": "Salva bozza non modifica il negozio. Pubblicare attiva il periodo: Programmato, In corso, Terminato."
+      },
+      {
+        "title": "Mostra il conto alla rovescia",
+        "body": "Il plugin viene aggiunto automaticamente alla pagina prodotto Wix Stores. Puoi anche aggiungere Drop launch countdown nell'editor e impostare l'ID prodotto."
+      }
+    ],
+    "lifecycle": [
+      "Salvato ma non pubblicato. Gli acquisti non cambiano.",
+      "Pubblicato, in attesa. Gli acquisti sono bloccati.",
+      "Nel periodo di lancio. I clienti possono acquistare.",
+      "Il periodo è terminato. Gli acquisti seguono l'impostazione finale."
+    ],
+    "sidePaths": [
+      "Annullato da te. Acquisti normali ripristinati.",
+      "Nascosto dal lavoro attivo. Ripristinalo per modificarlo."
+    ],
+    "checkout": {
+      "open": "Acquisti aperti",
+      "locked": "Acquisti bloccati",
+      "depends": "A tua scelta"
+    },
+    "actions": [
+      {
+        "title": "Modifica",
+        "body": "Cambia nome, prodotti, periodo o comportamento finale."
+      },
+      {
+        "title": "Duplica",
+        "body": "Copia il lancio come nuova bozza."
+      },
+      {
+        "title": "Annulla lancio",
+        "body": "Ferma un lancio pubblicato e riapri subito gli acquisti."
+      },
+      {
+        "title": "Archivia",
+        "body": "Metti da parte una bozza o un lancio terminato o annullato."
+      },
+      {
+        "title": "Ripristina bozza",
+        "body": "Recupera un lancio archiviato come bozza."
+      }
+    ],
+    "faqCategories": {
+      "launching": "Lancio",
+      "checkout": "Acquisti",
+      "managing": "Gestione",
+      "storefront": "Negozio"
+    },
+    "faq": [
+      {
+        "q": "I prodotti sono visibili prima dell'apertura?",
+        "a": "Sì. Prodotti e conto alla rovescia restano visibili. Solo gli acquisti sono bloccati fino all'apertura."
+      },
+      {
+        "q": "Si può aggiungere un prodotto al carrello prima?",
+        "a": "Sì, ma il checkout indica che il prodotto sarà disponibile solo all'apertura e impedisce di completare l'ordine."
+      },
+      {
+        "q": "Quale orologio determina l'apertura?",
+        "a": "Quello del server. Cambiare l'ora del dispositivo non anticipa il lancio. Il conto alla rovescia controlla il server ogni 15 secondi."
+      },
+      {
+        "q": "Quale fuso usare?",
+        "a": "Quello annunciato per il lancio. Inizio e fine sono istanti esatti: si apre contemporaneamente ovunque."
+      },
+      {
+        "q": "Quanti lanci possono essere attivi?",
+        "a": "Il piano gratuito ne include uno: programmato, in corso o terminato con acquisti bloccati. Le bozze sono illimitate. Annulla il corrente prima di pubblicarne un altro."
+      },
+      {
+        "q": "Come fermo subito un lancio?",
+        "a": "Apri il menu ⋯ e scegli Annulla lancio. Gli acquisti normali vengono ripristinati subito."
+      },
+      {
+        "q": "Posso modificare un lancio pubblicato?",
+        "a": "Sì. Apri, modifica e salva. Rimane pubblicato. Se qualcuno lo ha modificato altrove, ricarica prima di salvare."
+      },
+      {
+        "q": "Perché non posso archiviare?",
+        "a": "I lanci pubblicati controllano ancora gli acquisti. Annulla prima, poi archivia."
+      },
+      {
+        "q": "Perché non posso pubblicare?",
+        "a": "Verifica che la fine sia futura e dopo l'inizio, che ci siano prodotti selezionati e nessun altro lancio attivo."
+      },
+      {
+        "q": "Perché manca il conto alla rovescia?",
+        "a": "Verifica che il lancio sia pubblicato e includa il prodotto. Nell'elemento dell'editor, controlla che l'ID corrisponda."
+      },
+      {
+        "q": "Se la disponibilità non è verificabile?",
+        "a": "Gli acquisti vengono sospesi con un messaggio per evitare vendite fuori periodo durante un'interruzione. Riprendono quando il servizio risponde."
+      },
+      {
+        "q": "Posso riutilizzare un lancio?",
+        "a": "Sì. Scegli Duplica per copiare prodotti e impostazioni in una nuova bozza, poi cambia le date."
+      }
+    ]
+  }
+}

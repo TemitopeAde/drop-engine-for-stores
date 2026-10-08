@@ -1,0 +1,303 @@
+{
+  "messages": {
+    "selectProduct": "Lege eine Wix Stores-Produkt-ID fest, um diesen Countdown zu verbinden.",
+    "noLaunch": "Für dieses Produkt ist kein veröffentlichter Launch eingerichtet.",
+    "app": "Drop Engine",
+    "language": "Sprache",
+    "site": "Deine Website",
+    "subtitle": "Mach deinen nächsten Launch zum Erfolg.",
+    "drops": "Launches",
+    "create": "Launch erstellen",
+    "edit": "Launch bearbeiten",
+    "actions": "Aktionen",
+    "save": "Entwurf speichern",
+    "publish": "Launch veröffentlichen",
+    "cancel": "Launch abbrechen",
+    "archive": "Archivieren",
+    "restore": "Entwurf wiederherstellen",
+    "duplicate": "Duplizieren",
+    "name": "Launch-Name",
+    "products": "Produkte",
+    "start": "Beginn",
+    "now": "Jetzt",
+    "end": "Ende",
+    "zone": "Zeitzone",
+    "endBehavior": "Nach dem Launch",
+    "RESTORE": "Normale Käufe wieder zulassen",
+    "BLOCK": "Käufe weiterhin sperren",
+    "DRAFT": "Entwurf",
+    "SCHEDULED": "Geplant",
+    "LIVE": "Live",
+    "ENDED": "Beendet",
+    "CANCELLED": "Abgebrochen",
+    "ARCHIVED": "Archiviert",
+    "empty": "Dein nächster Launch beginnt hier",
+    "emptyHelp": "Wähle Produkte und einen Zeitraum. Produkte bleiben sichtbar, während Käufe gesperrt sind.",
+    "loading": "Dein Shop wird geladen…",
+    "retry": "Erneut versuchen",
+    "back": "Zurück zu den Launches",
+    "search": "Launches suchen",
+    "all": "Alle Status",
+    "catalog": "Produkte auswählen",
+    "done": "Fertig",
+    "dismiss": "Abbrechen",
+    "loadMore": "Weitere Produkte laden",
+    "selectAllProducts": "Alle Produkte auswählen",
+    "selectAllHelp": "Umfasst alle sichtbaren Produkte auf allen Seiten.",
+    "selectingProducts": "Produkte werden ausgewählt…",
+    "productsFound": "Produkte gefunden",
+    "stopSelecting": "Auswahl stoppen",
+    "selectionTooLarge": "Du kannst bis zu 10.000 Produkte pro Launch auswählen.",
+    "previousProducts": "Vorherige Produkte",
+    "nextProducts": "Nächste Produkte",
+    "productPage": "Seite",
+    "selected": "ausgewählt",
+    "saved": "Launch gespeichert",
+    "failed": "Die Anfrage konnte nicht abgeschlossen werden. Versuche es erneut.",
+    "invalidSchedule": "Wähle eine gültige Zeitzone und ein Ende nach dem Beginn. Ändere mehrdeutige oder übersprungene Zeiten bei der Zeitumstellung.",
+    "activeLimit": "Der kostenlose Tarif enthält einen aktiven Launch. Brich ihn ab, bevor du einen weiteren veröffentlichst.",
+    "conflict": "Dieser Launch wurde in einer anderen Sitzung geändert. Lade vor dem Speichern neu.",
+    "productInUse": "Einige Produkte gehören bereits zu einem anderen Launch. Entferne sie oder brich diesen Launch ab.",
+    "inOtherDrop": "In einem anderen Launch",
+    "storageLimit": "Diese Installation hat ihr Speicherlimit erreicht.",
+    "expiredSchedule": "Wähle vor der Veröffentlichung ein zukünftiges Ende.",
+    "forbidden": "Öffne die App als Website-Inhaber oder berechtigter Mitarbeiter.",
+    "unavailable": "Shop-Daten sind vorübergehend nicht verfügbar.",
+    "setup": "Die App-Sammlungen sind noch nicht bereit. Installiere die Version mit den Sammlungen und lasse Wix sie einrichten.",
+    "fieldsRequired": "Prüfe die markierten Felder.",
+    "noProducts": "Keine sichtbaren Produkte auf dieser Seite.",
+    "gatingHelp": "Die Serverzeit steuert Käufe. Ein Abbruch erlaubt normale Käufe sofort wieder.",
+    "free": "Kostenloser Tarif · 1 aktiver Launch",
+    "stage": "Launch-Steuerung",
+    "waitlist": "Warteliste",
+    "waitlistTitle": "Bei Öffnung benachrichtigen",
+    "waitlistEmail": "E-Mail-Adresse",
+    "waitlistConsent": "Sende mir E-Mails zu diesem Launch. Ich kann mich jederzeit abmelden.",
+    "waitlistJoin": "Auf die Warteliste",
+    "waitlistJoining": "Anmeldung…",
+    "waitlistJoined": "Du stehst auf der Warteliste.",
+    "waitlistAlready": "Diese E-Mail-Adresse steht bereits auf der Warteliste.",
+    "waitlistLeave": "Warteliste verlassen",
+    "waitlistLeaving": "Abmeldung…",
+    "waitlistLeft": "Du hast die Warteliste verlassen.",
+    "waitlistInvalid": "Gib eine gültige E-Mail-Adresse ein und bestätige deine Einwilligung.",
+    "waitlistFull": "Die Warteliste ist voll. Schau zur Öffnung wieder vorbei.",
+    "waitlistClosed": "Anmeldungen für diesen Launch sind geschlossen.",
+    "rateLimited": "Zu viele Versuche. Versuche es später erneut.",
+    "proRequired": "CSV-Export ist im Pro-Tarif verfügbar.",
+    "waitlistSetting": "Wartelistenanmeldungen sammeln",
+    "waitlistSettingHelp": "Kunden können sich bis zur Öffnung über den Countdown anmelden. Launch-E-Mails werden noch nicht versendet.",
+    "viewWaitlist": "Warteliste anzeigen",
+    "waitlistFor": "Warteliste",
+    "waitlistSubscribed": "angemeldet",
+    "waitlistTotal": "Einträge insgesamt",
+    "waitlistUsage": "genutzte Einträge aller Launches im kostenlosen Tarif",
+    "waitlistEmpty": "Noch keine Anmeldungen",
+    "waitlistEmptyHelp": "Kunden können sich auf der Produktseite anmelden, solange der Launch geplant ist.",
+    "waitlistOff": "Wartelistenanmeldungen sind für diesen Launch deaktiviert.",
+    "waitlistJoinedAt": "Angemeldet am",
+    "waitlistStatus": "Status",
+    "SUBSCRIBED": "Angemeldet",
+    "UNSUBSCRIBED": "Abgemeldet",
+    "markUnsubscribed": "Als abgemeldet markieren",
+    "removeEntry": "Löschen",
+    "confirmRemove": "Löschen bestätigen",
+    "removeHelp": "Löschen entfernt die E-Mail und gibt kostenlose Kapazität frei. Abmelden behält den Eintrag und verhindert zukünftige E-Mails.",
+    "exportCsv": "CSV exportieren",
+    "exporting": "Export wird erstellt…",
+    "entryUpdated": "Warteliste aktualisiert",
+    "previousPage": "Zurück",
+    "nextPage": "Weiter",
+    "notificationsPending": "Launch-E-Mails sind noch nicht verbunden. Anmeldungen und Einwilligungen werden gespeichert, damit du später nach Einrichtung der Benachrichtigungen Kontakt aufnehmen kannst.",
+    "opens": "Dieser Launch öffnet bald",
+    "live": "Der Launch ist live",
+    "ended": "Dieser Launch ist beendet",
+    "beforeViolation": "Dieses Produkt kann erst nach der Öffnung des Launches gekauft werden.",
+    "afterViolation": "Dieser Launch ist beendet. Käufe sind derzeit geschlossen.",
+    "outageViolation": "Die Verfügbarkeit kann nicht geprüft werden. Versuche es gleich erneut.",
+    "days": "Tage",
+    "hours": "Stunden",
+    "minutes": "Minuten",
+    "seconds": "Sekunden",
+    "editor": "Launch-Countdown",
+    "content": "Inhalt",
+    "typography": "Typografie",
+    "colors": "Farben",
+    "countdown": "Countdown",
+    "form": "Formular",
+    "layout": "Layout",
+    "borders": "Rahmen",
+    "responsive": "Responsiv",
+    "advanced": "Erweitert",
+    "heading": "Überschrift",
+    "textColor": "Textfarbe",
+    "background": "Hintergrund",
+    "font": "Schriftart",
+    "reset": "Auf Theme zurücksetzen",
+    "padding": "Innenabstand",
+    "gap": "Abstand",
+    "radius": "Eckenradius",
+    "maxWidth": "Maximale Breite",
+    "compact": "Kompakt auf Mobilgeräten",
+    "showSeconds": "Sekunden anzeigen",
+    "saveSettings": "Einstellungen speichern",
+    "settingsSaved": "Einstellungen gespeichert",
+    "pluginPlacement": "Platzierung des Countdown-Plugins",
+    "pluginAdded": "Hinzugefügt",
+    "pluginNotAdded": "Nicht hinzugefügt",
+    "pluginUnknown": "Prüfung nicht möglich",
+    "pluginChecking": "Platzierung wird geprüft…",
+    "pluginAdding": "Plugin wird hinzugefügt…",
+    "pluginCheck": "Platzierung prüfen",
+    "pluginAdd": "Plugin hinzufügen",
+    "pluginCheckingHelp": "Die Countdown-Platzierung auf der Produktseite wird geprüft.",
+    "pluginAddingHelp": "Folge den Wix-Schritten, um den Countdown zur Produktseite hinzuzufügen.",
+    "pluginAddedHelp": "Dein Countdown ist auf der Produktseite platziert.",
+    "pluginMissingHelp": "Füge den Countdown zur Produktseite hinzu, damit Kunden den Launch-Zeitraum sehen.",
+    "pluginCheckFailed": "Die Platzierung konnte nicht geprüft werden. Versuche es erneut.",
+    "pluginConfirmationFailed": "Die Anfrage zum Hinzufügen ist abgeschlossen, aber die Platzierung konnte nicht geprüft werden. Prüfe erneut.",
+    "pluginStillMissing": "Der Countdown ist noch nicht platziert. Prüfe erneut oder füge ihn noch einmal hinzu.",
+    "pluginAddCancelled": "Das Hinzufügen wurde abgebrochen. Du kannst es erneut versuchen.",
+    "pluginPublishFirst": "Veröffentliche zuerst deine Website und füge dann das Plugin hinzu.",
+    "pluginSlotOccupied": "Der Platz ist belegt. Ändere die Platzierung im Website-Editor und prüfe erneut.",
+    "pluginAddFailed": "Das Plugin konnte nicht hinzugefügt werden. Versuche es erneut.",
+    "guide": "Anleitung und FAQ",
+    "guideEyebrow": "Hilfecenter",
+    "guideTitle": "So funktioniert Drop Engine",
+    "guideIntro": "Plane Launches, die Käufe zu einem genauen Zeitpunkt öffnen und Kunden einen Countdown anzeigen.",
+    "guideSteps": "In fünf Schritten starten",
+    "guideStepsHelp": "Vom leeren Dashboard zum aktiven Launch in wenigen Minuten.",
+    "guideStep": "Schritt",
+    "guideStatuses": "Launch-Ablauf",
+    "guideStatusesHelp": "Jeder veröffentlichte Launch durchläuft diese Phasen nach Serverzeit.",
+    "guideSidePaths": "Wann immer du es brauchst",
+    "guideActions": "Launch-Aktionen",
+    "guideActionsHelp": "Öffne das ⋯-Menü eines Launches in der Liste.",
+    "faq": "Häufige Fragen",
+    "faqHelp": "Antworten zu Launches, Käufen und deinem Shop.",
+    "faqSearch": "Fragen suchen",
+    "faqAll": "Alle",
+    "faqEmpty": "Keine Fragen passen zur Suche.",
+    "faqClear": "Suche löschen",
+    "guideJump": "Springen zu",
+    "guideCta": "Erstelle deinen ersten Launch",
+    "guideCtaTitle": "Bereit für deinen nächsten Launch?"
+  },
+  "guide": {
+    "steps": [
+      {
+        "title": "Launch erstellen",
+        "body": "Wähle Launch erstellen, gib einen Namen ein und wähle Wix Stores-Produkte. Bis zu 10.000 Produkte oder mit Alle Produkte auswählen den ganzen Katalog."
+      },
+      {
+        "title": "Zeitraum festlegen",
+        "body": "Wähle Beginn, Ende und Zeitzone. Jetzt startet sofort. Das Ende muss später liegen; ändere mehrdeutige oder übersprungene Zeiten bei der Zeitumstellung."
+      },
+      {
+        "title": "Verhalten danach wählen",
+        "body": "Normale Käufe wieder zulassen öffnet Käufe am Ende. Käufe weiterhin sperren blockiert sie bis zum Abbruch des Launches."
+      },
+      {
+        "title": "Speichern oder veröffentlichen",
+        "body": "Entwurf speichern ändert nichts im Shop. Veröffentlichen aktiviert den Zeitraum: Geplant, Live, Beendet."
+      },
+      {
+        "title": "Countdown anzeigen",
+        "body": "Das Plugin wird automatisch zur Wix Stores-Produktseite hinzugefügt. Du kannst auch das Element Drop launch countdown im Editor hinzufügen und dessen Produkt-ID festlegen."
+      }
+    ],
+    "lifecycle": [
+      "Gespeichert, nicht veröffentlicht. Käufe bleiben unverändert.",
+      "Veröffentlicht, wartet auf Öffnung. Käufe sind gesperrt.",
+      "Im Launch-Zeitraum. Kunden können kaufen.",
+      "Zeitraum beendet. Käufe folgen der Einstellung für danach."
+    ],
+    "sidePaths": [
+      "Von dir abgebrochen. Normale Käufe sind wieder möglich.",
+      "Aus der aktiven Arbeit ausgeblendet. Zum Bearbeiten wiederherstellen."
+    ],
+    "checkout": {
+      "open": "Käufe offen",
+      "locked": "Käufe gesperrt",
+      "depends": "Deine Wahl"
+    },
+    "actions": [
+      {
+        "title": "Bearbeiten",
+        "body": "Ändere Name, Produkte, Zeitraum oder Verhalten nach dem Ende."
+      },
+      {
+        "title": "Duplizieren",
+        "body": "Kopiere den Launch als neuen Entwurf."
+      },
+      {
+        "title": "Launch abbrechen",
+        "body": "Stoppe einen veröffentlichten Launch und öffne Käufe sofort."
+      },
+      {
+        "title": "Archivieren",
+        "body": "Lege einen Entwurf oder einen beendeten oder abgebrochenen Launch ab."
+      },
+      {
+        "title": "Entwurf wiederherstellen",
+        "body": "Hole einen archivierten Launch als Entwurf zurück."
+      }
+    ],
+    "faqCategories": {
+      "launching": "Launch",
+      "checkout": "Käufe",
+      "managing": "Verwaltung",
+      "storefront": "Shop"
+    },
+    "faq": [
+      {
+        "q": "Sind Produkte vor dem Launch sichtbar?",
+        "a": "Ja. Produkte und Countdown bleiben sichtbar. Nur Käufe sind bis zur Öffnung gesperrt."
+      },
+      {
+        "q": "Kann man ein Produkt vorher in den Warenkorb legen?",
+        "a": "Ja, aber beim Bezahlen erscheint, dass es erst zur Öffnung verfügbar ist. Die Bestellung lässt sich vorher nicht abschließen."
+      },
+      {
+        "q": "Welche Uhr bestimmt die Öffnung?",
+        "a": "Die Serveruhr. Eine andere Gerätezeit öffnet den Launch nicht früher. Der Countdown prüft alle 15 Sekunden den Server."
+      },
+      {
+        "q": "Welche Zeitzone soll ich verwenden?",
+        "a": "Die Zeitzone deiner Ankündigung. Beginn und Ende werden als genaue Zeitpunkte gespeichert und gelten überall gleichzeitig."
+      },
+      {
+        "q": "Wie viele aktive Launches sind möglich?",
+        "a": "Im kostenlosen Tarif einer: geplant, live oder beendet mit gesperrten Käufen. Entwürfe sind unbegrenzt. Brich den aktuellen vor einer weiteren Veröffentlichung ab."
+      },
+      {
+        "q": "Wie stoppe ich einen Launch sofort?",
+        "a": "Öffne sein ⋯-Menü und wähle Launch abbrechen. Normale Käufe sind sofort wieder möglich."
+      },
+      {
+        "q": "Kann ich nach Veröffentlichung bearbeiten?",
+        "a": "Ja. Öffnen, ändern, speichern. Der Launch bleibt veröffentlicht. Wenn jemand anders ihn geändert hat, lade vorher neu."
+      },
+      {
+        "q": "Warum kann ich nicht archivieren?",
+        "a": "Veröffentlichte Launches steuern weiterhin Käufe. Brich ihn zuerst ab und archiviere ihn dann."
+      },
+      {
+        "q": "Warum schlägt die Veröffentlichung fehl?",
+        "a": "Prüfe, dass das Ende zukünftig und nach dem Beginn liegt, Produkte ausgewählt sind und kein anderer Launch aktiv ist."
+      },
+      {
+        "q": "Warum fehlt der Countdown?",
+        "a": "Prüfe, dass der Launch veröffentlicht ist und dieses Produkt enthält. Beim Editor-Element muss die Produkt-ID übereinstimmen."
+      },
+      {
+        "q": "Was passiert, wenn die Verfügbarkeit nicht geprüft werden kann?",
+        "a": "Käufe werden mit einer Meldung pausiert, um Verkäufe außerhalb des Zeitraums während eines Ausfalls zu verhindern. Sie öffnen wieder, sobald der Dienst antwortet."
+      },
+      {
+        "q": "Kann ich einen Launch wiederverwenden?",
+        "a": "Ja. Dupliziere ihn über das Aktionenmenü, um Produkte und Einstellungen in einen neuen Entwurf zu kopieren, und ändere die Daten."
+      }
+    ]
+  }
+}

@@ -3,7 +3,8 @@ import { dashboard } from "@wix/dashboard";
 import { LoaderCircle, Plus, RefreshCw } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { DROP_COUNTDOWN_PLUGIN_ID } from "../domain/site-plugin";
-import { t, type MessageKey } from "../locales/en";
+import type { MessageKey } from "../locales/en";
+import { useTranslation } from "../locales/use-translation";
 import { isCountdownPlaced } from "./plugin-placement";
 
 type PlacementState =
@@ -23,6 +24,7 @@ function addErrorMessage(error: unknown): MessageKey {
 }
 
 export function PluginPlacementStatus() {
+  const { t } = useTranslation();
   const titleId = useId();
   const requestId = useRef(0);
   const [state, setState] = useState<PlacementState>({ status: "checking" });
@@ -91,7 +93,9 @@ export function PluginPlacementStatus() {
         ? "pluginAddedHelp"
         : state.status === "missing"
           ? "pluginMissingHelp"
-          : "pluginCheckingHelp";
+          : state.status === "adding"
+            ? "pluginAddingHelp"
+            : "pluginCheckingHelp";
 
   return (
     <section

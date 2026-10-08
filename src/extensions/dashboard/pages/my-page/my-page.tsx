@@ -18,10 +18,12 @@ import {
 import { DropForm } from "../../../../dashboard/DropForm";
 import { DropActions } from "../../../../dashboard/DropActions";
 import { Guide } from "../../../../dashboard/Guide";
+import { Waitlist } from "../../../../dashboard/Waitlist";
 import { PluginPlacementStatus } from "../../../../dashboard/PluginPlacementStatus";
+import { LanguageSelector } from "../../../../dashboard/LanguageSelector";
 import { BusinessManagerTheme } from "../../BusinessManagerTheme";
 import { phase, type Drop } from "../../../../domain/drop";
-import { t } from "../../../../locales/en";
+import { useTranslation } from "../../../../locales/use-translation";
 import "../../../../dashboard/dashboard.css";
 export default function Dashboard() {
   return (
@@ -32,24 +34,29 @@ export default function Dashboard() {
 }
 
 function DropDashboard() {
+  const { t, locale, direction } = useTranslation();
   const [data, setData] = useState<DashboardData>();
   const [error, setError] = useState("");
   const [editing, setEditing] = useState<Drop | "new" | null>(null);
+  const [waitlist, setWaitlist] = useState<Drop | null>(null);
   const [view, setView] = useState<"drops" | "guide">("drops");
   const [search, setSearch] = useState(""),
     [status, setStatus] = useState("");
   const [busy, setBusy] = useState(false),
     [now, setNow] = useState(Date.now());
-  const refresh = useCallback(async (signal?: AbortSignal) => {
-    try {
-      const next = await loadDashboard(0, undefined, signal);
-      setData(next);
-      setError("");
-    } catch (err) {
-      if (!signal?.aborted)
-        setError(err instanceof Error ? err.message : t("failed"));
-    }
-  }, []);
+  const refresh = useCallback(
+    async (signal?: AbortSignal) => {
+      try {
+        const next = await loadDashboard(0, undefined, signal);
+        setData(next);
+        setError("");
+      } catch (err) {
+        if (!signal?.aborted)
+          setError(err instanceof Error ? err.message : t("failed"));
+      }
+    },
+    [t],
+  );
   useEffect(() => {
     const controller = new AbortController();
     void refresh(controller.signal);
@@ -78,7 +85,7 @@ function DropDashboard() {
         (!status || phase(drop, now) === status),
     ) || [];
   return (
-    <div className="de-app">
+    <div className="de-app" lang={locale} dir={direction}>
       <Toaster richColors position="bottom-right" />
       <aside className="de-sidebar">
         <div className="de-brand">
@@ -90,9 +97,12 @@ function DropDashboard() {
         <nav>
           <Button
             variant="ghost"
-            aria-current={view === "drops" && !editing ? "page" : undefined}
+            aria-current={
+              view === "drops" && !editing && !waitlist ? "page" : undefined
+            }
             onClick={() => {
               setEditing(null);
+              setWaitlist(null);
               setView("drops");
             }}
           >
@@ -101,9 +111,12 @@ function DropDashboard() {
           </Button>
           <Button
             variant="ghost"
-            aria-current={view === "guide" && !editing ? "page" : undefined}
+            aria-current={
+              view === "guide" && !editing && !waitlist ? "page" : undefined
+            }
             onClick={() => {
               setEditing(null);
+              setWaitlist(null);
               setView("guide");
             }}
           >
@@ -111,13 +124,16 @@ function DropDashboard() {
             {t("guide")}
           </Button>
         </nav>
+        <LanguageSelector />
         <div className="de-sidebar-footer">
           <span className="de-plan-dot" />
           {t("free")}
         </div>
       </aside>
       <main className="de-main">
-        {view === "guide" && !editing ? (
+        {waitlist ? (
+          <Waitlist drop={waitlist} back={() => setWaitlist(null)} />
+        ) : view === "guide" && !editing ? (
           <Guide
             create={() => {
               setView("drops");
@@ -239,14 +255,14 @@ function DropDashboard() {
                             </small>
                           </td>
                           <td>
-                            {new Intl.DateTimeFormat(undefined, {
+                            {new Intl.DateTimeFormat(locale, {
                               dateStyle: "medium",
                               timeStyle: "short",
                               timeZone: drop.timeZone,
                             }).format(drop.startsAt)}
                           </td>
                           <td>
-                            {new Intl.DateTimeFormat(undefined, {
+                            {new Intl.DateTimeFormat(locale, {
                               dateStyle: "medium",
                               timeStyle: "short",
                               timeZone: drop.timeZone,
@@ -265,6 +281,7 @@ function DropDashboard() {
                                 drop={drop}
                                 busy={busy}
                                 edit={() => setEditing(drop)}
+                                waitlist={() => setWaitlist(drop)}
                                 action={(command) => void action(drop, command)}
                               />
                             </div>

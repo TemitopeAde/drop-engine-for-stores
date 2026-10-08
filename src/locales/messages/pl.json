@@ -1,0 +1,303 @@
+{
+  "messages": {
+    "selectProduct": "Ustaw identyfikator produktu Wix Stores, aby połączyć odliczanie.",
+    "noLaunch": "Dla tego produktu nie skonfigurowano opublikowanej premiery.",
+    "app": "Drop Engine",
+    "language": "Język",
+    "site": "Twoja witryna",
+    "subtitle": "Niech kolejna premiera zrobi wrażenie.",
+    "drops": "Premiery",
+    "create": "Utwórz premierę",
+    "edit": "Edytuj premierę",
+    "actions": "Działania",
+    "save": "Zapisz szkic",
+    "publish": "Opublikuj premierę",
+    "cancel": "Anuluj premierę",
+    "archive": "Archiwizuj",
+    "restore": "Przywróć szkic",
+    "duplicate": "Duplikuj",
+    "name": "Nazwa premiery",
+    "products": "Produkty",
+    "start": "Początek",
+    "now": "Teraz",
+    "end": "Koniec",
+    "zone": "Strefa czasowa",
+    "endBehavior": "Po zakończeniu premiery",
+    "RESTORE": "Przywróć normalne zakupy",
+    "BLOCK": "Pozostaw zakupy zablokowane",
+    "DRAFT": "Szkic",
+    "SCHEDULED": "Zaplanowana",
+    "LIVE": "Trwa",
+    "ENDED": "Zakończona",
+    "CANCELLED": "Anulowana",
+    "ARCHIVED": "Zarchiwizowana",
+    "empty": "Twoja kolejna premiera zaczyna się tutaj",
+    "emptyHelp": "Wybierz produkty i termin. Produkty pozostają widoczne, gdy zakupy są zablokowane.",
+    "loading": "Ładowanie sklepu…",
+    "retry": "Spróbuj ponownie",
+    "back": "Wróć do premier",
+    "search": "Szukaj premier",
+    "all": "Wszystkie statusy",
+    "catalog": "Wybierz produkty",
+    "done": "Gotowe",
+    "dismiss": "Anuluj",
+    "loadMore": "Załaduj więcej produktów",
+    "selectAllProducts": "Zaznacz wszystkie produkty",
+    "selectAllHelp": "Obejmuje wszystkie widoczne produkty ze wszystkich stron.",
+    "selectingProducts": "Zaznaczanie produktów…",
+    "productsFound": "znalezionych produktów",
+    "stopSelecting": "Zatrzymaj zaznaczanie",
+    "selectionTooLarge": "Możesz wybrać do 10 000 produktów na premierę.",
+    "previousProducts": "Poprzednie produkty",
+    "nextProducts": "Następne produkty",
+    "productPage": "Strona",
+    "selected": "wybrano",
+    "saved": "Premiera zapisana",
+    "failed": "Nie udało się ukończyć żądania. Spróbuj ponownie.",
+    "invalidSchedule": "Wybierz prawidłową strefę i koniec po początku. Zmień niejednoznaczne lub pominięte godziny przy zmianie czasu.",
+    "activeLimit": "Plan darmowy obejmuje jedną aktywną premierę. Anuluj obecną przed publikacją kolejnej.",
+    "conflict": "Premiera została zmieniona w innej sesji. Odśwież przed zapisaniem.",
+    "productInUse": "Niektóre produkty należą do innej premiery. Usuń je lub anuluj tamtą premierę.",
+    "inOtherDrop": "W innej premierze",
+    "storageLimit": "Instalacja osiągnęła limit miejsca.",
+    "expiredSchedule": "Przed publikacją wybierz koniec w przyszłości.",
+    "forbidden": "Otwórz aplikację jako właściciel witryny lub uprawniony współpracownik.",
+    "unavailable": "Dane sklepu są chwilowo niedostępne.",
+    "setup": "Kolekcje aplikacji nie są gotowe. Zainstaluj wersję z kolekcjami i pozwól Wix je skonfigurować.",
+    "fieldsRequired": "Sprawdź wyróżnione pola.",
+    "noProducts": "Brak widocznych produktów na tej stronie.",
+    "gatingHelp": "Czas serwera steruje zakupami. Anulowanie natychmiast przywraca normalne zakupy.",
+    "free": "Plan darmowy · 1 aktywna premiera",
+    "stage": "Ustawienia premiery",
+    "waitlist": "Lista oczekujących",
+    "waitlistTitle": "Powiadom mnie o otwarciu",
+    "waitlistEmail": "Adres e-mail",
+    "waitlistConsent": "Wysyłaj mi wiadomości o tej premierze. Mogę zrezygnować w każdej chwili.",
+    "waitlistJoin": "Dołącz do listy",
+    "waitlistJoining": "Dołączanie…",
+    "waitlistJoined": "Jesteś na liście oczekujących.",
+    "waitlistAlready": "Ten e-mail jest już na liście.",
+    "waitlistLeave": "Opuść listę",
+    "waitlistLeaving": "Opuszczanie…",
+    "waitlistLeft": "Opuszczono listę oczekujących.",
+    "waitlistInvalid": "Podaj prawidłowy e-mail i potwierdź zgodę.",
+    "waitlistFull": "Lista jest pełna. Wróć, gdy premiera się rozpocznie.",
+    "waitlistClosed": "Zapisy do tej premiery są zamknięte.",
+    "rateLimited": "Zbyt wiele prób. Spróbuj później.",
+    "proRequired": "Eksport CSV jest dostępny w planie Pro.",
+    "waitlistSetting": "Zbieraj zapisy na listę",
+    "waitlistSettingHelp": "Klienci mogą zapisać się przez odliczanie do rozpoczęcia. Wiadomości o premierze nie są jeszcze wysyłane.",
+    "viewWaitlist": "Wyświetl listę",
+    "waitlistFor": "Lista oczekujących",
+    "waitlistSubscribed": "zapisanych",
+    "waitlistTotal": "wszystkich wpisów",
+    "waitlistUsage": "wpisów wykorzystanych we wszystkich premierach w planie darmowym",
+    "waitlistEmpty": "Jeszcze brak zapisów",
+    "waitlistEmptyHelp": "Klienci mogą zapisać się na stronie produktu, gdy premiera jest zaplanowana.",
+    "waitlistOff": "Zapisy są wyłączone dla tej premiery.",
+    "waitlistJoinedAt": "Data zapisu",
+    "waitlistStatus": "Status",
+    "SUBSCRIBED": "Zapisany",
+    "UNSUBSCRIBED": "Wypisany",
+    "markUnsubscribed": "Oznacz jako wypisany",
+    "removeEntry": "Usuń",
+    "confirmRemove": "Potwierdź usunięcie",
+    "removeHelp": "Usunięcie kasuje e-mail i zwalnia miejsce w planie darmowym. Wypisanie zachowuje wpis i blokuje przyszłe wiadomości.",
+    "exportCsv": "Eksportuj CSV",
+    "exporting": "Eksportowanie…",
+    "entryUpdated": "Lista zaktualizowana",
+    "previousPage": "Poprzednia",
+    "nextPage": "Następna",
+    "notificationsPending": "Wiadomości o premierze nie są jeszcze podłączone. Zapisy i zgody są zachowywane, aby kontaktować się z odbiorcami po konfiguracji powiadomień.",
+    "opens": "Ta premiera wkrótce się rozpocznie",
+    "live": "Premiera trwa",
+    "ended": "Ta premiera się zakończyła",
+    "beforeViolation": "Tego produktu nie można kupić przed rozpoczęciem premiery.",
+    "afterViolation": "Ta premiera się zakończyła. Zakupy są zamknięte.",
+    "outageViolation": "Nie można sprawdzić dostępności. Spróbuj za chwilę.",
+    "days": "Dni",
+    "hours": "Godziny",
+    "minutes": "Minuty",
+    "seconds": "Sekundy",
+    "editor": "Odliczanie do premiery",
+    "content": "Treść",
+    "typography": "Typografia",
+    "colors": "Kolory",
+    "countdown": "Odliczanie",
+    "form": "Formularz",
+    "layout": "Układ",
+    "borders": "Obramowania",
+    "responsive": "Responsywność",
+    "advanced": "Zaawansowane",
+    "heading": "Nagłówek",
+    "textColor": "Kolor tekstu",
+    "background": "Tło",
+    "font": "Czcionka",
+    "reset": "Przywróć motyw",
+    "padding": "Odstęp wewnętrzny",
+    "gap": "Odstępy",
+    "radius": "Promień narożników",
+    "maxWidth": "Maksymalna szerokość",
+    "compact": "Kompaktowo na telefonie",
+    "showSeconds": "Pokaż sekundy",
+    "saveSettings": "Zapisz ustawienia",
+    "settingsSaved": "Ustawienia zapisane",
+    "pluginPlacement": "Umiejscowienie wtyczki odliczania",
+    "pluginAdded": "Dodano",
+    "pluginNotAdded": "Nie dodano",
+    "pluginUnknown": "Nie można sprawdzić",
+    "pluginChecking": "Sprawdzanie umiejscowienia…",
+    "pluginAdding": "Dodawanie wtyczki…",
+    "pluginCheck": "Sprawdź umiejscowienie",
+    "pluginAdd": "Dodaj wtyczkę",
+    "pluginCheckingHelp": "Sprawdzanie odliczania na stronie produktu.",
+    "pluginAddingHelp": "Postępuj zgodnie z instrukcjami Wix, aby dodać odliczanie na stronie produktu.",
+    "pluginAddedHelp": "Odliczanie znajduje się na stronie produktu.",
+    "pluginMissingHelp": "Dodaj odliczanie na stronie produktu, aby pokazać termin premiery.",
+    "pluginCheckFailed": "Nie udało się sprawdzić umiejscowienia. Spróbuj ponownie.",
+    "pluginConfirmationFailed": "Żądanie dodania zakończono, ale nie można sprawdzić umiejscowienia. Sprawdź ponownie.",
+    "pluginStillMissing": "Odliczanie jeszcze nie zostało umieszczone. Sprawdź lub dodaj ponownie.",
+    "pluginAddCancelled": "Dodawanie anulowano. Możesz spróbować ponownie.",
+    "pluginPublishFirst": "Najpierw opublikuj witrynę, a następnie dodaj wtyczkę.",
+    "pluginSlotOccupied": "Miejsce jest zajęte. Zmień umiejscowienie w edytorze i sprawdź ponownie.",
+    "pluginAddFailed": "Nie udało się dodać wtyczki. Spróbuj ponownie.",
+    "guide": "Przewodnik i FAQ",
+    "guideEyebrow": "Centrum pomocy",
+    "guideTitle": "Jak działa Drop Engine",
+    "guideIntro": "Planuj premiery otwierające zakupy w dokładnym momencie i pokazuj klientom odliczanie.",
+    "guideSteps": "Zacznij w pięciu krokach",
+    "guideStepsHelp": "Od pustego panelu do aktywnej premiery w kilka minut.",
+    "guideStep": "Krok",
+    "guideStatuses": "Cykl premiery",
+    "guideStatusesHelp": "Każda opublikowana premiera przechodzi te etapy według czasu serwera.",
+    "guideSidePaths": "Gdy potrzebujesz",
+    "guideActions": "Działania premiery",
+    "guideActionsHelp": "Otwórz menu ⋯ przy premierze na liście.",
+    "faq": "Częste pytania",
+    "faqHelp": "Odpowiedzi o premierach, zakupach i sklepie.",
+    "faqSearch": "Szukaj pytań",
+    "faqAll": "Wszystkie",
+    "faqEmpty": "Brak pytań pasujących do wyszukiwania.",
+    "faqClear": "Wyczyść wyszukiwanie",
+    "guideJump": "Przejdź do",
+    "guideCta": "Utwórz pierwszą premierę",
+    "guideCtaTitle": "Gotowy na kolejną premierę?"
+  },
+  "guide": {
+    "steps": [
+      {
+        "title": "Utwórz premierę",
+        "body": "Wybierz Utwórz premierę, nadaj nazwę i wybierz produkty Wix Stores. Do 10 000 produktów albo cały katalog przez Zaznacz wszystkie produkty."
+      },
+      {
+        "title": "Ustaw termin",
+        "body": "Wybierz początek, koniec i strefę. Teraz uruchamia od razu. Koniec musi być późniejszy; zmień niejednoznaczne lub pominięte godziny przy zmianie czasu."
+      },
+      {
+        "title": "Wybierz zachowanie po zakończeniu",
+        "body": "Przywróć normalne zakupy otwiera je po końcu. Pozostaw zakupy zablokowane blokuje je aż do anulowania premiery."
+      },
+      {
+        "title": "Zapisz lub opublikuj",
+        "body": "Zapisz szkic nie zmienia sklepu. Publikacja aktywuje termin: Zaplanowana, Trwa, Zakończona."
+      },
+      {
+        "title": "Pokaż odliczanie",
+        "body": "Wtyczka jest automatycznie dodawana do strony produktu Wix Stores. Możesz też dodać Drop launch countdown w edytorze i ustawić ID produktu."
+      }
+    ],
+    "lifecycle": [
+      "Zapisana, nieopublikowana. Zakupy bez zmian.",
+      "Opublikowana, czeka na początek. Zakupy zablokowane.",
+      "W trakcie. Klienci mogą kupować.",
+      "Termin minął. Zakupy zgodne z ustawieniem końcowym."
+    ],
+    "sidePaths": [
+      "Anulowana przez Ciebie. Normalne zakupy przywrócone.",
+      "Ukryta z aktywnej pracy. Przywróć, aby edytować."
+    ],
+    "checkout": {
+      "open": "Zakupy otwarte",
+      "locked": "Zakupy zablokowane",
+      "depends": "Twój wybór"
+    },
+    "actions": [
+      {
+        "title": "Edytuj",
+        "body": "Zmień nazwę, produkty, termin lub zachowanie końcowe."
+      },
+      {
+        "title": "Duplikuj",
+        "body": "Skopiuj premierę do nowego szkicu."
+      },
+      {
+        "title": "Anuluj premierę",
+        "body": "Zatrzymaj opublikowaną premierę i natychmiast otwórz zakupy."
+      },
+      {
+        "title": "Archiwizuj",
+        "body": "Odłóż szkic albo zakończoną lub anulowaną premierę."
+      },
+      {
+        "title": "Przywróć szkic",
+        "body": "Przywróć zarchiwizowaną premierę jako szkic."
+      }
+    ],
+    "faqCategories": {
+      "launching": "Premiera",
+      "checkout": "Zakupy",
+      "managing": "Zarządzanie",
+      "storefront": "Sklep"
+    },
+    "faq": [
+      {
+        "q": "Czy produkty są widoczne przed premierą?",
+        "a": "Tak. Produkty i odliczanie są widoczne. Tylko zakupy są zablokowane do rozpoczęcia."
+      },
+      {
+        "q": "Czy można wcześniej dodać produkt do koszyka?",
+        "a": "Tak, ale kasa informuje, że produkt będzie dostępny po rozpoczęciu, i nie pozwala ukończyć zamówienia."
+      },
+      {
+        "q": "Który zegar ustala początek?",
+        "a": "Zegar serwera. Zmiana czasu urządzenia nie przyspiesza premiery. Odliczanie sprawdza serwer co 15 sekund."
+      },
+      {
+        "q": "Którą strefę wybrać?",
+        "a": "Tę z ogłoszenia premiery. Początek i koniec są dokładnymi chwilami, więc premiera otwiera się równocześnie wszędzie."
+      },
+      {
+        "q": "Ile premier może być aktywnych?",
+        "a": "W planie darmowym jedna: zaplanowana, trwająca lub zakończona z blokadą zakupów. Szkice są nieograniczone. Anuluj obecną przed publikacją kolejnej."
+      },
+      {
+        "q": "Jak natychmiast zatrzymać premierę?",
+        "a": "Otwórz jej menu ⋯ i wybierz Anuluj premierę. Normalne zakupy wrócą od razu."
+      },
+      {
+        "q": "Czy mogę edytować po publikacji?",
+        "a": "Tak. Otwórz, zmień i zapisz. Nadal jest opublikowana. Jeśli ktoś zmienił ją gdzie indziej, odśwież przed zapisaniem."
+      },
+      {
+        "q": "Dlaczego nie mogę archiwizować?",
+        "a": "Opublikowane premiery wciąż sterują zakupami. Najpierw anuluj, potem archiwizuj."
+      },
+      {
+        "q": "Dlaczego publikacja się nie udaje?",
+        "a": "Sprawdź przyszły koniec po początku, wybrane produkty i brak innej aktywnej premiery."
+      },
+      {
+        "q": "Dlaczego nie ma odliczania?",
+        "a": "Sprawdź publikację i przypisanie produktu. W elemencie edytora ID musi odpowiadać temu produktowi."
+      },
+      {
+        "q": "Co jeśli nie można sprawdzić dostępności?",
+        "a": "Zakupy są wstrzymane z komunikatem, aby uniknąć sprzedaży poza terminem podczas awarii. Wrócą po odpowiedzi usługi."
+      },
+      {
+        "q": "Czy mogę ponownie użyć premiery?",
+        "a": "Tak. Duplikuj kopiuje produkty i ustawienia do nowego szkicu. Następnie zmień daty."
+      }
+    ]
+  }
+}

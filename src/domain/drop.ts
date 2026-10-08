@@ -13,6 +13,8 @@ export const dropInputSchema = z.object({
   localEnd: z.string().min(16).max(25),
   timeZone: z.string().min(1).max(100),
   endBehavior: z.enum(["RESTORE", "BLOCK"]),
+  // Optional so drops stored before the waitlist existed keep parsing; absent means on.
+  waitlist: z.boolean().optional(),
 });
 export type DropInput = z.infer<typeof dropInputSchema>;
 export const dropSchema = dropInputSchema.extend({

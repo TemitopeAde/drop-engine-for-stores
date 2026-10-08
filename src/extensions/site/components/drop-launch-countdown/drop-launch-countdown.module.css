@@ -52,9 +52,14 @@
 .number {
   box-sizing: border-box;
   font-variant-numeric: tabular-nums;
-  font-size: 1.8em;
+  font-family: system-ui, sans-serif;
+  font-size: 28.8px;
+  font-weight: 700;
   line-height: 1.2;
 }
 .label {
   box-sizing: border-box;
+  font-family: system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
 }

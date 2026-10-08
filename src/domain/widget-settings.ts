@@ -6,6 +6,7 @@ export const widgetSettingsSchema = z.object({
     .string()
     .max(200)
     .default("var(--wst-color-fill-background-primary, #eff5f1)"),
+  accentColor: z.string().max(200).default("var(--wst-color-action, #17382c)"),
   font: z
     .string()
     .max(500)
@@ -15,6 +16,7 @@ export const widgetSettingsSchema = z.object({
   gap: z.number().min(0).max(48).default(16),
   radius: z.number().min(0).max(80).default(12),
   maxWidth: z.number().min(200).max(1600).default(640),
+  align: z.enum(["start", "center"]).default("start"),
   compact: z.boolean().default(true),
   showSeconds: z.boolean().default(true),
   showName: z.boolean().default(true),
