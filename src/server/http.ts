@@ -1,5 +1,6 @@
 import { ZodError } from "zod";
 import { DomainError } from "../domain/drop";
+import { MAX_DROP_STATE_BYTES } from "../domain/limits";
 export function json(value: unknown, status = 200) {
   return new Response(JSON.stringify(value), {
     status,
@@ -31,7 +32,7 @@ export async function readBody(request: Request) {
   )
     throw new DomainError("forbidden", 403);
   const body = await request.text();
-  if (new TextEncoder().encode(body).length > 32_768)
+  if (new TextEncoder().encode(body).length > MAX_DROP_STATE_BYTES)
     throw new DomainError("fieldsRequired", 413);
   try {
     return JSON.parse(body) as unknown;

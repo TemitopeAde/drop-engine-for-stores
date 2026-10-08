@@ -1,22 +1,27 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Temporal } from "@js-temporal/polyfill";
 import { ArrowLeft, LoaderCircle, Rocket } from "lucide-react";
 import { useState } from "react";
+import { dashboard } from "@wix/dashboard";
 import { toast } from "sonner";
 import { dropInputSchema, type Drop, type DropInput } from "../domain/drop";
 import { t } from "../locales/en";
 import { Button } from "../components/ui/button";
 import { mutate, type DashboardData } from "./api";
+import {
+  productPickerModalId,
+  productPickerResultSchema,
+} from "./product-picker";
 interface Props {
   drop?: Drop;
   data: DashboardData;
   back: () => void;
   saved: () => Promise<void>;
-  more: () => Promise<void>;
 }
-export function DropForm({ drop, data, back, saved, more }: Props) {
+export function DropForm({ drop, data, back, saved }: Props) {
   const [busy, setBusy] = useState(false),
-    [loadingMore, setLoadingMore] = useState(false);
+    [selecting, setSelecting] = useState(false);
   const form = useForm<DropInput>({
     resolver: zodResolver(dropInputSchema),
     defaultValues: drop || {
@@ -29,7 +34,56 @@ export function DropForm({ drop, data, back, saved, more }: Props) {
     },
   });
   const ids = form.watch("productIds");
+  async function chooseProducts() {
+    setSelecting(true);
+    try {
+      const { modalClosed } = dashboard.openModal({
+        modalId: productPickerModalId,
+        params: {
+          products: data.products,
+          selectedIds: form.getValues("productIds"),
+          hasNext: data.hasNext,
+          cursor: data.cursor,
+        },
+      });
+      const result = productPickerResultSchema.safeParse(await modalClosed);
+      if (result.success) {
+        form.setValue("productIds", result.data.productIds, {
+          shouldDirty: true,
+          shouldTouch: true,
+          shouldValidate: true,
+        });
+      }
+    } catch {
+      toast.error(t("failed"));
+    } finally {
+      setSelecting(false);
+    }
+  }
+  function setStartNow() {
+    try {
+      const localStart = Temporal.Now.zonedDateTimeISO(
+        form.getValues("timeZone"),
+      )
+        .toPlainDateTime()
+        .toString({ smallestUnit: "minute" });
+      form.clearErrors("timeZone");
+      form.setValue("localStart", localStart, {
+        shouldDirty: true,
+        shouldTouch: true,
+        shouldValidate: true,
+      });
+    } catch {
+      form.setError(
+        "timeZone",
+        { type: "validate", message: t("invalidSchedule") },
+        { shouldFocus: true },
+      );
+      toast.error(t("invalidSchedule"));
+    }
+  }
   async function submit(input: DropInput, action: "save" | "publish") {
+    if (busy || selecting) return;
     setBusy(true);
     try {
       await mutate({ action, id: drop?.id, version: drop?.version, input });
@@ -43,7 +97,7 @@ export function DropForm({ drop, data, back, saved, more }: Props) {
   }
   return (
     <section className="de-form-page">
-      <Button variant="ghost" onClick={back} disabled={busy}>
+      <Button variant="ghost" onClick={back} disabled={busy || selecting}>
         <ArrowLeft size={16} />
         {t("back")}
       </Button>
@@ -75,20 +129,36 @@ export function DropForm({ drop, data, back, saved, more }: Props) {
               )}
               <div className="de-field-pair">
                 {(["localStart", "localEnd"] as const).map((field, index) => (
-                  <label className="de-field" key={field} htmlFor={field}>
-                    {t(index ? "end" : "start")}
-                    <input
-                      id={field}
-                      type="datetime-local"
-                      {...form.register(field)}
-                      aria-invalid={!!form.formState.errors[field]}
-                    />
-                  </label>
+                  <div className="de-field" key={field}>
+                    <label htmlFor={field}>{t(index ? "end" : "start")}</label>
+                    <div className="de-date-input">
+                      <input
+                        id={field}
+                        type="datetime-local"
+                        {...form.register(field)}
+                        aria-invalid={!!form.formState.errors[field]}
+                      />
+                      {field === "localStart" && (
+                        <Button
+                          type="button"
+                          variant="outline"
+                          disabled={busy}
+                          onClick={setStartNow}
+                        >
+                          {t("now")}
+                        </Button>
+                      )}
+                    </div>
+                  </div>
                 ))}
               </div>
               <label className="de-field" htmlFor="time-zone">
                 {t("zone")}
-                <input id="time-zone" {...form.register("timeZone")} />
+                <input
+                  id="time-zone"
+                  {...form.register("timeZone")}
+                  aria-invalid={!!form.formState.errors.timeZone}
+                />
               </label>
               <label className="de-field" htmlFor="end-behavior">
                 {t("endBehavior")}
@@ -105,64 +175,25 @@ export function DropForm({ drop, data, back, saved, more }: Props) {
             </section>
             <section className="de-card de-product-card">
               <div className="de-card-heading">
-                <h2>{t("catalog")}</h2>
-                <span>
-                  {ids.length} {t("selected")}
+                <h2>{t("products")}</h2>
+                <span role="status">
+                  {ids.length.toLocaleString()} {t("selected")}
                 </span>
               </div>
-              <fieldset disabled={busy}>
-                <legend className="de-sr-only">{t("products")}</legend>
-                {data.products.map((product) => (
-                  <label className="de-product" key={product.id}>
-                    <input
-                      type="checkbox"
-                      checked={ids.includes(product.id)}
-                      onChange={(event) =>
-                        form.setValue(
-                          "productIds",
-                          event.target.checked
-                            ? [...ids, product.id]
-                            : ids.filter((id) => id !== product.id),
-                          { shouldValidate: true },
-                        )
-                      }
-                    />
-                    {product.image ? (
-                      <img src={product.image} alt="" width={44} height={44} />
-                    ) : (
-                      <span
-                        className="de-product-placeholder"
-                        aria-hidden="true"
-                      >
-                        <Rocket size={18} />
-                      </span>
-                    )}
-                    <span>{product.name}</span>
-                  </label>
-                ))}
-                {!data.products.length && <p>{t("noProducts")}</p>}
-              </fieldset>
-              {data.hasNext && (
-                <Button
-                  type="button"
-                  variant="outline"
-                  disabled={loadingMore}
-                  onClick={async () => {
-                    setLoadingMore(true);
-                    try {
-                      await more();
-                    } catch {
-                      toast.error(t("failed"));
-                    } finally {
-                      setLoadingMore(false);
-                    }
-                  }}
-                >
-                  {loadingMore && (
-                    <LoaderCircle className="de-spin" size={16} />
-                  )}
-                  {t("loadMore")}
-                </Button>
+              <Button
+                type="button"
+                variant="outline"
+                disabled={busy || selecting}
+                aria-haspopup="dialog"
+                aria-expanded={selecting}
+                onClick={() => void chooseProducts()}
+              >
+                {t("catalog")}
+              </Button>
+              {form.formState.errors.productIds && (
+                <p className="de-error" role="alert">
+                  {t("fieldsRequired")}
+                </p>
               )}
             </section>
           </div>
@@ -173,17 +204,16 @@ export function DropForm({ drop, data, back, saved, more }: Props) {
             <p>{t("emptyHelp")}</p>
             <hr />
             <p>{t("free")}</p>
-            <p>{t("notificationsPending")}</p>
           </aside>
         </div>
         <div className="de-form-footer">
-          <Button type="submit" variant="outline" disabled={busy}>
+          <Button type="submit" variant="outline" disabled={busy || selecting}>
             {busy && <LoaderCircle size={16} className="de-spin" />}
             {t("save")}
           </Button>
           <Button
             type="button"
-            disabled={busy}
+            disabled={busy || selecting}
             onClick={form.handleSubmit((input) => submit(input, "publish"))}
           >
             {busy && <LoaderCircle size={16} className="de-spin" />}

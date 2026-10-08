@@ -1,12 +1,13 @@
 import { z } from "zod";
 import { Temporal } from "@js-temporal/polyfill";
+import { MAX_DROP_STATE_BYTES, MAX_PRODUCTS_PER_DROP } from "./limits";
 
 export const dropInputSchema = z.object({
   name: z.string().trim().min(1).max(100),
   productIds: z
     .array(z.string().uuid())
     .min(1)
-    .max(50)
+    .max(MAX_PRODUCTS_PER_DROP)
     .refine((ids) => new Set(ids).size === ids.length),
   localStart: z.string().min(16).max(25),
   localEnd: z.string().min(16).max(25),
@@ -76,10 +77,11 @@ export function replaceDrop(drops: Drop[], next: Drop, now: number) {
       throw new DomainError("activeLimit", 409);
   }
   const result = [...others, next];
-  // Bound the canonical item below Wix Data's 500 KB limit. Free plan MVP.
+  // Bound the canonical item below Wix Data's 500 KB limit.
   if (
     result.length > 100 ||
-    new TextEncoder().encode(JSON.stringify(result)).length > 200_000
+    new TextEncoder().encode(JSON.stringify(result)).length >
+      MAX_DROP_STATE_BYTES
   )
     throw new DomainError("storageLimit", 409);
   return result;

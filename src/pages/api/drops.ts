@@ -20,20 +20,16 @@ import {
   tenant,
 } from "../../server/storage";
 import { handle, readBody } from "../../server/http";
+import { CATALOG_PAGE_SIZE, MAX_PRODUCTS_PER_DROP } from "../../domain/limits";
 export const GET: APIRoute = ({ url }) =>
   handle(async () => {
     const scope = await tenant(true);
     const context = await storeContext();
-    const installation = await initialize(
-      scope,
-      context.catalogVersion,
-      context.timeZone,
-    );
     const page = z.coerce
       .number()
       .int()
       .min(0)
-      .max(200)
+      .max(Math.ceil(MAX_PRODUCTS_PER_DROP / CATALOG_PAGE_SIZE))
       .parse(url.searchParams.get("page") || 0);
     const cursor = z
       .string()
@@ -41,6 +37,12 @@ export const GET: APIRoute = ({ url }) =>
       .optional()
       .parse(url.searchParams.get("cursor") || undefined);
     const catalog = await catalogPage(context.catalogVersion, page, cursor);
+    if (url.searchParams.get("catalogOnly") === "true") return catalog;
+    const installation = await initialize(
+      scope,
+      context.catalogVersion,
+      context.timeZone,
+    );
     return {
       drops: installation.state.drops,
       revision: installation.revision,

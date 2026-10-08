@@ -2,12 +2,7 @@ import { httpClient } from "@wix/essentials";
 import { z } from "zod";
 import { dropSchema, type DropInput } from "../domain/drop";
 import { en, t, type MessageKey } from "../locales/en";
-const responseSchema = z.object({
-  drops: z.array(dropSchema),
-  revision: z.number(),
-  serverNow: z.number(),
-  timeZone: z.string(),
-  catalogVersion: z.enum(["V1_CATALOG", "V3_CATALOG"]),
+const catalogSchema = z.object({
   products: z.array(
     z.object({
       id: z.string(),
@@ -18,6 +13,14 @@ const responseSchema = z.object({
   hasNext: z.boolean(),
   cursor: z.string().optional(),
 });
+const responseSchema = catalogSchema.extend({
+  drops: z.array(dropSchema),
+  revision: z.number(),
+  serverNow: z.number(),
+  timeZone: z.string(),
+  catalogVersion: z.enum(["V1_CATALOG", "V3_CATALOG"]),
+});
+export type CatalogPage = z.infer<typeof catalogSchema>;
 export type DashboardData = z.infer<typeof responseSchema>;
 const endpoint = new URL(/* @vite-ignore */ "/api/drops", import.meta.url);
 async function call(url: URL, init?: RequestInit) {
@@ -42,6 +45,17 @@ export async function loadDashboard(
   url.searchParams.set("page", String(page));
   if (cursor) url.searchParams.set("cursor", cursor);
   return responseSchema.parse(await call(url, { signal }));
+}
+export async function loadCatalog(
+  page: number,
+  cursor?: string,
+  signal?: AbortSignal,
+): Promise<CatalogPage> {
+  const url = new URL(endpoint);
+  url.searchParams.set("catalogOnly", "true");
+  url.searchParams.set("page", String(page));
+  if (cursor) url.searchParams.set("cursor", cursor);
+  return catalogSchema.parse(await call(url, { signal }));
 }
 export type Command = {
   action: "save" | "publish" | "cancel" | "archive" | "restore" | "duplicate";

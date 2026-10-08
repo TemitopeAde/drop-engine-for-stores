@@ -14,7 +14,6 @@ export const widgetSettingsSchema = z.object({
   padding: z.number().min(0).max(80).default(24),
   gap: z.number().min(0).max(48).default(16),
   radius: z.number().min(0).max(80).default(12),
-  borderWidth: z.number().min(0).max(12).default(1),
   maxWidth: z.number().min(200).max(1600).default(640),
   compact: z.boolean().default(true),
   showSeconds: z.boolean().default(true),

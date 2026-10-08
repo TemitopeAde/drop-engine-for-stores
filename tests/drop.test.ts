@@ -9,6 +9,7 @@ import {
   schedule,
   type Drop,
 } from "../src/domain/drop";
+import { MAX_PRODUCTS_PER_DROP } from "../src/domain/limits";
 const base: Drop = {
   id: "a937c9e8-a028-40f8-9a07-0f173b081c70",
   name: "Launch",
@@ -107,5 +108,36 @@ describe("merchant schedule validation", () => {
         productIds: [...base.productIds, ...base.productIds],
       }).success,
     ).toBe(false);
+  });
+  it("validates and persists 10,000 selected products", () => {
+    const drop = {
+      ...base,
+      productIds: Array.from({ length: MAX_PRODUCTS_PER_DROP }, () =>
+        crypto.randomUUID(),
+      ),
+    };
+    expect(dropInputSchema.safeParse(drop).success).toBe(true);
+    expect(replaceDrop([], drop, 500)[0].productIds).toHaveLength(
+      MAX_PRODUCTS_PER_DROP,
+    );
+    expect(
+      dropInputSchema.safeParse({
+        ...drop,
+        productIds: [...drop.productIds, crypto.randomUUID()],
+      }).success,
+    ).toBe(false);
+    expect(() =>
+      replaceDrop(
+        [
+          {
+            ...drop,
+            id: crypto.randomUUID(),
+            status: "DRAFT",
+          },
+        ],
+        drop,
+        500,
+      ),
+    ).toThrow("storageLimit");
   });
 });

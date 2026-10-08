@@ -20,7 +20,6 @@ const sections: MessageKey[] = [
   "typography",
   "colors",
   "countdown",
-  "form",
   "layout",
   "borders",
   "responsive",
@@ -76,7 +75,7 @@ export default function Panel() {
     }
   }
   const number = (
-    key: "padding" | "gap" | "radius" | "borderWidth" | "maxWidth",
+    key: "padding" | "gap" | "radius" | "maxWidth",
     min: number,
     max: number,
   ) => (
@@ -185,21 +184,13 @@ export default function Panel() {
                     ))}
                   {section === "countdown" &&
                     toggle("showSeconds", "showSeconds")}
-                  {section === "form" && (
-                    <p style={{ fontSize: 12 }}>{t("notificationsPending")}</p>
-                  )}
                   {section === "layout" && (
                     <>
                       {number("padding", 0, 80)}
                       {number("gap", 0, 48)}
                     </>
                   )}
-                  {section === "borders" && (
-                    <>
-                      {number("radius", 0, 80)}
-                      {number("borderWidth", 0, 12)}
-                    </>
-                  )}
+                  {section === "borders" && number("radius", 0, 80)}
                   {section === "responsive" && (
                     <>
                       {number("maxWidth", 200, 1600)}

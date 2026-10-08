@@ -4,6 +4,7 @@ export default defineConfig({
   root: new URL(".", import.meta.url).pathname,
   resolve: {
     alias: {
+      "@wix/dashboard": new URL("./dashboard.ts", import.meta.url).pathname,
       "@wix/essentials": new URL("./essentials.ts", import.meta.url).pathname,
     },
   },

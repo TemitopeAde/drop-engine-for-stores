@@ -349,6 +349,15 @@
   grid-template-columns: 1fr 1fr;
   gap: 16px;
 }
+.de-date-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.de-date-input input {
+  flex: 1;
+  width: 100%;
+}
 .de-error {
   color: #b94130 !important;
   font-size: 12px;
@@ -368,6 +377,7 @@
   color: var(--de-muted);
 }
 .de-product-card fieldset {
+  min-width: 0;
   border: 0;
   padding: 0;
   margin: 0 0 18px;
@@ -382,10 +392,51 @@
   border-bottom: 1px solid #eef2ef;
   cursor: pointer;
 }
-.de-product input {
+.de-product input,
+.de-select-all input {
   accent-color: var(--de-green);
   width: 16px;
   height: 16px;
+  flex-shrink: 0;
+}
+.de-product-selection {
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--de-line);
+}
+.de-select-all {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.de-product-selection p {
+  margin: 7px 0 0 29px;
+  font-size: 12px;
+}
+.de-selection-progress,
+.de-product-pagination,
+.de-product-pagination > div,
+.de-selection-progress > span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.de-selection-progress,
+.de-product-pagination {
+  justify-content: space-between;
+  font-size: 12px;
+}
+.de-selection-progress {
+  padding: 10px 0;
+}
+.de-product-placeholder,
+.de-product img {
+  flex-shrink: 0;
+}
+.de-product > span:last-child {
+  overflow-wrap: anywhere;
 }
 .de-product img {
   object-fit: cover;

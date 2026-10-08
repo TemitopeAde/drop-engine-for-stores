@@ -72,14 +72,13 @@ class DropCountdown extends HTMLElement {
     const root = document.createElement("section");
     root.setAttribute("aria-label", t("editor"));
     root.style.cssText =
-      "box-sizing:border-box;width:100%;margin:12px 0;border-style:solid;border-color:currentColor;";
+      "box-sizing:border-box;width:100%;margin:16px 0;border:0;";
     root.style.color = settings.textColor;
     root.style.background = settings.background;
     root.style.font = settings.font;
     root.style.textDecoration = settings.textDecoration;
     root.style.padding = `${settings.padding}px`;
     root.style.borderRadius = `${settings.radius}px`;
-    root.style.borderWidth = `${settings.borderWidth}px`;
     root.style.maxWidth = `${settings.maxWidth}px`;
     if (this.unavailable) {
       root.textContent = t("outageViolation");
@@ -132,10 +131,6 @@ class DropCountdown extends HTMLElement {
       }
       root.append(countdown);
     }
-    const info = document.createElement("p");
-    info.textContent = t("notificationsPending");
-    info.style.cssText = "font-size:.75em;opacity:.75;margin:18px 0 0";
-    root.append(info);
     if (settings.compact && this.getBoundingClientRect().width < 360)
       root.style.padding = `${Math.min(settings.padding, 16)}px`;
     this.replaceChildren(root);

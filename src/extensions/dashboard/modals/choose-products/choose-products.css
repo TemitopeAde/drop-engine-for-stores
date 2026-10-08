@@ -1,0 +1,27 @@
+.de-product-picker {
+  --de-ink: var(--wds-color-text-standard-primary);
+  --de-muted: var(--wds-color-text-standard-secondary);
+  --de-line: var(--wds-color-border-dark-secondary);
+  --de-green: var(--wds-color-text-primary);
+  color: var(--de-ink);
+  font-family: var(--wds-font-family-default);
+}
+.de-product-picker .de-product-card {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+}
+.de-product-picker .de-card-heading h2 {
+  display: none;
+}
+.de-product-picker .de-card-heading {
+  justify-content: flex-end;
+}
+.de-product-picker .de-button,
+.de-product-picker input {
+  font: inherit;
+}
+.de-product-picker .de-product img {
+  object-fit: cover;
+}

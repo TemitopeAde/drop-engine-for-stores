@@ -1,5 +1,6 @@
 import { expect, it } from "vitest";
 import { readBody } from "../src/server/http";
+import { MAX_DROP_STATE_BYTES } from "../src/domain/limits";
 it("rejects mutation requests without bearer credentials", async () => {
   await expect(
     readBody(
@@ -21,7 +22,7 @@ it("rejects oversized and malformed mutation payloads", async () => {
       new Request("https://example.test", {
         method: "POST",
         headers,
-        body: "x".repeat(33000),
+        body: "x".repeat(MAX_DROP_STATE_BYTES + 1),
       }),
     ),
   ).rejects.toThrow("fieldsRequired");
@@ -34,4 +35,18 @@ it("rejects oversized and malformed mutation payloads", async () => {
       }),
     ),
   ).rejects.toThrow("fieldsRequired");
+});
+it("accepts a mutation payload containing thousands of product IDs", async () => {
+  const input = {
+    productIds: Array.from({ length: 5000 }, () => crypto.randomUUID()),
+  };
+  const request = new Request("https://example.test/api/drops", {
+    method: "POST",
+    headers: {
+      authorization: "Bearer test-only",
+      "content-type": "application/json",
+    },
+    body: JSON.stringify(input),
+  });
+  await expect(readBody(request)).resolves.toEqual(input);
 });

@@ -16,23 +16,31 @@ import {
   type Command,
 } from "../../../../dashboard/api";
 import { DropForm } from "../../../../dashboard/DropForm";
+import { DropActions } from "../../../../dashboard/DropActions";
+import { BusinessManagerTheme } from "../../BusinessManagerTheme";
 import { phase, type Drop } from "../../../../domain/drop";
 import { t } from "../../../../locales/en";
 import "../../../../dashboard/dashboard.css";
 export default function Dashboard() {
+  return (
+    <BusinessManagerTheme>
+      <DropDashboard />
+    </BusinessManagerTheme>
+  );
+}
+
+function DropDashboard() {
   const [data, setData] = useState<DashboardData>();
   const [error, setError] = useState("");
   const [editing, setEditing] = useState<Drop | "new" | null>(null);
   const [search, setSearch] = useState(""),
     [status, setStatus] = useState("");
   const [busy, setBusy] = useState(false),
-    [page, setPage] = useState(0),
     [now, setNow] = useState(Date.now());
   const refresh = useCallback(async (signal?: AbortSignal) => {
     try {
       const next = await loadDashboard(0, undefined, signal);
       setData(next);
-      setPage(0);
       setError("");
     } catch (err) {
       if (!signal?.aborted)
@@ -59,20 +67,6 @@ export default function Dashboard() {
     } finally {
       setBusy(false);
     }
-  }
-  async function more() {
-    if (!data) return;
-    const next = await loadDashboard(page + 1, data.cursor);
-    setData({
-      ...next,
-      products: [
-        ...data.products,
-        ...next.products.filter(
-          (p) => !data.products.some((old) => old.id === p.id),
-        ),
-      ],
-    });
-    setPage(page + 1);
   }
   const drops =
     data?.drops.filter(
@@ -123,7 +117,6 @@ export default function Dashboard() {
               await refresh();
               setEditing(null);
             }}
-            more={more}
           />
         ) : (
           <>
@@ -193,7 +186,7 @@ export default function Dashboard() {
                         <th>{t("end")}</th>
                         <th>{t("stage")}</th>
                         <th>
-                          <span className="de-sr-only">{t("edit")}</span>
+                          <span className="de-sr-only">{t("actions")}</span>
                         </th>
                       </tr>
                     </thead>
@@ -234,48 +227,12 @@ export default function Dashboard() {
                           </td>
                           <td>
                             <div className="de-row-actions">
-                              <Button
-                                variant="ghost"
-                                disabled={busy}
-                                onClick={() => setEditing(drop)}
-                              >
-                                {t("edit")}
-                              </Button>
-                              <Button
-                                variant="ghost"
-                                disabled={busy}
-                                onClick={() => void action(drop, "duplicate")}
-                              >
-                                {t("duplicate")}
-                              </Button>
-                              {drop.status === "PUBLISHED" ? (
-                                <Button
-                                  variant="danger"
-                                  disabled={busy}
-                                  onClick={() => void action(drop, "cancel")}
-                                >
-                                  {t("cancel")}
-                                </Button>
-                              ) : (
-                                <Button
-                                  variant="ghost"
-                                  disabled={busy}
-                                  onClick={() =>
-                                    void action(
-                                      drop,
-                                      drop.status === "ARCHIVED"
-                                        ? "restore"
-                                        : "archive",
-                                    )
-                                  }
-                                >
-                                  {t(
-                                    drop.status === "ARCHIVED"
-                                      ? "restore"
-                                      : "archive",
-                                  )}
-                                </Button>
-                              )}
+                              <DropActions
+                                drop={drop}
+                                busy={busy}
+                                edit={() => setEditing(drop)}
+                                action={(command) => void action(drop, command)}
+                              />
                             </div>
                           </td>
                         </tr>
