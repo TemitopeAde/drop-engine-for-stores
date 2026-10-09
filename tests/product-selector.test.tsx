@@ -29,7 +29,9 @@ function Selector({
   firstPage = catalogPage(0),
   disabled = false,
   lockedIds = [],
+  maxProducts,
 }: {
+  maxProducts?: number;
   initial?: string[];
   lockedIds?: string[];
   firstPage?: CatalogPage;
@@ -42,6 +44,7 @@ function Selector({
       ids={ids}
       lockedIds={lockedIds}
       disabled={disabled}
+      maxProducts={maxProducts}
       onChange={setIds}
       onSelecting={vi.fn()}
     />
@@ -200,5 +203,33 @@ describe("catalog product selection", () => {
     );
     await waitFor(() => expect(screen.getByText("2 selected")).toBeTruthy());
     expect(locked.checked).toBe(false);
+  });
+  it("lets a one-product plan pick exactly one product", () => {
+    render(<Selector maxProducts={1} />);
+    expect(
+      screen.queryByRole("checkbox", { name: "Select all products" }),
+    ).toBeNull();
+    fireEvent.click(screen.getByRole("checkbox", { name: "Product 1" }));
+    fireEvent.click(screen.getByRole("checkbox", { name: "Product 2" }));
+    expect(screen.getByText("1 selected")).toBeTruthy();
+    expect(
+      screen.getByRole<HTMLInputElement>("checkbox", { name: "Product 2" })
+        .checked,
+    ).toBe(true);
+  });
+  it("stops at the plan limit and flags drops already over it", () => {
+    const { unmount } = render(<Selector maxProducts={2} />);
+    for (const name of ["Product 1", "Product 2", "Product 3"])
+      fireEvent.click(screen.getByRole("checkbox", { name }));
+    expect(screen.getByText("2 selected")).toBeTruthy();
+    expect(screen.getByRole("alert").textContent).toContain("product limit");
+    unmount();
+    render(
+      <Selector
+        maxProducts={1}
+        initial={[catalogPage(0).products[0].id, catalogPage(0).products[1].id]}
+      />,
+    );
+    expect(screen.getByRole("alert").textContent).toContain("more products");
   });
 });

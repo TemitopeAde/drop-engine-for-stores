@@ -26,8 +26,21 @@ export const dropSchema = dropInputSchema.extend({
   updatedAt: z.number().int(),
 });
 export type Drop = z.infer<typeof dropSchema>;
-export type Phase =
-  "DRAFT" | "SCHEDULED" | "LIVE" | "ENDED" | "CANCELLED" | "ARCHIVED";
+export const phaseSchema = z.enum([
+  "DRAFT",
+  "SCHEDULED",
+  "LIVE",
+  "ENDED",
+  "CANCELLED",
+  "ARCHIVED",
+]);
+export type Phase = z.infer<typeof phaseSchema>;
+// Dashboard list filters; an empty status means every phase.
+export const dropFilterSchema = z.object({
+  search: z.string().trim().max(100).default(""),
+  status: phaseSchema.optional(),
+});
+export type DropFilter = z.infer<typeof dropFilterSchema>;
 export class DomainError extends Error {
   constructor(
     public code: string,
@@ -36,14 +49,22 @@ export class DomainError extends Error {
     super(code);
   }
 }
-export function schedule(input: DropInput) {
+export function schedule(input: DropInput, previous?: Drop) {
   try {
     const convert = (local: string) =>
       Temporal.PlainDateTime.from(local).toZonedDateTime(input.timeZone, {
         disambiguation: "reject",
       }).epochMilliseconds;
-    const startsAt = convert(input.localStart),
-      endsAt = convert(input.localEnd);
+    // Retain exact instants for unchanged fields, including repeated DST hours.
+    const sameZone = previous?.timeZone === input.timeZone;
+    const startsAt =
+        sameZone && previous?.localStart === input.localStart
+          ? previous.startsAt
+          : convert(input.localStart),
+      endsAt =
+        sameZone && previous?.localEnd === input.localEnd
+          ? previous.endsAt
+          : convert(input.localEnd);
     if (endsAt <= startsAt) throw new Error("range");
     return { startsAt, endsAt };
   } catch {
@@ -57,6 +78,21 @@ export function phase(drop: Drop, now: number): Phase {
     : now < drop.endsAt
       ? "LIVE"
       : "ENDED";
+}
+export function startDrop(drop: Drop, now: number): Drop {
+  if (phase(drop, now) !== "SCHEDULED")
+    throw new DomainError("startUnavailable", 409);
+  const localStart = Temporal.Instant.fromEpochMilliseconds(now)
+    .toZonedDateTimeISO(drop.timeZone)
+    .toPlainDateTime()
+    .toString({ smallestUnit: "millisecond" });
+  return {
+    ...drop,
+    startsAt: now,
+    localStart,
+    version: drop.version + 1,
+    updatedAt: now,
+  };
 }
 export function controlsPurchasing(drop: Drop, now: number) {
   return (
@@ -87,11 +123,17 @@ export function heldProductIds(
 export function assertPublishable(endsAt: number, now: number) {
   if (endsAt <= now) throw new DomainError("expiredSchedule");
 }
-export function replaceDrop(drops: Drop[], next: Drop, now: number) {
+// maxActive is the plan's limit on drops that gate checkout at once; null is unlimited.
+export function replaceDrop(
+  drops: Drop[],
+  next: Drop,
+  now: number,
+  maxActive: number | null = 1,
+) {
   const others = drops.filter((drop) => drop.id !== next.id);
-  if (controlsPurchasing(next, now)) {
-    if (others.some((drop) => controlsPurchasing(drop, now)))
-      throw new DomainError("activeLimit", 409);
+  if (controlsPurchasing(next, now) && maxActive !== null) {
+    const active = others.filter((drop) => controlsPurchasing(drop, now));
+    if (active.length >= maxActive) throw new DomainError("activeLimit", 409);
   }
   if (holdsProducts(next, now)) {
     const held = heldProductIds(others, undefined, now);
@@ -107,4 +149,12 @@ export function replaceDrop(drops: Drop[], next: Drop, now: number) {
   )
     throw new DomainError("storageLimit", 409);
   return result;
+}
+export function filterDrops(drops: Drop[], filter: DropFilter, now: number) {
+  const search = filter.search.toLocaleLowerCase();
+  return drops.filter(
+    (drop) =>
+      drop.name.toLocaleLowerCase().includes(search) &&
+      (!filter.status || phase(drop, now) === filter.status),
+  );
 }

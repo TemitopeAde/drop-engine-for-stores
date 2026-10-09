@@ -11,6 +11,7 @@ import {
 } from "@testing-library/react";
 import Dashboard from "../src/extensions/dashboard/pages/my-page/my-page";
 import { languages } from "../src/locales/languages";
+import { describePlan } from "../src/domain/plans";
 import {
   LANGUAGE_STORAGE_KEY,
   setLanguage,
@@ -18,11 +19,18 @@ import {
 
 const spies = vi.hoisted(() => ({
   loadDashboard: vi.fn(),
+  // The list is filtered by the server; here it echoes the loaded drops.
+  loadDrops: vi.fn(async () => {
+    const data = await spies.loadDashboard.mock.results.at(-1)?.value;
+    const drops = data?.drops ?? [];
+    return { drops, total: drops.length, serverNow: Date.now() };
+  }),
   mutate: vi.fn(),
   openModal: vi.fn(),
 }));
 vi.mock("../src/dashboard/api", () => ({
   loadDashboard: spies.loadDashboard,
+  loadDrops: spies.loadDrops,
   mutate: spies.mutate,
 }));
 vi.mock("@wix/site-plugins", () => ({
@@ -37,6 +45,7 @@ vi.mock("@wix/dashboard", () => ({
 const data = {
   drops: [],
   revision: 0,
+  plan: describePlan({ isFree: true, freeTrialAvailable: true }, "instance-1"),
   serverNow: 0,
   timeZone: "UTC",
   catalogVersion: "V3_CATALOG",
@@ -174,5 +183,17 @@ describe("sidebar language selection", () => {
     vi.resetModules();
     const freshStore = await import("../src/locales/language-store");
     expect(freshStore.getLanguage()).toBe("ko");
+  });
+  it("offers the free trial from the sidebar plan badge", async () => {
+    const open = vi.spyOn(window, "open").mockReturnValue(null);
+    render(<Dashboard />);
+    expect(await screen.findByText("Basic plan")).toBeTruthy();
+    fireEvent.click(screen.getByRole("button", { name: "Start free trial" }));
+    expect(open).toHaveBeenCalledWith(
+      data.plan.upgradeUrl,
+      "_blank",
+      "noopener,noreferrer",
+    );
+    expect(data.plan.upgradeUrl).toContain("appInstanceId=instance-1");
   });
 });

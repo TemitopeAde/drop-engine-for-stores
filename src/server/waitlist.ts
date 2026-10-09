@@ -1,20 +1,22 @@
 import { items } from "@wix/data";
 import { auth } from "@wix/essentials";
-import { appInstances } from "@wix/app-management";
 import { z } from "zod";
 import { DomainError } from "../domain/drop";
 import {
   CONSENT_VERSION,
+  EMAIL_BATCH_SIZE,
   entryId,
   entrySchema,
-  FREE_WAITLIST_CAP,
   randomToken,
   sha256Hex,
   SIGNUP_RATE_LIMIT,
   toView,
   WAITLIST_PAGE_SIZE,
+  type Cursor,
   type Entry,
+  type Recipients,
 } from "../domain/waitlist";
+import { currentPlan } from "./plan";
 import type { Tenant } from "./storage";
 
 export const WAITLIST = "@admin14744/drop-engine-for-stores/waitlist_entries";
@@ -24,17 +26,8 @@ const query = auth.elevate(items.query);
 const insert = auth.elevate(items.insert);
 const update = auth.elevate(items.update);
 const remove = auth.elevate(items.remove);
+const bulkRemove = auth.elevate(items.bulkRemove);
 const read = { consistentRead: true };
-
-// Server-side entitlement; unknown plans are treated as Free (cap on, export off).
-export async function isPro() {
-  try {
-    const { instance } = await auth.elevate(appInstances.getAppInstance)();
-    return instance?.isFree === false;
-  } catch {
-    return false;
-  }
-}
 
 const counterSchema = z
   .object({
@@ -113,13 +106,13 @@ export const countEntries = (scope: Tenant, dropId?: string) => {
   const base = query(WAITLIST).eq("instanceId", scope.instanceId);
   return (dropId ? base.eq("dropId", dropId) : base).count(read);
 };
-// Claim one Free-plan slot. Persisted entries also bound the counter, so entries
-// created while on Pro still count after a downgrade.
-async function reserveSlot(scope: Tenant) {
+// Claim one slot under the plan's signup cap. Persisted entries also bound the
+// counter, so entries created on a bigger plan still count after a downgrade.
+async function reserveSlot(scope: Tenant, cap: number) {
   const stored = await countEntries(scope);
   return adjust(quotaId(scope), scope, "WAITLIST_QUOTA", (current) => {
     const used = Math.max(current?.count ?? 0, stored);
-    return used >= FREE_WAITLIST_CAP ? null : { count: used + 1 };
+    return used >= cap ? null : { count: used + 1 };
   });
 }
 const releaseSlot = (scope: Tenant) =>
@@ -149,8 +142,7 @@ function consent(consentText: string, now: number) {
 }
 
 export type JoinResult =
-  | { status: "joined"; id: string; token: string }
-  | { status: "already" };
+  { status: "joined"; id: string; token: string } | { status: "already" };
 export async function join(
   scope: Tenant,
   dropId: string,
@@ -174,8 +166,8 @@ export async function join(
     });
     return { status: "joined", id, token };
   }
-  const pro = await isPro();
-  if (!pro && !(await reserveSlot(scope)))
+  const cap = (await currentPlan(scope)).limits.waitlistSignups;
+  if (cap !== null && !(await reserveSlot(scope, cap)))
     throw new DomainError("waitlistFull", 409);
   const entry: Entry = {
     _id: id,
@@ -191,7 +183,7 @@ export async function join(
     await insert(WAITLIST, entry);
     return { status: "joined", id, token };
   } catch (error) {
-    if (!pro) await releaseSlot(scope).catch(() => undefined);
+    if (cap !== null) await releaseSlot(scope).catch(() => undefined);
     // A simultaneous identical signup won the deterministic ID.
     if (await getEntry(scope, dropId, id)) return { status: "already" };
     throw error;
@@ -232,7 +224,7 @@ export async function unsubscribe(
     });
 }
 
-// Deletion frees Free-plan capacity; unsubscribing alone does not.
+// Deletion frees plan capacity; unsubscribing alone does not.
 export async function removeEntry(scope: Tenant, dropId: string, id: string) {
   const entry = await getEntry(scope, dropId, id);
   if (!entry) throw new DomainError("conflict", 409);
@@ -246,7 +238,7 @@ export async function listEntries(scope: Tenant, dropId: string, page: number) {
       .eq("instanceId", scope.instanceId)
       .eq("siteId", scope.siteId)
       .eq("dropId", dropId);
-  const [result, total, subscribed, used, pro] = await Promise.all([
+  const [result, total, subscribed, used, plan] = await Promise.all([
     base()
       .descending("joinedAt")
       .skip(page * WAITLIST_PAGE_SIZE)
@@ -255,7 +247,7 @@ export async function listEntries(scope: Tenant, dropId: string, page: number) {
     base().count(read),
     base().eq("status", "SUBSCRIBED").count(read),
     countEntries(scope),
-    isPro(),
+    currentPlan(scope),
   ]);
   return {
     entries: result.items.map((item) => toView(entrySchema.parse(item))),
@@ -263,10 +255,53 @@ export async function listEntries(scope: Tenant, dropId: string, page: number) {
     subscribed,
     page,
     hasNext: (page + 1) * WAITLIST_PAGE_SIZE < total,
-    pro,
+    csvExport: plan.limits.csvExport,
     used,
-    cap: pro ? null : FREE_WAITLIST_CAP,
+    cap: plan.limits.waitlistSignups,
   };
+}
+
+// Only subscribed entries of this tenant's drop are ever returned for emailing.
+export async function recipientBatch(
+  scope: Tenant,
+  dropId: string,
+  recipients: Recipients,
+) {
+  const base = () =>
+    query(WAITLIST)
+      .eq("instanceId", scope.instanceId)
+      .eq("siteId", scope.siteId)
+      .eq("dropId", dropId)
+      .eq("status", "SUBSCRIBED");
+  if (recipients.kind === "selected") {
+    const ids = [...new Set(recipients.ids)];
+    const found = await base()
+      .hasSome("_id", ids)
+      .limit(EMAIL_BATCH_SIZE)
+      .find(read);
+    const entries = found.items.map((item) => entrySchema.parse(item));
+    return { entries, skipped: ids.length - entries.length, next: null };
+  }
+  const { after } = recipients;
+  const page = after
+    ? base().and(
+        items
+          .filter()
+          .gt("joinedAt", after.joinedAt)
+          .or(
+            items.filter().eq("joinedAt", after.joinedAt).gt("_id", after.id),
+          ),
+      )
+    : base();
+  const found = await page
+    .ascending("joinedAt", "_id")
+    .limit(EMAIL_BATCH_SIZE)
+    .find(read);
+  const entries = found.items.map((item) => entrySchema.parse(item));
+  const last = entries.at(-1);
+  const next: Cursor | null =
+    last && found.hasNext() ? { joinedAt: last.joinedAt, id: last._id } : null;
+  return { entries, skipped: 0, next };
 }
 
 export async function allEntries(scope: Tenant, dropId: string) {
@@ -283,4 +318,16 @@ export async function allEntries(scope: Tenant, dropId: string) {
     entries.push(...result.items.map((item) => entrySchema.parse(item)));
   }
   return entries;
+}
+
+// Deleting a drop erases its signups and returns their plan capacity.
+export async function removeDropEntries(scope: Tenant, dropId: string) {
+  const ids = (await allEntries(scope, dropId)).map((entry) => entry._id);
+  for (let offset = 0; offset < ids.length; offset += 1000)
+    await bulkRemove(WAITLIST, ids.slice(offset, offset + 1000));
+  if (ids.length)
+    await adjust(quotaId(scope), scope, "WAITLIST_QUOTA", (current) => ({
+      count: Math.max(0, (current?.count ?? 0) - ids.length),
+    }));
+  return ids.length;
 }

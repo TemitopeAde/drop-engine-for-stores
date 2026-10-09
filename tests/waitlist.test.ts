@@ -10,6 +10,7 @@ import {
   toCsv,
 } from "../src/domain/waitlist";
 import { projectDrop } from "../src/domain/projection";
+import { describePlan } from "../src/domain/plans";
 
 const api = vi.hoisted(() => ({
   caller: vi.fn(),
@@ -18,11 +19,16 @@ const api = vi.hoisted(() => ({
   consumeSignupAttempt: vi.fn(),
   join: vi.fn(),
   leave: vi.fn(),
-  isPro: vi.fn(),
+  currentPlan: vi.fn(),
   allEntries: vi.fn(),
   listEntries: vi.fn(),
   removeEntry: vi.fn(),
   unsubscribe: vi.fn(),
+  sendConfirmation: vi.fn(),
+}));
+vi.mock("../src/server/plan", () => ({ currentPlan: api.currentPlan }));
+vi.mock("../src/server/email", () => ({
+  sendConfirmation: api.sendConfirmation,
 }));
 vi.mock("../src/server/storage", () => ({
   caller: api.caller,
@@ -33,14 +39,16 @@ vi.mock("../src/server/waitlist", () => ({
   consumeSignupAttempt: api.consumeSignupAttempt,
   join: api.join,
   leave: api.leave,
-  isPro: api.isPro,
   allEntries: api.allEntries,
   listEntries: api.listEntries,
   removeEntry: api.removeEntry,
   unsubscribe: api.unsubscribe,
 }));
 import { POST as storefront } from "../src/pages/api/waitlist";
-import { GET as adminGet, POST as adminPost } from "../src/pages/api/waitlist-admin";
+import {
+  GET as adminGet,
+  POST as adminPost,
+} from "../src/pages/api/waitlist-admin";
 
 const scope = { instanceId: "instance", siteId: "site" };
 const drop: Drop = {
@@ -82,7 +90,10 @@ beforeEach(() => {
   vi.resetAllMocks();
   api.caller.mockResolvedValue({ scope, subjectId: "visitor" });
   api.tenant.mockResolvedValue(scope);
-  api.readInstallation.mockResolvedValue({ state: { drops: [drop] } });
+  api.readInstallation.mockResolvedValue({
+    catalogVersion: "V3_CATALOG",
+    state: { drops: [drop] },
+  });
   api.consumeSignupAttempt.mockResolvedValue(true);
   api.join.mockResolvedValue({ status: "joined", id: "a", token: "b" });
 });
@@ -139,6 +150,35 @@ describe("storefront waitlist API", () => {
       expect.any(Number),
     );
   });
+  it("emails the confirmation for the product the visitor signed up from", async () => {
+    const other = crypto.randomUUID();
+    api.readInstallation.mockResolvedValue({
+      catalogVersion: "V1_CATALOG",
+      state: { drops: [{ ...drop, productIds: [drop.productIds[0], other] }] },
+    });
+    await storefront(post(join({ productId: other })));
+    expect(api.sendConfirmation).toHaveBeenCalledWith(
+      expect.objectContaining({
+        scope,
+        catalogVersion: "V1_CATALOG",
+        productId: other,
+        entryId: "a",
+        email: "shopper@example.com",
+        seed: "b",
+      }),
+    );
+  });
+  it("never emails a product outside the drop", async () => {
+    await storefront(post(join({ productId: crypto.randomUUID() })));
+    expect(api.sendConfirmation).toHaveBeenCalledWith(
+      expect.objectContaining({ productId: drop.productIds[0] }),
+    );
+  });
+  it("does not re-send to an address already on the list", async () => {
+    api.join.mockResolvedValue({ status: "already" });
+    await storefront(post(join()));
+    expect(api.sendConfirmation).not.toHaveBeenCalled();
+  });
   it("silently drops honeypot and too-fast submissions", async () => {
     for (const body of [join({ website: "spam" }), join({ elapsedMs: 10 })]) {
       const response = await storefront(post(body));
@@ -146,6 +186,7 @@ describe("storefront waitlist API", () => {
     }
     expect(api.join).not.toHaveBeenCalled();
     expect(api.consumeSignupAttempt).not.toHaveBeenCalled();
+    expect(api.sendConfirmation).not.toHaveBeenCalled();
   });
   it("rate limits persistently per visitor", async () => {
     api.consumeSignupAttempt.mockResolvedValue(false);
@@ -199,14 +240,16 @@ describe("merchant waitlist API", () => {
     expect(api.tenant).toHaveBeenCalledWith(true);
   });
   it("refuses CSV export without Pro", async () => {
-    api.isPro.mockResolvedValue(false);
+    api.currentPlan.mockResolvedValue(describePlan({ isFree: true }, "i"));
     const response = await adminGet(url("&format=csv"));
     expect(response.status).toBe(403);
     expect(await response.json()).toEqual({ error: "proRequired" });
     expect(api.allEntries).not.toHaveBeenCalled();
   });
   it("exports an uncached, injection-safe CSV on Pro", async () => {
-    api.isPro.mockResolvedValue(true);
+    api.currentPlan.mockResolvedValue(
+      describePlan({ isFree: false, billing: { packageName: "pro" } }, "i"),
+    );
     api.allEntries.mockResolvedValue([
       {
         email: "=cmd@example.com",

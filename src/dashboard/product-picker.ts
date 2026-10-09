@@ -9,6 +9,7 @@ export interface ProductPickerParams {
   products: DashboardData["products"];
   selectedIds: string[];
   lockedIds: string[];
+  maxProducts?: number;
   hasNext: boolean;
   cursor?: string;
 }

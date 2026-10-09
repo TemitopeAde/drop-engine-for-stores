@@ -12,6 +12,8 @@ const editor = vi.hoisted(() => ({
 const client = vi.hoisted(() => ({ fetchWithAuth: vi.fn() }));
 vi.mock("@wix/editor", () => ({ widget: editor }));
 vi.mock("@wix/essentials", () => ({ httpClient: client }));
+const member = vi.hoisted(() => ({ getMember: vi.fn() }));
+vi.mock("@wix/site-members", () => ({ currentMember: member }));
 let stored: string;
 beforeEach(() => {
   vi.clearAllMocks();
@@ -21,6 +23,7 @@ beforeEach(() => {
     stored = value;
   });
   editor.setPreloadFonts.mockResolvedValue(undefined);
+  member.getMember.mockResolvedValue(undefined);
 });
 afterEach(() => {
   cleanup();
@@ -142,5 +145,63 @@ it("renders changed fonts, colors, spacing and visibility without replacing the 
   expect(element.querySelector("h3")?.style.fontFamily).toBe("inherit");
   expect(element.querySelector("input[type=email]")).toBe(input);
   expect(input.value).toBe("visitor@example.com");
+  element.remove();
+});
+
+async function mountWaitlist(tag: string) {
+  if (!customElements.get(tag))
+    customElements.define(tag, class extends DropCountdown {});
+  client.fetchWithAuth.mockResolvedValue(
+    new Response(
+      JSON.stringify({
+        serverNow: 1000,
+        drop: {
+          id: "drop",
+          name: "Launch",
+          phase: "SCHEDULED",
+          startsAt: 61000,
+          endsAt: 121000,
+          waitlist: true,
+        },
+      }),
+    ),
+  );
+  const element = document.createElement(tag);
+  element.setAttribute("product-id", "product");
+  document.body.append(element);
+  await waitFor(() =>
+    expect(element.querySelector("input[type=email]")).toBeTruthy(),
+  );
+  return element;
+}
+it("prefills the logged-in member's email without overwriting typing", async () => {
+  member.getMember.mockResolvedValue({ loginEmail: "member@example.com" });
+  const element = await mountWaitlist("test-drop-member");
+  const input = element.querySelector<HTMLInputElement>("input[type=email]")!;
+  await waitFor(() => expect(input.value).toBe("member@example.com"));
+  expect(member.getMember).toHaveBeenCalledWith({ fieldsets: ["FULL"] });
+  element.remove();
+
+  let resolve!: (value: unknown) => void;
+  member.getMember.mockReturnValue(new Promise((r) => (resolve = r)));
+  const typed = await mountWaitlist("test-drop-member-typed");
+  const field = typed.querySelector<HTMLInputElement>("input[type=email]")!;
+  field.value = "typed@example.com";
+  resolve({ loginEmail: "member@example.com" });
+  await new Promise((r) => setTimeout(r, 0));
+  expect(field.value).toBe("typed@example.com");
+  typed.remove();
+});
+it("toggles consent from the visible box and its label", async () => {
+  const element = await mountWaitlist("test-drop-consent");
+  const consent = element.querySelector<HTMLInputElement>(
+    "input[type=checkbox]",
+  )!;
+  const label = element.querySelector<HTMLLabelElement>(".dce-consent")!;
+  expect(label.querySelector(".dce-box")).toBeTruthy();
+  label.querySelector<HTMLElement>(".dce-box")!.click();
+  expect(consent.checked).toBe(true);
+  label.querySelector<HTMLElement>(".dce-consent-text")!.click();
+  expect(consent.checked).toBe(false);
   element.remove();
 });

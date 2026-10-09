@@ -1,16 +1,22 @@
 import type { APIRoute } from "astro";
 import { z } from "zod";
 import { DomainError } from "../../domain/drop";
-import { adminCommandSchema, toCsv } from "../../domain/waitlist";
+import {
+  adminCommandSchema,
+  toCsv,
+  type EmailResult,
+} from "../../domain/waitlist";
 import { readInstallation, tenant } from "../../server/storage";
 import { handle, readBody } from "../../server/http";
+import { currentPlan } from "../../server/plan";
 import {
   allEntries,
-  isPro,
   listEntries,
+  recipientBatch,
   removeEntry,
   unsubscribe,
 } from "../../server/waitlist";
+import { sendBroadcast } from "../../server/email";
 import type { Tenant } from "../../server/storage";
 
 async function ownedDrop(scope: Tenant, dropId: string) {
@@ -36,7 +42,8 @@ export const GET: APIRoute = ({ url }) =>
         .parse(url.searchParams.get("page") || 0);
       return listEntries(scope, dropId, page);
     }
-    if (!(await isPro())) throw new DomainError("proRequired", 403);
+    if (!(await currentPlan(scope)).limits.csvExport)
+      throw new DomainError("proRequired", 403);
     const rows = (await allEntries(scope, dropId)).map((entry) => [
       entry.email,
       entry.status,
@@ -70,7 +77,23 @@ export const POST: APIRoute = ({ request }) =>
   handle(async () => {
     const scope = await tenant(true);
     const command = adminCommandSchema.parse(await readBody(request));
-    await ownedDrop(scope, command.dropId);
+    const drop = await ownedDrop(scope, command.dropId);
+    if (command.action === "email") {
+      const { entries, skipped, next } = await recipientBatch(
+        scope,
+        drop.id,
+        command.recipients,
+      );
+      const { sent, failed } = await sendBroadcast({
+        scope,
+        drop,
+        broadcastId: command.broadcastId,
+        subject: command.subject,
+        message: command.message,
+        entries,
+      });
+      return { sent, failed, skipped, next } satisfies EmailResult;
+    }
     if (command.action === "remove")
       await removeEntry(scope, command.dropId, command.id);
     else await unsubscribe(scope, command.dropId, command.id, Date.now());

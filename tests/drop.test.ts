@@ -7,8 +7,10 @@ import {
   phase,
   replaceDrop,
   schedule,
+  startDrop,
   type Drop,
 } from "../src/domain/drop";
+import { acceptsSignups } from "../src/domain/waitlist";
 import { MAX_PRODUCTS_PER_DROP } from "../src/domain/limits";
 const base: Drop = {
   id: "a937c9e8-a028-40f8-9a07-0f173b081c70",
@@ -163,5 +165,78 @@ describe("merchant schedule validation", () => {
         500,
       ),
     ).toThrow("storageLimit");
+  });
+});
+
+describe("plan active-drop limits", () => {
+  const live = (id: string) => ({
+    ...base,
+    id,
+    startsAt: 0,
+    endsAt: 10_000,
+    productIds: [crypto.randomUUID()],
+  });
+  it("allows up to the plan limit and never limits Business", () => {
+    const three = [live("a"), live("b")];
+    expect(replaceDrop(three, live("c"), 500, 3)).toHaveLength(3);
+    expect(() => replaceDrop([...three, live("c")], live("d"), 500, 3)).toThrow(
+      "activeLimit",
+    );
+    expect(
+      replaceDrop([...three, live("c")], live("d"), 500, null),
+    ).toHaveLength(4);
+  });
+});
+
+describe("manual start", () => {
+  it.each([
+    "2026-10-09T19:00:45.123Z",
+    "2026-03-08T09:59:59.123Z",
+    "2026-03-08T10:00:00.123Z",
+    "2026-11-01T08:30:45.123Z",
+    "2026-11-01T09:30:45.123Z",
+  ])("preserves the exact instant when saved again at %s", (instant) => {
+    const now = Date.parse(instant);
+    const drop: Drop = {
+      ...base,
+      timeZone: "America/Los_Angeles",
+      startsAt: Date.parse("2026-12-01T20:00:00Z"),
+      endsAt: Date.parse("2026-12-01T21:00:00Z"),
+      localStart: "2026-12-01T12:00",
+      localEnd: "2026-12-01T13:00",
+    };
+    const started = startDrop(drop, now);
+    expect(started.startsAt).toBe(now);
+    expect(started.localStart).toMatch(/:45\.123$|:59\.123$|:00\.123$/);
+    expect(schedule(dropInputSchema.parse(started), started)).toEqual({
+      startsAt: now,
+      endsAt: drop.endsAt,
+    });
+    expect(started).toEqual({
+      ...drop,
+      startsAt: now,
+      localStart: started.localStart,
+      version: drop.version + 1,
+      updatedAt: now,
+    });
+    expect(blocked(drop, now)).toBe(true);
+    expect(acceptsSignups(drop, now)).toBe(true);
+    expect(phase(started, now)).toBe("LIVE");
+    expect(blocked(started, now)).toBe(false);
+    expect(acceptsSignups(started, now)).toBe(false);
+  });
+  it("still rejects newly edited ambiguous local times", () => {
+    const started = startDrop(
+      {
+        ...base,
+        timeZone: "America/Los_Angeles",
+        startsAt: Date.parse("2026-12-01T20:00Z"),
+        endsAt: Date.parse("2026-12-01T21:00Z"),
+      },
+      Date.parse("2026-11-01T09:30:45.123Z"),
+    );
+    expect(() =>
+      schedule({ ...started, localStart: "2026-11-01T01:45" }, started),
+    ).toThrow("invalidSchedule");
   });
 });

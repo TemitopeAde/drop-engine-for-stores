@@ -1,9 +1,10 @@
 import { z } from "zod";
 import type { Drop } from "./drop";
+import { MAX_SUBJECT_CHARS, messageSchema } from "./message";
 
-// Free plan: retained entries per installation across all drops (architecture decision).
-export const FREE_WAITLIST_CAP = 200;
 export const WAITLIST_PAGE_SIZE = 50;
+// Recipients emailed per request; the dashboard loops so no request runs long.
+export const EMAIL_BATCH_SIZE = 25;
 // Persistent per-visitor signup attempts.
 export const SIGNUP_RATE_LIMIT = { attempts: 10, windowMs: 60 * 60 * 1000 };
 // Submissions faster than this after the form renders are treated as automated.
@@ -26,6 +27,8 @@ export const joinSchema = z
     action: z.literal("join"),
     dropId: z.string().uuid(),
     email: emailSchema,
+    // The product page the visitor signed up from; the server checks it belongs to the drop.
+    productId: z.string().uuid().optional(),
     consent: z.literal(true),
     // Honeypot: hidden from people, filled by naive bots.
     website: z.string().max(500).optional(),
@@ -44,13 +47,52 @@ export const storefrontCommandSchema = z.discriminatedUnion("action", [
   joinSchema,
   leaveSchema,
 ]);
-export const adminCommandSchema = z
+export const entryCommandSchema = z
   .object({
     action: z.enum(["unsubscribe", "remove"]),
     dropId: z.string().uuid(),
     id: hex64,
   })
   .strict();
+// "all" pages through subscribers ordered by (joinedAt, id); `after` is the last one sent.
+export const cursorSchema = z
+  .object({ joinedAt: z.number().int().min(0), id: hex64 })
+  .strict();
+export type Cursor = z.infer<typeof cursorSchema>;
+export const recipientsSchema = z.discriminatedUnion("kind", [
+  z.object({ kind: z.literal("all"), after: cursorSchema.optional() }).strict(),
+  z
+    .object({
+      kind: z.literal("selected"),
+      ids: z.array(hex64).min(1).max(EMAIL_BATCH_SIZE),
+    })
+    .strict(),
+]);
+export type Recipients = z.infer<typeof recipientsSchema>;
+export const emailCommandSchema = z
+  .object({
+    action: z.literal("email"),
+    dropId: z.string().uuid(),
+    // Fixed for one send, so retrying a batch can't email anyone twice.
+    broadcastId: z.string().uuid(),
+    subject: z.string().trim().min(1).max(MAX_SUBJECT_CHARS),
+    message: messageSchema,
+    recipients: recipientsSchema,
+  })
+  .strict();
+export type EmailCommand = z.infer<typeof emailCommandSchema>;
+export const adminCommandSchema = z.union([
+  entryCommandSchema,
+  emailCommandSchema,
+]);
+export const emailResultSchema = z.object({
+  sent: z.number(),
+  failed: z.number(),
+  // Selected entries that were removed or unsubscribed before the send.
+  skipped: z.number(),
+  next: cursorSchema.nullable(),
+});
+export type EmailResult = z.infer<typeof emailResultSchema>;
 
 export const entryStatusSchema = z.enum(["SUBSCRIBED", "UNSUBSCRIBED"]);
 export const entrySchema = z

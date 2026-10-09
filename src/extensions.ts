@@ -15,6 +15,14 @@ import dropLaunchCountdown from "./extensions/site/components/drop-launch-countd
 
 import chooseProducts from "./extensions/dashboard/modals/choose-products/choose-products.extension.ts";
 
+import confirmDropAction from "./extensions/dashboard/modals/confirm-drop-action/confirm-drop-action.extension.ts";
+
+import appInstalled from "./extensions/backend/events/app-installed/app-installed.extension.ts";
+
+import paidPlanPurchased from "./extensions/backend/events/paid-plan-purchased/paid-plan-purchased.extension.ts";
+
+import paidPlanChanged from "./extensions/backend/events/paid-plan-changed/paid-plan-changed.extension.ts";
+
 export default app()
   .use(myPage)
   .use(dropValidation)
@@ -23,4 +31,8 @@ export default app()
   .use(dropEngineTools)
   .use(dropToolsProvider)
   .use(dropLaunchCountdown)
-  .use(chooseProducts);
+  .use(chooseProducts)
+  .use(confirmDropAction)
+  .use(appInstalled)
+  .use(paidPlanPurchased)
+  .use(paidPlanChanged);

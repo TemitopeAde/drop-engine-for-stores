@@ -7,6 +7,7 @@ import {
 } from "../../domain/waitlist";
 import { t } from "../../locales/en";
 import { caller, readInstallation } from "../../server/storage";
+import { sendConfirmation } from "../../server/email";
 import { handle, readBody } from "../../server/http";
 import { consumeSignupAttempt, join, leave } from "../../server/waitlist";
 
@@ -29,7 +30,29 @@ export const POST: APIRoute = ({ request }) =>
     const drop = installation?.state.drops.find(
       (candidate) => candidate.id === command.dropId,
     );
-    if (!drop || !acceptsSignups(drop, now))
+    if (!installation || !drop || !acceptsSignups(drop, now))
       throw new DomainError("waitlistClosed", 409);
-    return join(scope, drop.id, command.email, t("waitlistConsent"), now);
+    const result = await join(
+      scope,
+      drop.id,
+      command.email,
+      t("waitlistConsent"),
+      now,
+    );
+    if (result.status === "joined") {
+      const productId =
+        command.productId && drop.productIds.includes(command.productId)
+          ? command.productId
+          : drop.productIds[0]!;
+      await sendConfirmation({
+        scope,
+        catalogVersion: installation.catalogVersion,
+        drop,
+        productId,
+        entryId: result.id,
+        email: command.email,
+        seed: result.token,
+      });
+    }
+    return result;
   });

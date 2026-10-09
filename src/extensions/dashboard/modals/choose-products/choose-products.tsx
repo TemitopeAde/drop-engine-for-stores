@@ -62,6 +62,7 @@ function ProductPicker() {
               firstPage={picker}
               ids={picker.selectedIds}
               lockedIds={picker.lockedIds ?? []}
+              maxProducts={picker.maxProducts}
               disabled={false}
               onSelecting={setSelecting}
               onChange={(selectedIds) =>

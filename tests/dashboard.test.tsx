@@ -1,4 +1,5 @@
 // @vitest-environment jsdom
+import { describePlan } from "../src/domain/plans";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   cleanup,
@@ -29,6 +30,7 @@ afterEach(() => {
 const data = {
   drops: [],
   revision: 0,
+  plan: describePlan({ isFree: false, billing: { packageName: "pro" } }, "i"),
   serverNow: 0,
   timeZone: "UTC",
   catalogVersion: "V3_CATALOG" as const,

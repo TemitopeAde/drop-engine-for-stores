@@ -31,9 +31,11 @@
     "@wix/design-system": "1.333.1",
     "@wix/ecom": "1.0.2539",
     "@wix/editor": "1.908.0",
+    "@wix/email-transmissions": "1.0.13",
     "@wix/essentials": "0.1.28",
     "@wix/react-component-schema": "1.9.0",
     "@wix/react-component-utils": "1.13.0",
+    "@wix/site-members": "1.36.0",
     "@wix/site-plugins": "1.0.27",
     "@wix/site-site": "1.29.0",
     "@wix/site-window": "1.59.0",
@@ -44,11 +46,14 @@
     "clsx": "2.1.1",
     "deepmerge": "4.3.1",
     "lucide-react": "1.53.0",
+    "quill-delta": "5.1.0",
     "react-hook-form": "7.89.0",
+    "react-quill-new": "3.8.3",
     "sonner": "2.0.8",
     "tailwind-merge": "3.7.0",
     "typescript": "5.9.3",
-    "zod": "4.6.5"
+    "zod": "4.6.5",
+    "@wix/crm": "^1.0.125"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",

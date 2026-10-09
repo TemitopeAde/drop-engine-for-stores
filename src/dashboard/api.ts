@@ -1,7 +1,12 @@
 import { httpClient } from "@wix/essentials";
 import { z } from "zod";
-import { dropSchema, type DropInput } from "../domain/drop";
-import { entryViewSchema } from "../domain/waitlist";
+import { dropSchema, type DropFilter, type DropInput } from "../domain/drop";
+import { planSchema } from "../domain/plans";
+import {
+  emailResultSchema,
+  entryViewSchema,
+  type EmailCommand,
+} from "../domain/waitlist";
 import { en, type MessageKey } from "../locales/en";
 import { t } from "../locales/translations";
 const catalogSchema = z.object({
@@ -18,6 +23,7 @@ const catalogSchema = z.object({
 const responseSchema = catalogSchema.extend({
   drops: z.array(dropSchema),
   revision: z.number(),
+  plan: planSchema,
   serverNow: z.number(),
   timeZone: z.string(),
   siteName: z.string().optional(),
@@ -50,6 +56,19 @@ export async function loadDashboard(
   if (cursor) url.searchParams.set("cursor", cursor);
   return responseSchema.parse(await call(url, { signal }));
 }
+const dropListSchema = z.object({
+  drops: z.array(dropSchema),
+  total: z.number(),
+  serverNow: z.number(),
+});
+export type DropList = z.infer<typeof dropListSchema>;
+export async function loadDrops(filter: DropFilter, signal?: AbortSignal) {
+  const url = new URL(endpoint);
+  url.searchParams.set("view", "list");
+  if (filter.search) url.searchParams.set("search", filter.search);
+  if (filter.status) url.searchParams.set("status", filter.status);
+  return dropListSchema.parse(await call(url, { signal }));
+}
 export async function loadCatalog(
   page: number,
   cursor?: string,
@@ -62,7 +81,15 @@ export async function loadCatalog(
   return catalogSchema.parse(await call(url, { signal }));
 }
 export type Command = {
-  action: "save" | "publish" | "cancel" | "archive" | "restore" | "duplicate";
+  action:
+    | "save"
+    | "publish"
+    | "start"
+    | "cancel"
+    | "archive"
+    | "restore"
+    | "duplicate"
+    | "delete";
   id?: string;
   version?: number;
   input?: DropInput;
@@ -84,7 +111,7 @@ const waitlistPageSchema = z.object({
   subscribed: z.number(),
   page: z.number(),
   hasNext: z.boolean(),
-  pro: z.boolean(),
+  csvExport: z.boolean(),
   used: z.number(),
   cap: z.number().nullable(),
 });
@@ -109,6 +136,20 @@ export async function updateEntry(
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ action, dropId, id }),
   });
+}
+// Sends one batch; the caller repeats with `next` until it comes back null.
+export async function emailWaitlist(
+  command: Omit<EmailCommand, "action">,
+  signal?: AbortSignal,
+) {
+  return emailResultSchema.parse(
+    await call(waitlistEndpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action: "email", ...command }),
+      signal,
+    }),
+  );
 }
 export async function exportWaitlist(dropId: string) {
   const url = new URL(waitlistEndpoint);

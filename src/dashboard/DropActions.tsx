@@ -1,19 +1,27 @@
 import { IconButton, PopoverMenu } from "@wix/design-system";
 import { More } from "@wix/wix-ui-icons-common/lazy";
 import { useRef } from "react";
-import type { Drop } from "../domain/drop";
+import { phase, type Drop } from "../domain/drop";
 import { useTranslation } from "../locales/use-translation";
 import type { Command } from "./api";
 
 interface Props {
   drop: Drop;
   busy: boolean;
+  now: number;
   edit: () => void;
   waitlist: () => void;
   action: (command: Command["action"]) => void;
 }
 
-export function DropActions({ drop, busy, edit, waitlist, action }: Props) {
+export function DropActions({
+  drop,
+  busy,
+  now,
+  edit,
+  waitlist,
+  action,
+}: Props) {
   const { t } = useTranslation();
   const closeMenu = useRef<(() => void) | null>(null);
   function run(callback: () => void) {
@@ -45,6 +53,13 @@ export function DropActions({ drop, busy, edit, waitlist, action }: Props) {
         </IconButton>
       )}
     >
+      {phase(drop, now) === "SCHEDULED" && (
+        <PopoverMenu.MenuItem
+          text={t("startNow")}
+          disabled={busy}
+          onClick={() => run(() => action("start"))}
+        />
+      )}
       <PopoverMenu.MenuItem
         text={t("edit")}
         disabled={busy}
@@ -65,6 +80,13 @@ export function DropActions({ drop, busy, edit, waitlist, action }: Props) {
         disabled={busy}
         skin={statusAction === "cancel" ? "destructive" : "standard"}
         onClick={() => run(() => action(statusAction))}
+      />
+      <PopoverMenu.Divider />
+      <PopoverMenu.MenuItem
+        text={t("deleteDrop")}
+        disabled={busy}
+        skin="destructive"
+        onClick={() => run(() => action("delete"))}
       />
     </PopoverMenu>
   );

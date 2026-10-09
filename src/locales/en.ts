@@ -1,4 +1,11 @@
 export const en = {
+  startNow: "Start now",
+  startTitle: "Start {name} now?",
+  startBody:
+    "Purchasing opens immediately. The configured end date and time stay unchanged.",
+  launchStarted: "Launch started",
+  startUnavailable:
+    "Only scheduled, published drops can be started now. Refresh the page and try again.",
   selectProduct: "Set a Wix Stores product ID to connect this countdown.",
   noLaunch: "No published launch is configured for this product.",
   app: "Drop Engine",
@@ -47,7 +54,8 @@ export const en = {
   selectingProducts: "Selecting products…",
   productsFound: "products found",
   stopSelecting: "Stop selecting",
-  selectionTooLarge: "You can select up to 10,000 products per drop.",
+  selectionTooLarge:
+    "You've reached your plan's product limit for this drop. Upgrade for more.",
   previousProducts: "Previous products",
   nextProducts: "Next products",
   productPage: "Page",
@@ -57,7 +65,7 @@ export const en = {
   invalidSchedule:
     "Use a valid time zone and an end after the start. Ambiguous or skipped daylight-saving times must be changed.",
   activeLimit:
-    "Free includes one active drop. Cancel the current drop before publishing another.",
+    "You've reached your plan's limit of active drops. Cancel one or upgrade for more.",
   conflict: "This drop changed in another session. Reload before saving.",
   productInUse:
     "One or more products already belong to another drop. Remove them or cancel that drop first.",
@@ -72,7 +80,6 @@ export const en = {
   noProducts: "No visible products on this page.",
   gatingHelp:
     "Server time controls checkout. Cancelling immediately restores normal purchasing.",
-  free: "Free plan · 1 active drop",
   stage: "Core launch controls",
   waitlist: "Waitlist",
   waitlistTitle: "Get notified when it opens",
@@ -90,7 +97,7 @@ export const en = {
     "The waitlist is full right now. Check back when the drop opens.",
   waitlistClosed: "Signups for this drop are closed.",
   rateLimited: "Too many attempts. Try again later.",
-  proRequired: "CSV export is available on the Pro plan.",
+  proRequired: "CSV export is available on the Pro and Business plans.",
   waitlistSetting: "Collect waitlist signups",
   waitlistSettingHelp:
     "Shoppers can join from the product page countdown until the drop opens. Launch emails aren't sent yet.",
@@ -98,7 +105,7 @@ export const en = {
   waitlistFor: "Waitlist",
   waitlistSubscribed: "subscribed",
   waitlistTotal: "total entries",
-  waitlistUsage: "entries used across all drops on the Free plan",
+  waitlistUsage: "entries used across all drops on your plan",
   waitlistEmpty: "No signups yet",
   waitlistEmptyHelp:
     "Shoppers can join from the product page while this drop is scheduled.",
@@ -111,17 +118,61 @@ export const en = {
   removeEntry: "Delete",
   confirmRemove: "Confirm delete",
   removeHelp:
-    "Deleting erases the email and frees Free-plan capacity. Unsubscribing keeps the record but stops future emails.",
+    "Deleting erases the email and frees plan capacity. Unsubscribing keeps the record but stops future emails.",
   exportCsv: "Export CSV",
   exporting: "Exporting…",
   entryUpdated: "Waitlist updated",
   previousPage: "Previous",
   nextPage: "Next",
-  notificationsPending:
-    "Launch emails aren't connected yet. Signups and consent are stored so you can contact subscribers once notifications are set up.",
+  emailHelp:
+    "Launch emails aren't sent automatically. Select subscribers to email them, or email everyone who's subscribed. Unsubscribed entries are never emailed.",
+  emailSelected: "Email selected",
+  emailAll: "Email all subscribers",
+  emailEntry: "Email",
+  selectEntry: "Select",
+  selectPage: "Select all subscribers on this page",
+  clearSelection: "Clear selection",
+  emailTitle: "Email waitlist",
+  emailTo: "To",
+  emailAllRecipients: "All subscribers",
+  emailSubject: "Subject",
+  emailMessage: "Message",
+  emailSend: "Send email",
+  emailConfirmSend: "Confirm and send",
+  emailSending: "Sending…",
+  emailSentCount: "sent",
+  emailFailedCount: "couldn't be sent",
+  emailSkippedCount: "skipped because they're no longer subscribed",
+  emailRequired: "Add a subject and a message.",
+  emailRetry:
+    "Some emails couldn't be sent. You can send again: anyone who already received this message won't get it twice.",
+  emailFooterNote:
+    "Each subscriber receives their own copy, with a note that they joined this drop's waitlist.",
   opens: "This drop opens soon",
   live: "The drop is live",
   ended: "This drop has ended",
+  cancelTitle: "Cancel “{name}”?",
+  cancelBody:
+    "Purchasing returns to normal right away and the countdown is removed from your product pages. A cancelled drop can't be published again, but you can duplicate it.",
+  keepDrop: "Keep drop",
+  deleteDrop: "Delete drop",
+  deleteTitle: "Delete “{name}”?",
+  deleteBody:
+    "This permanently removes the drop and erases its waitlist signups. This can't be undone.",
+  deleteActiveBody:
+    "This drop is currently controlling checkout, so purchasing returns to normal immediately.",
+  deleted: "Drop deleted",
+  productLimit:
+    "This drop has more products than your plan allows. Remove some or upgrade.",
+  planBasic: "Basic plan",
+  planPro: "Pro plan",
+  planBusiness: "Business plan",
+  planTrial: "Free trial",
+  startTrial: "Start free trial",
+  upgrade: "Upgrade",
+  limitActiveDrops: "Active drops",
+  limitProducts: "Products per drop",
+  unlimited: "Unlimited",
   beforeViolation:
     "This product is not available for purchase until the drop opens.",
   afterViolation: "This drop has ended. Purchasing is currently closed.",

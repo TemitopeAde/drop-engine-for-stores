@@ -11,6 +11,8 @@ interface Props {
   ids: string[];
   lockedIds: string[];
   disabled: boolean;
+  // The merchant's plan limit; Basic allows a single product.
+  maxProducts?: number;
   onChange: (ids: string[]) => void;
   onSelecting: (selecting: boolean) => void;
 }
@@ -20,9 +22,11 @@ export function ProductSelector({
   ids,
   lockedIds,
   disabled,
+  maxProducts = MAX_PRODUCTS_PER_DROP,
   onChange,
   onSelecting,
 }: Props) {
+  const single = maxProducts === 1;
   const { t, locale } = useTranslation();
   const [current, setCurrent] = useState(firstPage);
   const [page, setPage] = useState(0);
@@ -101,8 +105,7 @@ export function ProductSelector({
       const nextIds = [
         ...new Set([...ids, ...allIds.filter((id) => !locked.has(id))]),
       ];
-      if (nextIds.length > MAX_PRODUCTS_PER_DROP)
-        throw new Error(t("selectionTooLarge"));
+      if (nextIds.length > maxProducts) throw new Error(t("selectionTooLarge"));
       setCatalogIds(allIds);
       onChange(nextIds);
     } catch (err) {
@@ -117,11 +120,12 @@ export function ProductSelector({
 
   function toggleProduct(id: string, checked: boolean) {
     setError("");
-    if (
-      checked &&
-      !selected.has(id) &&
-      selected.size >= MAX_PRODUCTS_PER_DROP
-    ) {
+    // With a one-product plan, picking another product replaces the current one.
+    if (single && checked) {
+      onChange([id]);
+      return;
+    }
+    if (checked && !selected.has(id) && selected.size >= maxProducts) {
       setError(t("selectionTooLarge"));
       return;
     }
@@ -142,22 +146,29 @@ export function ProductSelector({
           {ids.length.toLocaleString(locale)} {t("selected")}
         </span>
       </div>
-      <div className="de-product-selection">
-        <label className="de-select-all">
-          <input
-            ref={selectAll}
-            type="checkbox"
-            checked={allSelected}
-            disabled={
-              busy || (!firstPage.products.length && !firstPage.hasNext)
-            }
-            aria-describedby="select-all-help"
-            onChange={() => void toggleAll()}
-          />
-          {t("selectAllProducts")}
-        </label>
-        <p id="select-all-help">{t("selectAllHelp")}</p>
-      </div>
+      {ids.length > maxProducts && (
+        <p className="de-error" role="alert">
+          {t("productLimit")}
+        </p>
+      )}
+      {!single && (
+        <div className="de-product-selection">
+          <label className="de-select-all">
+            <input
+              ref={selectAll}
+              type="checkbox"
+              checked={allSelected}
+              disabled={
+                busy || (!firstPage.products.length && !firstPage.hasNext)
+              }
+              aria-describedby="select-all-help"
+              onChange={() => void toggleAll()}
+            />
+            {t("selectAllProducts")}
+          </label>
+          <p id="select-all-help">{t("selectAllHelp")}</p>
+        </div>
+      )}
       {selecting && (
         <div className="de-selection-progress">
           <span role="status">

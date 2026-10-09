@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { dashboard } from "@wix/dashboard";
 import { Toaster, toast } from "sonner";
 import {
   Plus,
@@ -11,8 +12,10 @@ import {
 import { Button } from "../../../../components/ui/button";
 import {
   loadDashboard,
+  loadDrops,
   mutate,
   type DashboardData,
+  type DropList,
   type Command,
 } from "../../../../dashboard/api";
 import { DropForm } from "../../../../dashboard/DropForm";
@@ -21,8 +24,20 @@ import { Guide } from "../../../../dashboard/Guide";
 import { Waitlist } from "../../../../dashboard/Waitlist";
 import { PluginPlacementStatus } from "../../../../dashboard/PluginPlacementStatus";
 import { LanguageSelector } from "../../../../dashboard/LanguageSelector";
+import { PlanBadge } from "../../../../dashboard/PlanBadge";
 import { BusinessManagerTheme } from "../../BusinessManagerTheme";
-import { phase, type Drop } from "../../../../domain/drop";
+import {
+  confirmActionModalId,
+  confirmActionResultSchema,
+  type ConfirmActionParams,
+} from "../../../../dashboard/confirm-action";
+import {
+  controlsPurchasing,
+  phase,
+  phaseSchema,
+  type Drop,
+  type Phase,
+} from "../../../../domain/drop";
 import { useTranslation } from "../../../../locales/use-translation";
 import "../../../../dashboard/dashboard.css";
 export default function Dashboard() {
@@ -41,9 +56,11 @@ function DropDashboard() {
   const [waitlist, setWaitlist] = useState<Drop | null>(null);
   const [view, setView] = useState<"drops" | "guide">("drops");
   const [search, setSearch] = useState(""),
-    [status, setStatus] = useState("");
+    [status, setStatus] = useState<Phase | "">("");
+  const [listed, setListed] = useState<DropList>();
   const [busy, setBusy] = useState(false),
     [now, setNow] = useState(Date.now());
+  const actionPending = useRef(false);
   const refresh = useCallback(
     async (signal?: AbortSignal) => {
       try {
@@ -62,28 +79,79 @@ function DropDashboard() {
     void refresh(controller.signal);
     return () => controller.abort();
   }, [refresh]);
+  // A trial or upgrade happens in Wix's tab; pick it up when the merchant returns.
+  useEffect(() => {
+    const onVisible = () => {
+      if (document.visibilityState === "visible") void refresh();
+    };
+    document.addEventListener("visibilitychange", onVisible);
+    return () => document.removeEventListener("visibilitychange", onVisible);
+  }, [refresh]);
+  // The server filters the list; reloading dashboard data refreshes it too.
+  useEffect(() => {
+    if (!data) return;
+    const controller = new AbortController();
+    const timer = setTimeout(() => {
+      loadDrops(
+        { search: search.trim(), status: status || undefined },
+        controller.signal,
+      )
+        .then(setListed)
+        .catch((err: unknown) => {
+          if (!controller.signal.aborted)
+            toast.error(err instanceof Error ? err.message : t("failed"));
+        });
+    }, 250);
+    return () => {
+      clearTimeout(timer);
+      controller.abort();
+    };
+  }, [data, search, status, t]);
   useEffect(() => {
     const timer = setInterval(() => setNow(Date.now()), 1000);
     return () => clearInterval(timer);
   }, []);
+  // Confirm actions that immediately change purchasing or remove a drop.
+  async function confirmed(drop: Drop, kind: ConfirmActionParams["kind"]) {
+    const params: ConfirmActionParams = {
+      locale,
+      kind,
+      name: drop.name,
+      active: controlsPurchasing(drop, Date.now()),
+    };
+    const { modalClosed } = dashboard.openModal({
+      modalId: confirmActionModalId,
+      params,
+    });
+    return confirmActionResultSchema.safeParse(await modalClosed).success;
+  }
   async function action(drop: Drop, command: Command["action"]) {
+    if (actionPending.current) return;
+    actionPending.current = true;
     setBusy(true);
     try {
+      if (command === "cancel" || command === "delete" || command === "start") {
+        if (!(await confirmed(drop, command))) return;
+      }
       await mutate({ action: command, id: drop.id, version: drop.version });
-      toast.success(t("saved"));
+      toast.success(
+        t(
+          command === "start"
+            ? "launchStarted"
+            : command === "delete"
+              ? "deleted"
+              : "saved",
+        ),
+      );
       await refresh();
     } catch (err) {
       toast.error(err instanceof Error ? err.message : t("failed"));
     } finally {
+      actionPending.current = false;
       setBusy(false);
     }
   }
-  const drops =
-    data?.drops.filter(
-      (drop) =>
-        drop.name.toLowerCase().includes(search.toLowerCase()) &&
-        (!status || phase(drop, now) === status),
-    ) || [];
+  const drops = listed?.drops ?? [];
   return (
     <div className="de-app" lang={locale} dir={direction}>
       <Toaster richColors position="bottom-right" />
@@ -125,10 +193,7 @@ function DropDashboard() {
           </Button>
         </nav>
         <LanguageSelector />
-        <div className="de-sidebar-footer">
-          <span className="de-plan-dot" />
-          {t("free")}
-        </div>
+        {data && <PlanBadge plan={data.plan} />}
       </aside>
       <main className="de-main">
         {waitlist ? (
@@ -195,26 +260,25 @@ function DropDashboard() {
                 <select
                   aria-label={t("all")}
                   value={status}
-                  onChange={(e) => setStatus(e.target.value)}
+                  onChange={(e) => {
+                    const next = phaseSchema.safeParse(e.target.value);
+                    setStatus(next.success ? next.data : "");
+                  }}
                 >
                   <option value="">{t("all")}</option>
-                  {(
-                    [
-                      "DRAFT",
-                      "SCHEDULED",
-                      "LIVE",
-                      "ENDED",
-                      "CANCELLED",
-                      "ARCHIVED",
-                    ] as const
-                  ).map((value) => (
+                  {phaseSchema.options.map((value) => (
                     <option value={value} key={value}>
                       {t(value)}
                     </option>
                   ))}
                 </select>
               </div>
-              {!drops.length ? (
+              {!listed ? (
+                <div className="de-state" role="status">
+                  <LoaderCircle className="de-spin" />
+                  <p>{t("loading")}</p>
+                </div>
+              ) : !drops.length ? (
                 <div className="de-empty">
                   <span className="de-empty-icon">
                     <Rocket size={34} />
@@ -280,6 +344,7 @@ function DropDashboard() {
                               <DropActions
                                 drop={drop}
                                 busy={busy}
+                                now={now}
                                 edit={() => setEditing(drop)}
                                 waitlist={() => setWaitlist(drop)}
                                 action={(command) => void action(drop, command)}

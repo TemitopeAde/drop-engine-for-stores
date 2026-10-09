@@ -39,7 +39,13 @@ validations.provideHandlers({
           });
       }
       return { violations };
-    } catch {
+    } catch (error) {
+      // Fail closed, but leave a trace: the shopper only sees the outage message.
+      console.error("Drop Engine validation failed", {
+        error: error instanceof Error ? error.name : "UnknownError",
+        message: error instanceof Error ? error.message.slice(0, 500) : "",
+        hasInstanceId: Boolean(metadata.instanceId),
+      });
       return {
         violations: [
           {

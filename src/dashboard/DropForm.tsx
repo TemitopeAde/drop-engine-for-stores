@@ -14,6 +14,7 @@ import {
 import { useTranslation } from "../locales/use-translation";
 import { Button } from "../components/ui/button";
 import { mutate, type DashboardData } from "./api";
+import { planNames, usePlanSummary } from "./PlanBadge";
 import {
   productPickerModalId,
   productPickerResultSchema,
@@ -26,6 +27,7 @@ interface Props {
 }
 export function DropForm({ drop, data, back, saved }: Props) {
   const { t, locale } = useTranslation();
+  const planSummary = usePlanSummary(data.plan);
   const [busy, setBusy] = useState(false),
     [selecting, setSelecting] = useState(false);
   const form = useForm<DropInput>({
@@ -63,6 +65,7 @@ export function DropForm({ drop, data, back, saved }: Props) {
           products: data.products,
           selectedIds: form.getValues("productIds"),
           lockedIds: [...heldProductIds(data.drops, drop?.id, data.serverNow)],
+          maxProducts: data.plan.limits.productsPerDrop,
           hasNext: data.hasNext,
           cursor: data.cursor,
         },
@@ -155,6 +158,7 @@ export function DropForm({ drop, data, back, saved }: Props) {
                     <input
                       id={field}
                       type="datetime-local"
+                      step="0.001"
                       {...form.register(field)}
                       aria-invalid={!!form.formState.errors[field]}
                     />
@@ -239,7 +243,9 @@ export function DropForm({ drop, data, back, saved }: Props) {
             <h2>{t("empty")}</h2>
             <p>{t("emptyHelp")}</p>
             <hr />
-            <p>{t("free")}</p>
+            <p>
+              {t(planNames[data.plan.id])} · {planSummary}
+            </p>
           </aside>
         </div>
         <div className="de-form-footer">

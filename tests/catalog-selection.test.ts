@@ -59,7 +59,7 @@ describe("catalog selection paging", () => {
         new AbortController().signal,
         vi.fn(),
       ),
-    ).rejects.toThrow("10,000");
+    ).rejects.toThrow("product limit");
   });
   it("aborts before requesting another page", async () => {
     const controller = new AbortController();

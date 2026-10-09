@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
-import { ArrowLeft, Download, LoaderCircle, Mail } from "lucide-react";
+import { ArrowLeft, Download, LoaderCircle, Mail, Send } from "lucide-react";
 import type { Drop } from "../domain/drop";
-import { waitlistEnabled } from "../domain/waitlist";
+import { waitlistEnabled, type EntryView } from "../domain/waitlist";
 import { useTranslation } from "../locales/use-translation";
 import { Button } from "../components/ui/button";
 import {
@@ -11,6 +11,7 @@ import {
   updateEntry,
   type WaitlistPage,
 } from "./api";
+import { WaitlistEmail, type EmailRecipients } from "./WaitlistEmail";
 
 interface Props {
   drop: Drop;
@@ -30,6 +31,9 @@ export function Waitlist({ drop, back }: Props) {
   const [page, setPage] = useState(0);
   const [busy, setBusy] = useState<string | null>(null);
   const [confirming, setConfirming] = useState<string | null>(null);
+  // Kept across pages so a merchant can pick recipients from several pages.
+  const [selected, setSelected] = useState<Map<string, EntryView>>(new Map());
+  const [composing, setComposing] = useState<EmailRecipients | null>(null);
   const refresh = useCallback(
     async (signal?: AbortSignal) => {
       try {
@@ -52,6 +56,7 @@ export function Waitlist({ drop, back }: Props) {
     try {
       await updateEntry(action, drop.id, id);
       setConfirming(null);
+      deselect([id]);
       toast.success(t("entryUpdated"));
       // Step back if deleting emptied the last page.
       if (action === "remove" && data?.entries.length === 1 && page > 0)
@@ -62,6 +67,21 @@ export function Waitlist({ drop, back }: Props) {
     } finally {
       setBusy(null);
     }
+  }
+  function deselect(ids: string[]) {
+    setSelected((current) => {
+      const next = new Map(current);
+      ids.forEach((id) => next.delete(id));
+      return next;
+    });
+  }
+  function toggle(entries: EntryView[], on: boolean) {
+    if (!on) return deselect(entries.map((entry) => entry.id));
+    setSelected((current) => {
+      const next = new Map(current);
+      entries.forEach((entry) => next.set(entry.id, entry));
+      return next;
+    });
   }
   async function download() {
     setBusy("export");
@@ -78,6 +98,24 @@ export function Waitlist({ drop, back }: Props) {
       setBusy(null);
     }
   }
+  if (composing)
+    return (
+      <WaitlistEmail
+        drop={drop}
+        recipients={composing}
+        back={() => setComposing(null)}
+        sent={() => {
+          setComposing(null);
+          setSelected(new Map());
+          void refresh();
+        }}
+      />
+    );
+  const subscribedOnPage =
+    data?.entries.filter((entry) => entry.status === "SUBSCRIBED") ?? [];
+  const pageSelected =
+    subscribedOnPage.length > 0 &&
+    subscribedOnPage.every((entry) => selected.has(entry.id));
   return (
     <section className="de-form-page">
       <Button variant="ghost" onClick={back}>
@@ -100,8 +138,18 @@ export function Waitlist({ drop, back }: Props) {
         <div className="de-header-actions">
           <Button
             variant="outline"
-            disabled={!data?.pro || !data.total || busy !== null}
-            title={data && !data.pro ? t("proRequired") : undefined}
+            disabled={!data?.subscribed || busy !== null}
+            onClick={() =>
+              data && setComposing({ kind: "all", count: data.subscribed })
+            }
+          >
+            <Mail size={16} />
+            {t("emailAll")}
+          </Button>
+          <Button
+            variant="outline"
+            disabled={!data?.csvExport || !data.total || busy !== null}
+            title={data && !data.csvExport ? t("proRequired") : undefined}
             onClick={() => void download()}
           >
             {busy === "export" ? (
@@ -113,15 +161,36 @@ export function Waitlist({ drop, back }: Props) {
           </Button>
         </div>
       </header>
-      {data && !data.pro && <p className="de-footnote">{t("proRequired")}</p>}
+      {data && !data.csvExport && (
+        <p className="de-footnote">{t("proRequired")}</p>
+      )}
       {!waitlistEnabled(drop) && (
         <p className="de-footnote">{t("waitlistOff")}</p>
       )}
       <p className="de-footnote">
         <Mail size={15} />
-        {t("notificationsPending")}
+        {t("emailHelp")}
       </p>
       <section className="de-card de-list">
+        {selected.size > 0 && (
+          <div className="de-toolbar de-selection-bar" role="status">
+            <Button variant="ghost" onClick={() => setSelected(new Map())}>
+              {t("clearSelection")}
+            </Button>
+            <Button
+              disabled={busy !== null}
+              onClick={() =>
+                setComposing({
+                  kind: "selected",
+                  entries: [...selected.values()],
+                })
+              }
+            >
+              <Send size={16} />
+              {t("emailSelected")} ({selected.size.toLocaleString(locale)})
+            </Button>
+          </div>
+        )}
         {error ? (
           <div className="de-state" role="alert">
             <p>{error}</p>
@@ -146,10 +215,21 @@ export function Waitlist({ drop, back }: Props) {
               <table>
                 <thead>
                   <tr>
+                    <th className="de-select-cell">
+                      <input
+                        type="checkbox"
+                        aria-label={t("selectPage")}
+                        checked={pageSelected}
+                        disabled={!subscribedOnPage.length}
+                        onChange={(event) =>
+                          toggle(subscribedOnPage, event.target.checked)
+                        }
+                      />
+                    </th>
                     <th>{t("waitlistEmail")}</th>
                     <th>{t("waitlistJoinedAt")}</th>
                     <th>{t("waitlistStatus")}</th>
-                    <th>
+                    <th className="de-actions-cell">
                       <span className="de-sr-only">{t("actions")}</span>
                     </th>
                   </tr>
@@ -157,6 +237,18 @@ export function Waitlist({ drop, back }: Props) {
                 <tbody>
                   {data.entries.map((entry) => (
                     <tr key={entry.id}>
+                      <td className="de-select-cell">
+                        <input
+                          type="checkbox"
+                          aria-label={`${t("selectEntry")}: ${entry.email}`}
+                          checked={selected.has(entry.id)}
+                          // Unsubscribed entries can't be emailed, so they can't be picked.
+                          disabled={entry.status !== "SUBSCRIBED"}
+                          onChange={(event) =>
+                            toggle([entry], event.target.checked)
+                          }
+                        />
+                      </td>
                       <td>{entry.email}</td>
                       <td>
                         {formatDate(entry.joinedAt, drop.timeZone, locale)}
@@ -168,8 +260,24 @@ export function Waitlist({ drop, back }: Props) {
                           {t(entry.status)}
                         </span>
                       </td>
-                      <td>
+                      <td className="de-actions-cell">
                         <div className="de-row-actions">
+                          {entry.status === "SUBSCRIBED" && (
+                            <Button
+                              variant="ghost"
+                              disabled={busy !== null}
+                              aria-label={`${t("emailEntry")}: ${entry.email}`}
+                              onClick={() =>
+                                setComposing({
+                                  kind: "selected",
+                                  entries: [entry],
+                                })
+                              }
+                            >
+                              <Mail size={14} />
+                              {t("emailEntry")}
+                            </Button>
+                          )}
                           {entry.status === "SUBSCRIBED" && (
                             <Button
                               variant="ghost"
@@ -209,7 +317,7 @@ export function Waitlist({ drop, back }: Props) {
                 </tbody>
               </table>
             </div>
-            <div className="de-product-pagination">
+            <div className="de-product-pagination de-table-pagination">
               <Button
                 variant="outline"
                 disabled={page === 0 || busy !== null}
