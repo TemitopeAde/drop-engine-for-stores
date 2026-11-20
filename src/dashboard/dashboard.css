@@ -1417,6 +1417,22 @@
 .de-drop-cell small {
   color: #6d7d73;
 }
+.de-copy-id {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  border: 0;
+  color: #527663;
+  background: transparent;
+  font: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+.de-copy-id:hover {
+  text-decoration: underline;
+}
 .de-drop-art-preview {
   display: block;
   width: 100%;

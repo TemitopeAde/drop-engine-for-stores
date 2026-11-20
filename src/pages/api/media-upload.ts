@@ -21,6 +21,7 @@ export const POST: APIRoute = ({ request }) =>
   handle(async () => {
     await tenant(true);
     const input = uploadSchema.parse(await readBody(request));
+    // This elevated call requires SCOPE.DC-MEDIA.MANAGE-MEDIAMANAGER in Dev Center.
     const result = await auth.elevate(files.generateFileUploadUrl)(
       input.mimeType,
       {

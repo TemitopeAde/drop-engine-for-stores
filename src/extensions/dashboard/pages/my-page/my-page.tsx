@@ -8,6 +8,7 @@ import {
   CalendarClock,
   CircleHelp,
   Search,
+  Copy,
 } from "lucide-react";
 import { Button } from "../../../../components/ui/button";
 import {
@@ -337,6 +338,22 @@ function DropDashboardContent({ standalone }: { standalone: boolean }) {
                                     ? "Standalone drop"
                                     : `${drop.productIds.length} ${t("products")}`}
                                 </small>
+                                {standalone && (
+                                  <button
+                                    className="de-copy-id"
+                                    aria-label={`Copy drop ID for ${drop.name}`}
+                                    onClick={() =>
+                                      void navigator.clipboard
+                                        .writeText(drop.id)
+                                        .then(() =>
+                                          toast.success("Drop ID copied"),
+                                        )
+                                        .catch(() => toast.error(t("failed")))
+                                    }
+                                  >
+                                    <Copy size={12} /> Copy ID
+                                  </button>
+                                )}
                               </div>
                             </div>
                           </td>

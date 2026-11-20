@@ -20,6 +20,7 @@ export const editorElement = {
     dropId: {
       displayName: "Drop Id",
       dataType: "text",
+      description: "Paste a drop ID copied from Drop Studio.",
       text: {},
     },
     headline: {
