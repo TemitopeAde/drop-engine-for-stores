@@ -53,7 +53,8 @@
     "tailwind-merge": "3.7.0",
     "typescript": "5.9.3",
     "zod": "4.6.5",
-    "@wix/crm": "^1.0.125"
+    "@wix/crm": "^1.0.125",
+    "react-to-webcomponent": "^2.0.0"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",
