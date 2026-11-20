@@ -12,6 +12,6 @@ export interface GuideTranslation {
   faq: { q: string; a: string }[];
 }
 export interface Translation {
-  messages: Messages;
+  messages: Partial<Messages>;
   guide: GuideTranslation;
 }

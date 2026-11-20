@@ -237,6 +237,11 @@ export const en = {
   guideIntro:
     "Schedule product launches that open checkout at an exact moment, and show customers a live countdown while they wait.",
   guideSteps: "Get started in five steps",
+  guideScreenshots: "See it in action",
+  guideReadMore: "Read step",
+  guideMore: "Drop statuses and actions",
+  faqShowAll: "Show all questions",
+  faqShowLess: "Show fewer questions",
   guideStepsHelp: "From an empty dashboard to a live launch in a few minutes.",
   guideStep: "Step",
   guideStatuses: "Drop lifecycle",

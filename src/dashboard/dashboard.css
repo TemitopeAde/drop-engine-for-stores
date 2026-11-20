@@ -586,10 +586,10 @@
   position: relative;
   overflow: hidden;
   display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-  gap: 32px;
-  align-items: center;
-  padding: 40px;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  align-items: start;
+  padding: 32px;
   border-radius: 18px;
   color: #fff;
   background:
@@ -701,6 +701,32 @@
   border-color: #b8cfc3;
   background: #f4f8f6;
 }
+.de-guide-tabs {
+  display: flex;
+  gap: 8px;
+  margin: 18px 0 26px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--de-line);
+}
+.de-guide-tabs button {
+  border: 0;
+  border-radius: 8px;
+  padding: 9px 14px;
+  background: transparent;
+  color: var(--de-muted);
+  font-weight: 600;
+  cursor: pointer;
+}
+.de-guide-tabs button[aria-pressed="true"] {
+  background: #e7f1eb;
+  color: var(--de-green);
+}
+.de-guide-tabs button:focus-visible,
+.de-guide summary:focus-visible,
+.de-guide-more summary:focus-visible {
+  outline: 2px solid var(--de-green);
+  outline-offset: 2px;
+}
 .de-pills button[aria-pressed="true"] {
   background: var(--de-green);
   border-color: var(--de-green);
@@ -740,6 +766,64 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 14px;
+}
+.de-guide-gallery {
+  margin-top: 30px;
+}
+.de-guide-gallery,
+.de-guide-more {
+  margin-top: 18px;
+  border: 1px solid var(--de-line);
+  border-radius: 10px;
+  background: #fff;
+}
+.de-guide-gallery > summary,
+.de-guide-more > summary,
+.de-step details > summary {
+  padding: 12px 16px;
+  color: var(--de-green);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.de-guide-gallery[open] > summary,
+.de-guide-more[open] > summary {
+  border-bottom: 1px solid var(--de-line);
+}
+.de-guide-gallery-grid {
+  padding: 14px;
+}
+.de-guide-more {
+  margin: 0 0 28px;
+  padding: 0 16px;
+}
+.de-guide-more > summary {
+  margin: 0 -16px;
+}
+.de-guide-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.de-guide-gallery figure {
+  overflow: hidden;
+  margin: 0;
+  border: 1px solid var(--de-line);
+  border-radius: 12px;
+  background: #fff;
+}
+.de-guide-gallery img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: #eef2ef;
+}
+.de-guide-gallery figcaption {
+  min-height: 54px;
+  padding: 12px 14px;
+  color: var(--de-ink);
+  font-weight: 600;
 }
 .de-step {
   position: relative;
@@ -789,6 +873,20 @@
 }
 .de-step p {
   margin-top: 6px;
+}
+.de-steps-compact .de-step {
+  padding: 16px;
+}
+.de-steps-compact .de-step-top {
+  margin-bottom: 10px;
+}
+.de-steps-compact .de-step h3 {
+  min-height: 44px;
+}
+.de-step details > summary {
+  margin: 10px -8px -8px;
+  padding: 8px;
+  font-size: 12px;
 }
 .de-lifecycle {
   list-style: none;
@@ -908,6 +1006,16 @@
 .de-faq {
   display: grid;
   gap: 10px;
+}
+.de-faq-show-all {
+  justify-self: start;
+  margin-top: 4px;
+  padding: 8px 0;
+  border: 0;
+  background: transparent;
+  color: var(--de-green);
+  font-weight: 600;
+  cursor: pointer;
 }
 .de-faq-item {
   background: #fff;
@@ -1072,6 +1180,9 @@
   .de-row-actions {
     flex-wrap: wrap;
   }
+  .de-guide-gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 @media (max-width: 700px) {
   .de-app {
@@ -1104,6 +1215,9 @@
     padding: 0;
     width: 180px;
     max-width: 100%;
+  }
+  .de-guide-gallery-grid {
+    grid-template-columns: 1fr;
   }
   .de-header {
     align-items: flex-start;
