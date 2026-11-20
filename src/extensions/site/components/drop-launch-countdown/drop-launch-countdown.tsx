@@ -111,11 +111,7 @@ const DropLaunchCountdown: FC<DropLaunchCountdownProps> = (props) => {
         {headline}
       </h2>
       {drop?.imageUrl && (
-        <img
-          className={styles.artwork}
-          src={drop.imageUrl}
-          alt={drop.imageAlt || drop.name}
-        />
+        <img className={styles.artwork} src={drop.imageUrl} alt={drop.name} />
       )}
       {drop?.name && <p className={styles.dropName}>{drop.name}</p>}
       {drop?.description && (

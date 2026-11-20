@@ -6,7 +6,6 @@ const dropFieldsSchema = z.object({
   name: z.string().trim().min(1).max(100),
   description: z.string().trim().max(500).optional(),
   imageUrl: z.string().url().max(2000).optional().or(z.literal("")),
-  imageAlt: z.string().trim().max(160).optional(),
   productIds: z
     .array(z.string().uuid())
     .max(MAX_PRODUCTS_PER_DROP)

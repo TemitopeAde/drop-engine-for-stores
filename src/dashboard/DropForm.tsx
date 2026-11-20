@@ -3,7 +3,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Temporal } from "@js-temporal/polyfill";
 import { ArrowLeft, LoaderCircle, Rocket } from "lucide-react";
 import { useMemo, useState } from "react";
-import { httpClient } from "@wix/essentials";
 import { dashboard } from "@wix/dashboard";
 import { z } from "zod";
 import { toast } from "sonner";
@@ -53,7 +52,6 @@ export function DropForm({
           name: "",
           description: "",
           imageUrl: "",
-          imageAlt: "",
           productIds: [],
           storeLinked: !standalone,
           localStart: "",
@@ -107,37 +105,23 @@ export function DropForm({
       setSelecting(false);
     }
   }
-  async function uploadImage(file?: File) {
-    if (!file) return;
-    if (file.size > 10 * 1024 * 1024) {
-      toast.error("Choose an image under 10 MB.");
-      return;
-    }
+  async function chooseImage() {
     setUploading(true);
     try {
-      const ticket = await httpClient.fetchWithAuth(
-        new URL(/* @vite-ignore */ "/api/media-upload", import.meta.url).href,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ fileName: file.name, mimeType: file.type }),
-        },
-      );
-      if (!ticket.ok) throw new Error(t("failed"));
-      const ticketBody = z
-        .object({ uploadUrl: z.string().url() })
-        .parse(await ticket.json());
-      const uploaded = await fetch(ticketBody.uploadUrl, {
-        method: "PUT",
-        headers: { "Content-Type": file.type },
-        body: file,
+      const result = await dashboard.openMediaManager({
+        category: "IMAGE",
+        multiSelect: false,
       });
-      if (!uploaded.ok) throw new Error(t("failed"));
-      const result = z
-        .object({ file: z.object({ url: z.string().url() }) })
-        .parse(await uploaded.json());
-      form.setValue("imageUrl", result.file.url, { shouldDirty: true });
-      toast.success("Image added to Wix Media Manager");
+      const selected = z
+        .object({
+          items: z.array(z.object({ url: z.string().url() }).passthrough()),
+        })
+        .safeParse(result);
+      const image = selected.success ? selected.data.items[0] : undefined;
+      if (image) {
+        form.setValue("imageUrl", image.url, { shouldDirty: true });
+        toast.success("Image selected from Wix Media Manager");
+      }
     } catch (error) {
       toast.error(error instanceof Error ? error.message : t("failed"));
     } finally {
@@ -290,14 +274,14 @@ export function DropForm({
             <section className="de-card de-product-card">
               <div className="de-card-heading">
                 <h2>Drop artwork</h2>
-                <span>Optional · Wix Media Manager</span>
+                <span>Choose from your Wix Media Manager</span>
               </div>
               {imageUrl ? (
                 <>
                   <img
                     className="de-drop-art-preview"
                     src={imageUrl}
-                    alt={form.getValues("imageAlt") || "Drop artwork preview"}
+                    alt={form.getValues("name") || "Drop artwork"}
                   />
                   <Button
                     type="button"
@@ -315,28 +299,15 @@ export function DropForm({
                   <span>Make this drop unmistakable with a launch image.</span>
                 </div>
               )}
-              <label className="de-field" htmlFor="drop-image">
-                Image
-              </label>
-              <input
-                id="drop-image"
-                type="file"
-                accept="image/png,image/jpeg,image/webp,image/gif"
+              <Button
+                type="button"
+                variant="outline"
                 disabled={busy || uploading}
-                onChange={(event) => void uploadImage(event.target.files?.[0])}
-              />
-              <label className="de-field" htmlFor="drop-image-alt">
-                Image description
-              </label>
-              <input
-                id="drop-image-alt"
-                maxLength={160}
-                {...form.register("imageAlt")}
-                placeholder="Describe the image for screen readers"
-              />
-              {uploading && (
-                <p role="status">Uploading image to Wix Media Manager…</p>
-              )}
+                onClick={() => void chooseImage()}
+              >
+                {imageUrl ? "Change image" : "Choose image"}
+              </Button>
+              {uploading && <p role="status">Opening Wix Media Manager…</p>}
             </section>
             {!standalone && storeLinked && (
               <section className="de-card de-product-card">

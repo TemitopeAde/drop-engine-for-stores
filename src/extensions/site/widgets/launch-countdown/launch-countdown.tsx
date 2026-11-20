@@ -102,7 +102,6 @@ class LaunchCountdown extends HTMLElement {
       ? {
           name: "Sample product",
           description: "",
-          imageAlt: "",
           imageUrl: undefined,
           startsAt: previewStart,
           endsAt: previewStart + 2 * 86_400_000,
@@ -125,7 +124,7 @@ class LaunchCountdown extends HTMLElement {
       const artwork = document.createElement("img");
       artwork.className = styles.artwork;
       artwork.src = drop.imageUrl;
-      artwork.alt = drop.imageAlt || drop.name;
+      artwork.alt = drop.name;
       root.append(artwork);
     }
     if (drop?.name) {

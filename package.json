@@ -34,7 +34,6 @@
     "@wix/editor": "1.908.0",
     "@wix/email-transmissions": "1.0.13",
     "@wix/essentials": "0.1.28",
-    "@wix/media": "^1.0.403",
     "@wix/react-component-schema": "1.9.0",
     "@wix/react-component-utils": "1.13.0",
     "@wix/site-members": "1.36.0",
