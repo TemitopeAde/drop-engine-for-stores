@@ -73,7 +73,7 @@ if (root)
         <Countdown
           id="countdown"
           headline="The Friday collection is almost here"
-          productId="4c8379c5-7609-4ae9-91ad-a22a052f1aa9"
+          dropId="4c8379c5-7609-4ae9-91ad-a22a052f1aa9"
         />
       </div>
     ) : (

@@ -11,8 +11,17 @@ import {
   startDrop,
   type Drop,
 } from "../../domain/drop";
-import { catalogPage, storeContext, verifyProducts } from "../../server/catalog";
-import { commit, initialize, readInstallation, tenant } from "../../server/storage";
+import {
+  catalogPage,
+  storeContext,
+  verifyProducts,
+} from "../../server/catalog";
+import {
+  commit,
+  initialize,
+  readInstallation,
+  tenant,
+} from "../../server/storage";
 import { handle, readBody } from "../../server/http";
 import { currentPlan } from "../../server/plan";
 import { removeDropEntries } from "../../server/waitlist";

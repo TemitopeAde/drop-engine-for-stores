@@ -13,7 +13,7 @@ it("renders deterministically on the server with a complete setup state", () => 
   expect(first).toBe(
     renderToString(<Countdown id="widget" {...defaultProps} />),
   );
-  expect(first).toContain("Set a Wix Stores product ID");
+  expect(first).toContain("Choose a drop in the component settings");
   expect(first).toContain("drop-launch-countdown-heading");
   expect(client.fetch).not.toHaveBeenCalled();
 });
@@ -36,13 +36,13 @@ it("reads the selected product and displays server-verified launch status", asyn
     <Countdown
       id="live-widget"
       {...defaultProps}
-      productId="4c8379c5-7609-4ae9-91ad-a22a052f1aa9"
+      dropId="4c8379c5-7609-4ae9-91ad-a22a052f1aa9"
     />,
   );
   await waitFor(() =>
     expect(screen.getByRole("status").textContent).toBe("This drop opens soon"),
   );
-  expect(client.fetch.mock.calls[0][0]).toContain("productId=4c8379c5");
+  expect(client.fetch.mock.calls[0][0]).toContain("dropId=4c8379c5");
   expect(screen.getByText("Days")).toBeTruthy();
   cleanup();
 });

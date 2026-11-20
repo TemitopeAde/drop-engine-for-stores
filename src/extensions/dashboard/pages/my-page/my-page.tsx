@@ -44,7 +44,11 @@ export default function Dashboard() {
   return <DropDashboard />;
 }
 
-export function DropDashboard({ standalone = false }: { standalone?: boolean }) {
+export function DropDashboard({
+  standalone = false,
+}: {
+  standalone?: boolean;
+}) {
   return (
     <BusinessManagerTheme>
       <DropDashboardContent standalone={standalone} />

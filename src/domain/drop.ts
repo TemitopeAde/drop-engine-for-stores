@@ -21,11 +21,17 @@ const dropFieldsSchema = z.object({
   // Optional so drops stored before the waitlist existed keep parsing; absent means on.
   waitlist: z.boolean().optional(),
 });
-export const dropInputSchema = dropFieldsSchema.superRefine((value, context) => {
-  if (value.storeLinked !== false && value.productIds.length === 0) {
-    context.addIssue({ code: "custom", path: ["productIds"], message: "required" });
-  }
-});
+export const dropInputSchema = dropFieldsSchema.superRefine(
+  (value, context) => {
+    if (value.storeLinked !== false && value.productIds.length === 0) {
+      context.addIssue({
+        code: "custom",
+        path: ["productIds"],
+        message: "required",
+      });
+    }
+  },
+);
 export type DropInput = z.infer<typeof dropInputSchema>;
 export const dropSchema = dropFieldsSchema.extend({
   id: z.string().uuid(),

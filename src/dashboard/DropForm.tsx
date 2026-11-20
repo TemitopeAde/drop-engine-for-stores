@@ -28,7 +28,13 @@ interface Props {
   back: () => void;
   saved: () => Promise<void>;
 }
-export function DropForm({ drop, data, standalone = false, back, saved }: Props) {
+export function DropForm({
+  drop,
+  data,
+  standalone = false,
+  back,
+  saved,
+}: Props) {
   const { t, locale } = useTranslation();
   const planSummary = usePlanSummary(data.plan);
   const [busy, setBusy] = useState(false),
@@ -40,7 +46,8 @@ export function DropForm({ drop, data, standalone = false, back, saved }: Props)
       ? {
           ...drop,
           storeLinked: standalone ? false : (drop.storeLinked ?? true),
-          productIds: standalone || drop.storeLinked === false ? [] : drop.productIds,
+          productIds:
+            standalone || drop.storeLinked === false ? [] : drop.productIds,
         }
       : {
           name: "",
@@ -174,7 +181,11 @@ export function DropForm({ drop, data, standalone = false, back, saved }: Props)
   }
   return (
     <section className="de-form-page">
-      <Button variant="ghost" onClick={back} disabled={busy || uploading || selecting}>
+      <Button
+        variant="ghost"
+        onClick={back}
+        disabled={busy || uploading || selecting}
+      >
         <ArrowLeft size={16} />
         {t("back")}
       </Button>
@@ -335,7 +346,10 @@ export function DropForm({ drop, data, standalone = false, back, saved }: Props)
                     {productIds.length.toLocaleString(locale)} {t("selected")}
                   </span>
                 </div>
-                <p>Connect this drop to Wix Store products to control their availability.</p>
+                <p>
+                  Connect this drop to Wix Store products to control their
+                  availability.
+                </p>
                 <Button
                   type="button"
                   variant="outline"
@@ -346,14 +360,19 @@ export function DropForm({ drop, data, standalone = false, back, saved }: Props)
                   {selecting ? "Loading products…" : t("catalog")}
                 </Button>
                 {form.formState.errors.productIds && (
-                  <p className="de-error" role="alert">{t("fieldsRequired")}</p>
+                  <p className="de-error" role="alert">
+                    {t("fieldsRequired")}
+                  </p>
                 )}
               </section>
             )}
             {!standalone && !storeLinked && (
               <section className="de-card de-product-card">
                 <h2>Standalone drop</h2>
-                <p>This drop is not linked to a Wix Store product. Open it in Drop Studio to edit its launch content.</p>
+                <p>
+                  This drop is not linked to a Wix Store product. Open it in
+                  Drop Studio to edit its launch content.
+                </p>
               </section>
             )}
           </div>
@@ -369,7 +388,11 @@ export function DropForm({ drop, data, standalone = false, back, saved }: Props)
           </aside>
         </div>
         <div className="de-form-footer">
-          <Button type="submit" variant="outline" disabled={busy || uploading || selecting}>
+          <Button
+            type="submit"
+            variant="outline"
+            disabled={busy || uploading || selecting}
+          >
             {busy && <LoaderCircle size={16} className="de-spin" />}
             {t("save")}
           </Button>
