@@ -20,6 +20,7 @@ const DropLaunchCountdown: FC<DropLaunchCountdownProps> = (props) => {
     setSnapshot(undefined);
     setError(false);
     if (!dropId) return;
+    const selectedDropId = dropId;
     let active = true;
     let controller: AbortController | undefined;
     async function refresh() {
@@ -31,7 +32,7 @@ const DropLaunchCountdown: FC<DropLaunchCountdownProps> = (props) => {
           /* @vite-ignore */ "/api/storefront",
           import.meta.url,
         );
-        url.searchParams.set("dropId", dropId);
+        url.searchParams.set("dropId", selectedDropId);
         const response = await httpClient.fetchWithAuth(url.href, {
           signal: current.signal,
         });

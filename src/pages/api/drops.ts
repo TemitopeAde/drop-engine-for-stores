@@ -11,17 +11,8 @@ import {
   startDrop,
   type Drop,
 } from "../../domain/drop";
-import {
-  catalogPage,
-  storeContext,
-  verifyProducts,
-} from "../../server/catalog";
-import {
-  commit,
-  initialize,
-  readInstallation,
-  tenant,
-} from "../../server/storage";
+import { catalogPage, storeContext, verifyProducts } from "../../server/catalog";
+import { commit, initialize, readInstallation, tenant } from "../../server/storage";
 import { handle, readBody } from "../../server/http";
 import { currentPlan } from "../../server/plan";
 import { removeDropEntries } from "../../server/waitlist";
@@ -50,7 +41,9 @@ export const GET: APIRoute = ({ url }) =>
         serverNow: now,
       };
     }
-    if (url.searchParams.get("catalogOnly") !== "true") {
+    const catalogOnly = url.searchParams.get("catalogOnly") === "true";
+    const includeCatalog = url.searchParams.get("includeCatalog") === "true";
+    if (!catalogOnly && !includeCatalog) {
       const installation = await readInstallation(scope);
       const plan = await currentPlan(scope);
       return {
@@ -78,7 +71,7 @@ export const GET: APIRoute = ({ url }) =>
       .optional()
       .parse(url.searchParams.get("cursor") || undefined);
     const catalog = await catalogPage(context.catalogVersion, page, cursor);
-    if (url.searchParams.get("catalogOnly") === "true") return catalog;
+    if (catalogOnly) return catalog;
     const installation = await initialize(
       scope,
       context.catalogVersion,
@@ -141,9 +134,18 @@ export const POST: APIRoute = ({ request }) =>
       if (!command.input) throw new DomainError("fieldsRequired");
       const input = command.input;
       const { limits } = await currentPlan(scope);
+      const storeLinked = input.storeLinked !== false;
+      if (storeLinked && input.productIds.length > limits.productsPerDrop)
+        throw new DomainError("productLimit", 403);
+      if (storeLinked) {
+        const context = await storeContext();
+        await verifyProducts(context.catalogVersion, input.productIds);
+      }
       maxActive = limits.activeDrops;
       next = {
         ...input,
+        storeLinked,
+        productIds: storeLinked ? input.productIds : [],
         ...schedule(input, old),
         id: old?.id || crypto.randomUUID(),
         version: (old?.version || 0) + 1,

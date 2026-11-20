@@ -50,10 +50,12 @@ export async function loadDashboard(
   page = 0,
   cursor?: string,
   signal?: AbortSignal,
+  includeCatalog = false,
 ) {
   const url = new URL(endpoint);
   url.searchParams.set("page", String(page));
   if (cursor) url.searchParams.set("cursor", cursor);
+  if (includeCatalog) url.searchParams.set("includeCatalog", "true");
   return responseSchema.parse(await call(url, { signal }));
 }
 const dropListSchema = z.object({

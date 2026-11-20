@@ -22,7 +22,7 @@ export function DropForm({ drop, data, back, saved }: Props) {
   const planSummary = usePlanSummary(data.plan);
   const [busy, setBusy] = useState(false),
     [uploading, setUploading] = useState(false);
-  const form = useForm<DropInput>({
+  const form = useForm<z.input<typeof dropInputSchema>, unknown, DropInput>({
     resolver: zodResolver(dropInputSchema),
     defaultValues: drop
       ? { ...drop, productIds: [] }
@@ -54,10 +54,14 @@ export function DropForm({ drop, data, back, saved }: Props) {
   );
   async function uploadImage(file?: File) {
     if (!file) return;
+    if (file.size > 10 * 1024 * 1024) {
+      toast.error("Choose an image under 10 MB.");
+      return;
+    }
     setUploading(true);
     try {
       const ticket = await httpClient.fetchWithAuth(
-        new URL("/api/media-upload", import.meta.url).href,
+        new URL(/* @vite-ignore */ "/api/media-upload", import.meta.url).href,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -230,11 +234,22 @@ export function DropForm({ drop, data, back, saved }: Props) {
                 <span>Optional · Wix Media Manager</span>
               </div>
               {imageUrl ? (
-                <img
-                  className="de-drop-art-preview"
-                  src={imageUrl}
-                  alt={form.getValues("imageAlt") || "Drop artwork preview"}
-                />
+                <>
+                  <img
+                    className="de-drop-art-preview"
+                    src={imageUrl}
+                    alt={form.getValues("imageAlt") || "Drop artwork preview"}
+                  />
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    onClick={() =>
+                      form.setValue("imageUrl", "", { shouldDirty: true })
+                    }
+                  >
+                    Remove image
+                  </Button>
+                </>
               ) : (
                 <div className="de-drop-art-empty">
                   <Rocket size={28} />

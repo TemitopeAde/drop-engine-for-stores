@@ -41,14 +41,18 @@ import {
 import { useTranslation } from "../../../../locales/use-translation";
 import "../../../../dashboard/dashboard.css";
 export default function Dashboard() {
+  return <DropDashboard />;
+}
+
+export function DropDashboard({ standalone = false }: { standalone?: boolean }) {
   return (
     <BusinessManagerTheme>
-      <DropDashboard />
+      <DropDashboardContent standalone={standalone} />
     </BusinessManagerTheme>
   );
 }
 
-function DropDashboard() {
+function DropDashboardContent({ standalone }: { standalone: boolean }) {
   const { t, locale, direction } = useTranslation();
   const [data, setData] = useState<DashboardData>();
   const [error, setError] = useState("");
@@ -64,7 +68,7 @@ function DropDashboard() {
   const refresh = useCallback(
     async (signal?: AbortSignal) => {
       try {
-        const next = await loadDashboard(0, undefined, signal);
+        const next = await loadDashboard(0, undefined, signal, !standalone);
         setData(next);
         setError("");
       } catch (err) {
@@ -220,6 +224,7 @@ function DropDashboard() {
           <DropForm
             drop={editing === "new" ? undefined : editing}
             data={data}
+            standalone={standalone}
             back={() => setEditing(null)}
             saved={async () => {
               await refresh();

@@ -2,11 +2,11 @@ import { z } from "zod";
 import { Temporal } from "@js-temporal/polyfill";
 import { MAX_DROP_STATE_BYTES, MAX_PRODUCTS_PER_DROP } from "./limits";
 
-export const dropInputSchema = z.object({
+const dropFieldsSchema = z.object({
   name: z.string().trim().min(1).max(100),
-  description: z.string().trim().max(500).default(""),
+  description: z.string().trim().max(500).optional(),
   imageUrl: z.string().url().max(2000).optional().or(z.literal("")),
-  imageAlt: z.string().trim().max(160).default(""),
+  imageAlt: z.string().trim().max(160).optional(),
   productIds: z
     .array(z.string().uuid())
     .max(MAX_PRODUCTS_PER_DROP)
@@ -16,11 +16,18 @@ export const dropInputSchema = z.object({
   localEnd: z.string().min(16).max(25),
   timeZone: z.string().min(1).max(100),
   endBehavior: z.enum(["RESTORE", "BLOCK"]),
+  // Standalone drops aren't connected to the Wix Stores catalog.
+  storeLinked: z.boolean().optional(),
   // Optional so drops stored before the waitlist existed keep parsing; absent means on.
   waitlist: z.boolean().optional(),
 });
+export const dropInputSchema = dropFieldsSchema.superRefine((value, context) => {
+  if (value.storeLinked !== false && value.productIds.length === 0) {
+    context.addIssue({ code: "custom", path: ["productIds"], message: "required" });
+  }
+});
 export type DropInput = z.infer<typeof dropInputSchema>;
-export const dropSchema = dropInputSchema.extend({
+export const dropSchema = dropFieldsSchema.extend({
   id: z.string().uuid(),
   version: z.number().int().positive(),
   startsAt: z.number().int(),

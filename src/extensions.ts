@@ -36,8 +36,6 @@ import planTransferred from "./extensions/backend/events/plan-transferred/plan-t
 
 import launchCountdown from "./extensions/site/widgets/launch-countdown/launch-countdown.extension.ts";
 
-import dropStudio from "./extensions/dashboard/pages/drop-studio/drop-studio.extension.ts";
-
 export default app()
   .use(myPage)
   .use(dropStudio)

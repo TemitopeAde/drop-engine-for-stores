@@ -28,7 +28,8 @@ const Panel: FC = () => {
       widget.getProp("drop-id"),
       widget.getProp("headline"),
       httpClient.fetchWithAuth(
-        new URL("/api/drops?view=selector", import.meta.url).href,
+        new URL(/* @vite-ignore */ "/api/drops?view=selector", import.meta.url)
+          .href,
       ),
     ])
       .then(async ([storedDropId, storedHeadline, response]) => {
