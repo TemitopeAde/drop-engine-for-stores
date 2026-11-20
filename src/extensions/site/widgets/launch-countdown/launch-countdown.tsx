@@ -101,6 +101,9 @@ class LaunchCountdown extends HTMLElement {
     const drop = preview
       ? {
           name: "Sample product",
+          description: "",
+          imageAlt: "",
+          imageUrl: undefined,
           startsAt: previewStart,
           endsAt: previewStart + 2 * 86_400_000,
         }

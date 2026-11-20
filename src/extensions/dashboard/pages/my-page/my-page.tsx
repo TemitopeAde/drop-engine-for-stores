@@ -328,7 +328,11 @@ function DropDashboardContent({ standalone }: { standalone: boolean }) {
                                 >
                                   {drop.name}
                                 </button>
-                                <small>Standalone drop</small>
+                                <small>
+                                  {standalone || drop.storeLinked === false
+                                    ? "Standalone drop"
+                                    : `${drop.productIds.length} ${t("products")}`}
+                                </small>
                               </div>
                             </div>
                           </td>

@@ -39,7 +39,7 @@ export const POST: APIRoute = ({ request }) =>
       t("waitlistConsent"),
       now,
     );
-    if (result.status === "joined") {
+    if (result.status === "joined" && drop.productIds.length > 0) {
       const productId =
         command.productId && drop.productIds.includes(command.productId)
           ? command.productId

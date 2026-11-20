@@ -4,34 +4,51 @@ import { Temporal } from "@js-temporal/polyfill";
 import { ArrowLeft, LoaderCircle, Rocket } from "lucide-react";
 import { useMemo, useState } from "react";
 import { httpClient } from "@wix/essentials";
+import { dashboard } from "@wix/dashboard";
 import { z } from "zod";
 import { toast } from "sonner";
-import { dropInputSchema, type Drop, type DropInput } from "../domain/drop";
+import {
+  dropInputSchema,
+  heldProductIds,
+  type Drop,
+  type DropInput,
+} from "../domain/drop";
 import { useTranslation } from "../locales/use-translation";
 import { Button } from "../components/ui/button";
 import { mutate, type DashboardData } from "./api";
 import { planNames, usePlanSummary } from "./PlanBadge";
+import {
+  productPickerModalId,
+  productPickerResultSchema,
+} from "./product-picker";
 interface Props {
   drop?: Drop;
   data: DashboardData;
+  standalone?: boolean;
   back: () => void;
   saved: () => Promise<void>;
 }
-export function DropForm({ drop, data, back, saved }: Props) {
-  const { t } = useTranslation();
+export function DropForm({ drop, data, standalone = false, back, saved }: Props) {
+  const { t, locale } = useTranslation();
   const planSummary = usePlanSummary(data.plan);
   const [busy, setBusy] = useState(false),
-    [uploading, setUploading] = useState(false);
+    [uploading, setUploading] = useState(false),
+    [selecting, setSelecting] = useState(false);
   const form = useForm<z.input<typeof dropInputSchema>, unknown, DropInput>({
     resolver: zodResolver(dropInputSchema),
     defaultValues: drop
-      ? { ...drop, productIds: [] }
+      ? {
+          ...drop,
+          storeLinked: standalone ? false : (drop.storeLinked ?? true),
+          productIds: standalone || drop.storeLinked === false ? [] : drop.productIds,
+        }
       : {
           name: "",
           description: "",
           imageUrl: "",
           imageAlt: "",
           productIds: [],
+          storeLinked: !standalone,
           localStart: "",
           localEnd: "",
           timeZone: data.timeZone,
@@ -40,6 +57,8 @@ export function DropForm({ drop, data, back, saved }: Props) {
         },
   });
   const imageUrl = form.watch("imageUrl");
+  const productIds = form.watch("productIds") || [];
+  const storeLinked = form.watch("storeLinked") !== false;
   const timeZones = useMemo(
     () =>
       [
@@ -52,6 +71,35 @@ export function DropForm({ drop, data, back, saved }: Props) {
       ].sort(),
     [data.timeZone, drop?.timeZone],
   );
+  async function chooseProducts() {
+    setSelecting(true);
+    try {
+      const { modalClosed } = dashboard.openModal({
+        modalId: productPickerModalId,
+        params: {
+          locale,
+          products: data.products,
+          selectedIds: productIds,
+          lockedIds: [...heldProductIds(data.drops, drop?.id, data.serverNow)],
+          maxProducts: data.plan.limits.productsPerDrop,
+          hasNext: data.hasNext,
+          cursor: data.cursor,
+        },
+      });
+      const result = productPickerResultSchema.safeParse(await modalClosed);
+      if (result.success) {
+        form.setValue("productIds", result.data.productIds, {
+          shouldDirty: true,
+          shouldTouch: true,
+          shouldValidate: true,
+        });
+      }
+    } catch {
+      toast.error(t("failed"));
+    } finally {
+      setSelecting(false);
+    }
+  }
   async function uploadImage(file?: File) {
     if (!file) return;
     if (file.size > 10 * 1024 * 1024) {
@@ -112,7 +160,7 @@ export function DropForm({ drop, data, back, saved }: Props) {
     }
   }
   async function submit(input: DropInput, action: "save" | "publish") {
-    if (busy || uploading) return;
+    if (busy || uploading || selecting) return;
     setBusy(true);
     try {
       await mutate({ action, id: drop?.id, version: drop?.version, input });
@@ -126,7 +174,7 @@ export function DropForm({ drop, data, back, saved }: Props) {
   }
   return (
     <section className="de-form-page">
-      <Button variant="ghost" onClick={back} disabled={busy || uploading}>
+      <Button variant="ghost" onClick={back} disabled={busy || uploading || selecting}>
         <ArrowLeft size={16} />
         {t("back")}
       </Button>
@@ -279,6 +327,35 @@ export function DropForm({ drop, data, back, saved }: Props) {
                 <p role="status">Uploading image to Wix Media Manager…</p>
               )}
             </section>
+            {!standalone && storeLinked && (
+              <section className="de-card de-product-card">
+                <div className="de-card-heading">
+                  <h2>{t("products")}</h2>
+                  <span role="status">
+                    {productIds.length.toLocaleString(locale)} {t("selected")}
+                  </span>
+                </div>
+                <p>Connect this drop to Wix Store products to control their availability.</p>
+                <Button
+                  type="button"
+                  variant="outline"
+                  disabled={busy || selecting}
+                  aria-haspopup="dialog"
+                  onClick={() => void chooseProducts()}
+                >
+                  {selecting ? "Loading products…" : t("catalog")}
+                </Button>
+                {form.formState.errors.productIds && (
+                  <p className="de-error" role="alert">{t("fieldsRequired")}</p>
+                )}
+              </section>
+            )}
+            {!standalone && !storeLinked && (
+              <section className="de-card de-product-card">
+                <h2>Standalone drop</h2>
+                <p>This drop is not linked to a Wix Store product. Open it in Drop Studio to edit its launch content.</p>
+              </section>
+            )}
           </div>
           <aside className="de-card de-launch-guide">
             <span className="de-eyebrow">{t("stage")}</span>
@@ -292,13 +369,13 @@ export function DropForm({ drop, data, back, saved }: Props) {
           </aside>
         </div>
         <div className="de-form-footer">
-          <Button type="submit" variant="outline" disabled={busy || uploading}>
+          <Button type="submit" variant="outline" disabled={busy || uploading || selecting}>
             {busy && <LoaderCircle size={16} className="de-spin" />}
             {t("save")}
           </Button>
           <Button
             type="button"
-            disabled={busy || uploading}
+            disabled={busy || uploading || selecting}
             onClick={form.handleSubmit((input) => submit(input, "publish"))}
           >
             {busy && <LoaderCircle size={16} className="de-spin" />}

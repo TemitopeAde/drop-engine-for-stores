@@ -55,5 +55,4 @@ export default app()
   .use(planConvertedToPaid)
   .use(planReactivated)
   .use(planTransferred)
-  .use(launchCountdown)
-  .use(dropStudio);
+  .use(launchCountdown);
