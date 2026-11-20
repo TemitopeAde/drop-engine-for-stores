@@ -8,7 +8,7 @@ import Component from "./drop-launch-countdown";
 import { defaultProps } from "./drop-launch-countdown.props";
 const Preview: FC<ComponentProps<typeof Component>> = (props) => {
   const isEditMode = useIsEditMode();
-  return <Component {...props} productId={isEditMode ? "" : props.productId} />;
+  return <Component {...props} dropId={isEditMode ? "" : props.dropId} />;
 };
 export default withDefaults(
   withFallbackPlaceholder(Preview, {

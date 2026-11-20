@@ -5,8 +5,8 @@ export type DropLaunchCountdownProps = {
   className?: string;
   direction?: Direction;
   a11y?: A11y;
-  /** Wix Stores product UUID. Availability is read from the current installation. */
-  productId?: string;
+  /** Standalone drop UUID from the Drop Studio dashboard. */
+  dropId?: string;
   headline?: string;
   elementProps?: {
     heading?: { className?: string };
@@ -17,6 +17,6 @@ export type DropLaunchCountdownProps = {
   };
 };
 export const defaultProps = {
-  productId: "",
+  dropId: "",
   headline: t("opens"),
 } satisfies Omit<DropLaunchCountdownProps, "id" | "className">;

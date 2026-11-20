@@ -15,7 +15,7 @@ export default extensions.customElement({
   },
   behaviors: {
     dashboard: {
-      dashboardPageComponentId: "4e5e25b3-90bd-48dc-8d94-307f14b1e5a0",
+      dashboardPageComponentId: "846f35c7-c343-4dfb-ab57-4120d2391193",
     },
   },
   presets: [

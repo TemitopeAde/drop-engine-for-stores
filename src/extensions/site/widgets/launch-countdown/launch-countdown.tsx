@@ -1,5 +1,8 @@
 import { httpClient } from "@wix/essentials";
-import { projectionSchema, type Projection } from "../../../../domain/projection";
+import {
+  projectionSchema,
+  type Projection,
+} from "../../../../domain/projection";
 import { t } from "../../../../locales/en";
 import styles from "./launch-countdown.module.css";
 
@@ -12,7 +15,7 @@ const units = [
 
 class LaunchCountdown extends HTMLElement {
   static get observedAttributes() {
-    return ["product-id", "headline"];
+    return ["drop-id", "headline"];
   }
 
   private projection?: Projection;
@@ -39,7 +42,7 @@ class LaunchCountdown extends HTMLElement {
 
   attributeChangedCallback(name: string) {
     if (!this.isConnected) return;
-    if (name === "product-id") void this.load();
+    if (name === "drop-id") void this.load();
     else this.render();
   }
 
@@ -56,16 +59,19 @@ class LaunchCountdown extends HTMLElement {
   private async load() {
     this.controller?.abort();
     const controller = (this.controller = new AbortController());
-    const productId = this.getAttribute("product-id")?.trim();
-    if (!productId) {
+    const dropId = this.getAttribute("drop-id")?.trim();
+    if (!dropId) {
       this.projection = undefined;
       this.unavailable = false;
       this.render();
       return;
     }
     try {
-      const url = new URL(/* @vite-ignore */ "/api/storefront", import.meta.url);
-      url.searchParams.set("productId", productId);
+      const url = new URL(
+        /* @vite-ignore */ "/api/storefront",
+        import.meta.url,
+      );
+      url.searchParams.set("dropId", dropId);
       const response = await httpClient.fetchWithAuth(url.href, {
         signal: controller.signal,
       });
@@ -85,15 +91,19 @@ class LaunchCountdown extends HTMLElement {
   }
 
   private render() {
-    const productId = this.getAttribute("product-id")?.trim();
+    const dropId = this.getAttribute("drop-id")?.trim();
     const now = this.projection
       ? this.projection.serverNow + performance.now() - this.synchronizedAt
       : Date.now();
-    const preview = this.editor && !this.projection && !productId;
+    const preview = this.editor && !this.projection && !dropId;
     this.previewOrigin ||= now;
     const previewStart = this.previewOrigin + ((2 * 24 + 6) * 60 + 45) * 60_000;
     const drop = preview
-      ? { name: "Sample product", startsAt: previewStart, endsAt: previewStart + 2 * 86_400_000 }
+      ? {
+          name: "Sample product",
+          startsAt: previewStart,
+          endsAt: previewStart + 2 * 86_400_000,
+        }
       : this.projection?.drop;
     const phase = drop
       ? now < drop.startsAt
@@ -108,18 +118,43 @@ class LaunchCountdown extends HTMLElement {
     const heading = document.createElement("h2");
     heading.className = styles.heading;
     heading.textContent = this.getAttribute("headline")?.trim() || t("opens");
+    if (drop?.imageUrl) {
+      const artwork = document.createElement("img");
+      artwork.className = styles.artwork;
+      artwork.src = drop.imageUrl;
+      artwork.alt = drop.imageAlt || drop.name;
+      root.append(artwork);
+    }
+    if (drop?.name) {
+      const name = document.createElement("p");
+      name.className = styles.dropName;
+      name.textContent = drop.name;
+      root.append(name);
+    }
+    if (drop?.description) {
+      const description = document.createElement("p");
+      description.className = styles.description;
+      description.textContent = drop.description;
+      root.append(description);
+    }
     const status = document.createElement("p");
     status.className = styles.status;
     status.setAttribute("role", "status");
     status.textContent = this.unavailable
       ? t("outageViolation")
-      : !productId && !preview
-        ? t("selectProduct")
+      : !dropId && !preview
+        ? "Choose a drop in the widget settings."
         : !this.projection?.drop && !preview
           ? this.projection
             ? t("noLaunch")
             : t("loading")
-          : t(phase === "scheduled" ? "opens" : phase === "live" ? "live" : "ended");
+          : t(
+              phase === "scheduled"
+                ? "opens"
+                : phase === "live"
+                  ? "live"
+                  : "ended",
+            );
     root.append(heading, status);
 
     if (drop && phase && phase !== "ended" && !this.unavailable) {
@@ -127,7 +162,12 @@ class LaunchCountdown extends HTMLElement {
       countdown.className = styles.countdown;
       countdown.setAttribute("role", "timer");
       countdown.setAttribute("aria-live", "off");
-      let remaining = Math.max(0, Math.floor(((phase === "scheduled" ? drop.startsAt : drop.endsAt) - now) / 1_000));
+      let remaining = Math.max(
+        0,
+        Math.floor(
+          ((phase === "scheduled" ? drop.startsAt : drop.endsAt) - now) / 1_000,
+        ),
+      );
       const spoken: string[] = [];
       for (const [divisor, label] of units) {
         const value = Math.floor(remaining / divisor);
@@ -144,7 +184,10 @@ class LaunchCountdown extends HTMLElement {
         countdown.append(unit);
         spoken.push(`${value} ${t(label).toLowerCase()}`);
       }
-      countdown.setAttribute("aria-label", `${t(phase === "scheduled" ? "opens" : "live")}: ${spoken.join(", ")}`);
+      countdown.setAttribute(
+        "aria-label",
+        `${t(phase === "scheduled" ? "opens" : "live")}: ${spoken.join(", ")}`,
+      );
       root.append(countdown);
     }
     this.replaceChildren(root);

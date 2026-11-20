@@ -29,6 +29,14 @@ import { CATALOG_PAGE_SIZE, MAX_PRODUCTS_PER_DROP } from "../../domain/limits";
 export const GET: APIRoute = ({ url }) =>
   handle(async () => {
     const scope = await tenant(true);
+    if (url.searchParams.get("view") === "selector") {
+      const drops = (await readInstallation(scope))?.state.drops ?? [];
+      return {
+        drops: drops
+          .filter((drop) => drop.status === "PUBLISHED")
+          .map(({ id, name, imageUrl }) => ({ id, name, imageUrl })),
+      };
+    }
     if (url.searchParams.get("view") === "list") {
       const filter = dropFilterSchema.parse({
         search: url.searchParams.get("search") ?? "",
@@ -40,6 +48,21 @@ export const GET: APIRoute = ({ url }) =>
         drops: filterDrops(drops, filter, now),
         total: drops.length,
         serverNow: now,
+      };
+    }
+    if (url.searchParams.get("catalogOnly") !== "true") {
+      const installation = await readInstallation(scope);
+      const plan = await currentPlan(scope);
+      return {
+        drops: installation?.state.drops ?? [],
+        revision: installation?.revision ?? 0,
+        plan,
+        timeZone: installation?.timeZone ?? "UTC",
+        siteName: undefined,
+        serverNow: Date.now(),
+        products: [],
+        hasNext: false,
+        catalogVersion: "V3_CATALOG",
       };
     }
     const context = await storeContext();
@@ -118,11 +141,7 @@ export const POST: APIRoute = ({ request }) =>
       if (!command.input) throw new DomainError("fieldsRequired");
       const input = command.input;
       const { limits } = await currentPlan(scope);
-      if (input.productIds.length > limits.productsPerDrop)
-        throw new DomainError("productLimit", 403);
       maxActive = limits.activeDrops;
-      const context = await storeContext();
-      await verifyProducts(context.catalogVersion, input.productIds);
       next = {
         ...input,
         ...schedule(input, old),

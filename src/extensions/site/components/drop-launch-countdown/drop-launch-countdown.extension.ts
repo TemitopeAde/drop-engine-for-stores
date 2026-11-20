@@ -17,13 +17,13 @@ export default extensions.editorReactComponent({
   type: "drop_engine_for_stores.DropLaunchCountdown",
   displayName: "Drop launch countdown",
   description:
-    "Display the server-verified launch window for a selected Wix Stores product, with editable heading and countdown styling.",
+    "Display a standalone product drop countdown with launch artwork, details, and countdown styling.",
   editorElement: merge(editorElementWithDefaults, {
     actions: {
       dashboard: {
         hidden: false,
         displayName: "Manage drops",
-        dashboardPageId: "4e5e25b3-90bd-48dc-8d94-307f14b1e5a0",
+        dashboardPageId: "846f35c7-c343-4dfb-ab57-4120d2391193",
       },
     },
     presets: {

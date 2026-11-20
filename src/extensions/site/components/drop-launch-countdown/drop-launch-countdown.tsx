@@ -9,7 +9,7 @@ import { t } from "../../../../locales/en";
 import styles from "./drop-launch-countdown.module.css";
 import type { DropLaunchCountdownProps } from "./drop-launch-countdown.props";
 const DropLaunchCountdown: FC<DropLaunchCountdownProps> = (props) => {
-  const { id, className, direction, productId, headline, elementProps } = props;
+  const { id, className, direction, dropId, headline, elementProps } = props;
   const [snapshot, setSnapshot] = useState<{
     projection: Projection;
     synchronizedAt: number;
@@ -19,7 +19,7 @@ const DropLaunchCountdown: FC<DropLaunchCountdownProps> = (props) => {
   useEffect(() => {
     setSnapshot(undefined);
     setError(false);
-    if (!productId) return;
+    if (!dropId) return;
     let active = true;
     let controller: AbortController | undefined;
     async function refresh() {
@@ -31,7 +31,7 @@ const DropLaunchCountdown: FC<DropLaunchCountdownProps> = (props) => {
           /* @vite-ignore */ "/api/storefront",
           import.meta.url,
         );
-        url.searchParams.set("productId", productId!);
+        url.searchParams.set("dropId", dropId);
         const response = await httpClient.fetchWithAuth(url.href, {
           signal: current.signal,
         });
@@ -52,7 +52,7 @@ const DropLaunchCountdown: FC<DropLaunchCountdownProps> = (props) => {
       controller?.abort();
       clearInterval(interval);
     };
-  }, [productId]);
+  }, [dropId]);
   useEffect(() => {
     if (!snapshot) return;
     const tick = () =>
@@ -81,8 +81,8 @@ const DropLaunchCountdown: FC<DropLaunchCountdownProps> = (props) => {
   ];
   const status = error
     ? t("outageViolation")
-    : !productId
-      ? t("selectProduct")
+    : !dropId
+      ? "Choose a drop in the component settings."
       : !snapshot
         ? t("loading")
         : !drop
@@ -109,6 +109,17 @@ const DropLaunchCountdown: FC<DropLaunchCountdownProps> = (props) => {
       >
         {headline}
       </h2>
+      {drop?.imageUrl && (
+        <img
+          className={styles.artwork}
+          src={drop.imageUrl}
+          alt={drop.imageAlt || drop.name}
+        />
+      )}
+      {drop?.name && <p className={styles.dropName}>{drop.name}</p>}
+      {drop?.description && (
+        <p className={styles.description}>{drop.description}</p>
+      )}
       <p
         {...elementProps?.status}
         className={classNames(

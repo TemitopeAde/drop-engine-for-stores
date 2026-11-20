@@ -14,7 +14,7 @@ export function usePlanSummary(plan: Plan) {
   const { t, locale } = useTranslation();
   const limit = (value: number | null) =>
     value === null ? t("unlimited") : value.toLocaleString(locale);
-  return `${t("limitActiveDrops")}: ${limit(plan.limits.activeDrops)} · ${t("limitProducts")}: ${limit(plan.limits.productsPerDrop)}`;
+  return `${t("limitActiveDrops")}: ${limit(plan.limits.activeDrops)}`;
 }
 
 // Wix hosts the pricing page and checkout, including the free trial.

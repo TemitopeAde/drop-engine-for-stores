@@ -1392,3 +1392,63 @@
 .de-editor[aria-invalid="true"] .ql-container.ql-snow {
   border-color: #b94130;
 }
+.de-drop-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 200px;
+}
+.de-drop-cell > img,
+.de-drop-cell-placeholder {
+  display: grid;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 9px;
+  background: #edf5ef;
+  object-fit: cover;
+}
+.de-drop-cell > div {
+  display: grid;
+  gap: 3px;
+}
+.de-drop-cell small {
+  color: #6d7d73;
+}
+.de-drop-art-preview {
+  display: block;
+  width: 100%;
+  max-height: 280px;
+  margin: 14px 0;
+  border-radius: 14px;
+  object-fit: cover;
+}
+.de-drop-art-empty {
+  display: grid;
+  min-height: 150px;
+  margin: 14px 0;
+  padding: 24px;
+  place-items: center;
+  gap: 10px;
+  border: 1px dashed #b6c9bc;
+  border-radius: 14px;
+  color: #567363;
+  text-align: center;
+  background: linear-gradient(145deg, #f4f8f4, #eaf2eb);
+}
+.de-product-card > input[type="file"] {
+  display: block;
+  width: 100%;
+  margin: 8px 0 16px;
+  padding: 10px;
+  border: 1px solid #cbded1;
+  border-radius: 9px;
+  background: #fff;
+}
+.de-form-page textarea {
+  width: 100%;
+  resize: vertical;
+  font: inherit;
+}

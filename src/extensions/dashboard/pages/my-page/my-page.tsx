@@ -308,15 +308,24 @@ function DropDashboard() {
                       {drops.map((drop) => (
                         <tr key={drop.id}>
                           <td>
-                            <button
-                              className="de-link"
-                              onClick={() => setEditing(drop)}
-                            >
-                              {drop.name}
-                            </button>
-                            <small>
-                              {drop.productIds.length} {t("products")}
-                            </small>
+                            <div className="de-drop-cell">
+                              {drop.imageUrl ? (
+                                <img src={drop.imageUrl} alt="" />
+                              ) : (
+                                <span className="de-drop-cell-placeholder">
+                                  <Rocket size={15} />
+                                </span>
+                              )}
+                              <div>
+                                <button
+                                  className="de-link"
+                                  onClick={() => setEditing(drop)}
+                                >
+                                  {drop.name}
+                                </button>
+                                <small>Standalone drop</small>
+                              </div>
+                            </div>
                           </td>
                           <td>
                             {new Intl.DateTimeFormat(locale, {

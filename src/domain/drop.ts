@@ -4,11 +4,14 @@ import { MAX_DROP_STATE_BYTES, MAX_PRODUCTS_PER_DROP } from "./limits";
 
 export const dropInputSchema = z.object({
   name: z.string().trim().min(1).max(100),
+  description: z.string().trim().max(500).default(""),
+  imageUrl: z.string().url().max(2000).optional().or(z.literal("")),
+  imageAlt: z.string().trim().max(160).default(""),
   productIds: z
     .array(z.string().uuid())
-    .min(1)
     .max(MAX_PRODUCTS_PER_DROP)
-    .refine((ids) => new Set(ids).size === ids.length),
+    .refine((ids) => new Set(ids).size === ids.length)
+    .default([]),
   localStart: z.string().min(16).max(25),
   localEnd: z.string().min(16).max(25),
   timeZone: z.string().min(1).max(100),

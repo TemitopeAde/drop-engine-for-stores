@@ -7,6 +7,9 @@ export const projectionSchema = z.object({
     .object({
       id: z.string(),
       name: z.string(),
+      description: z.string().default(""),
+      imageUrl: z.string().optional(),
+      imageAlt: z.string().default(""),
       phase: z.enum(["SCHEDULED", "LIVE", "ENDED"]),
       startsAt: z.number(),
       endsAt: z.number(),
@@ -29,6 +32,9 @@ export function projectDrop(drop: Drop, now: number) {
   return {
     id: drop.id,
     name: drop.name,
+    description: drop.description,
+    imageUrl: drop.imageUrl || undefined,
+    imageAlt: drop.imageAlt,
     phase: phase(drop, now),
     startsAt: drop.startsAt,
     endsAt: drop.endsAt,

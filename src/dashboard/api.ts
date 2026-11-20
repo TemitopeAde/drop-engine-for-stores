@@ -27,7 +27,7 @@ const responseSchema = catalogSchema.extend({
   serverNow: z.number(),
   timeZone: z.string(),
   siteName: z.string().optional(),
-  catalogVersion: z.enum(["V1_CATALOG", "V3_CATALOG"]),
+  catalogVersion: z.enum(["V1_CATALOG", "V3_CATALOG"]).optional(),
 });
 export type CatalogPage = z.infer<typeof catalogSchema>;
 export type DashboardData = z.infer<typeof responseSchema>;

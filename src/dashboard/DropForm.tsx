@@ -3,22 +3,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Temporal } from "@js-temporal/polyfill";
 import { ArrowLeft, LoaderCircle, Rocket } from "lucide-react";
 import { useMemo, useState } from "react";
-import { dashboard } from "@wix/dashboard";
+import { httpClient } from "@wix/essentials";
+import { z } from "zod";
 import { toast } from "sonner";
-import {
-  dropInputSchema,
-  heldProductIds,
-  type Drop,
-  type DropInput,
-} from "../domain/drop";
+import { dropInputSchema, type Drop, type DropInput } from "../domain/drop";
 import { useTranslation } from "../locales/use-translation";
 import { Button } from "../components/ui/button";
 import { mutate, type DashboardData } from "./api";
 import { planNames, usePlanSummary } from "./PlanBadge";
-import {
-  productPickerModalId,
-  productPickerResultSchema,
-} from "./product-picker";
 interface Props {
   drop?: Drop;
   data: DashboardData;
@@ -26,23 +18,28 @@ interface Props {
   saved: () => Promise<void>;
 }
 export function DropForm({ drop, data, back, saved }: Props) {
-  const { t, locale } = useTranslation();
+  const { t } = useTranslation();
   const planSummary = usePlanSummary(data.plan);
   const [busy, setBusy] = useState(false),
-    [selecting, setSelecting] = useState(false);
+    [uploading, setUploading] = useState(false);
   const form = useForm<DropInput>({
     resolver: zodResolver(dropInputSchema),
-    defaultValues: drop || {
-      name: "",
-      productIds: [],
-      localStart: "",
-      localEnd: "",
-      timeZone: data.timeZone,
-      endBehavior: "RESTORE",
-      waitlist: true,
-    },
+    defaultValues: drop
+      ? { ...drop, productIds: [] }
+      : {
+          name: "",
+          description: "",
+          imageUrl: "",
+          imageAlt: "",
+          productIds: [],
+          localStart: "",
+          localEnd: "",
+          timeZone: data.timeZone,
+          endBehavior: "RESTORE",
+          waitlist: true,
+        },
   });
-  const ids = form.watch("productIds");
+  const imageUrl = form.watch("imageUrl");
   const timeZones = useMemo(
     () =>
       [
@@ -55,33 +52,37 @@ export function DropForm({ drop, data, back, saved }: Props) {
       ].sort(),
     [data.timeZone, drop?.timeZone],
   );
-  async function chooseProducts() {
-    setSelecting(true);
+  async function uploadImage(file?: File) {
+    if (!file) return;
+    setUploading(true);
     try {
-      const { modalClosed } = dashboard.openModal({
-        modalId: productPickerModalId,
-        params: {
-          locale,
-          products: data.products,
-          selectedIds: form.getValues("productIds"),
-          lockedIds: [...heldProductIds(data.drops, drop?.id, data.serverNow)],
-          maxProducts: data.plan.limits.productsPerDrop,
-          hasNext: data.hasNext,
-          cursor: data.cursor,
+      const ticket = await httpClient.fetchWithAuth(
+        new URL("/api/media-upload", import.meta.url).href,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ fileName: file.name, mimeType: file.type }),
         },
+      );
+      if (!ticket.ok) throw new Error(t("failed"));
+      const ticketBody = z
+        .object({ uploadUrl: z.string().url() })
+        .parse(await ticket.json());
+      const uploaded = await fetch(ticketBody.uploadUrl, {
+        method: "PUT",
+        headers: { "Content-Type": file.type },
+        body: file,
       });
-      const result = productPickerResultSchema.safeParse(await modalClosed);
-      if (result.success) {
-        form.setValue("productIds", result.data.productIds, {
-          shouldDirty: true,
-          shouldTouch: true,
-          shouldValidate: true,
-        });
-      }
-    } catch {
-      toast.error(t("failed"));
+      if (!uploaded.ok) throw new Error(t("failed"));
+      const result = z
+        .object({ file: z.object({ url: z.string().url() }) })
+        .parse(await uploaded.json());
+      form.setValue("imageUrl", result.file.url, { shouldDirty: true });
+      toast.success("Image added to Wix Media Manager");
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : t("failed"));
     } finally {
-      setSelecting(false);
+      setUploading(false);
     }
   }
   function setStartNow() {
@@ -107,7 +108,7 @@ export function DropForm({ drop, data, back, saved }: Props) {
     }
   }
   async function submit(input: DropInput, action: "save" | "publish") {
-    if (busy || selecting) return;
+    if (busy || uploading) return;
     setBusy(true);
     try {
       await mutate({ action, id: drop?.id, version: drop?.version, input });
@@ -121,7 +122,7 @@ export function DropForm({ drop, data, back, saved }: Props) {
   }
   return (
     <section className="de-form-page">
-      <Button variant="ghost" onClick={back} disabled={busy || selecting}>
+      <Button variant="ghost" onClick={back} disabled={busy || uploading}>
         <ArrowLeft size={16} />
         {t("back")}
       </Button>
@@ -151,6 +152,16 @@ export function DropForm({ drop, data, back, saved }: Props) {
                   {t("fieldsRequired")}
                 </p>
               )}
+              <label className="de-field" htmlFor="drop-description">
+                Drop details
+                <textarea
+                  id="drop-description"
+                  rows={4}
+                  maxLength={500}
+                  {...form.register("description")}
+                  placeholder="Tell shoppers what makes this drop special."
+                />
+              </label>
               {(["localStart", "localEnd"] as const).map((field, index) => (
                 <div className="de-field" key={field}>
                   <label htmlFor={field}>{t(index ? "end" : "start")}</label>
@@ -215,25 +226,42 @@ export function DropForm({ drop, data, back, saved }: Props) {
             </section>
             <section className="de-card de-product-card">
               <div className="de-card-heading">
-                <h2>{t("products")}</h2>
-                <span role="status">
-                  {ids.length.toLocaleString(locale)} {t("selected")}
-                </span>
+                <h2>Drop artwork</h2>
+                <span>Optional · Wix Media Manager</span>
               </div>
-              <Button
-                type="button"
-                variant="outline"
-                disabled={busy || selecting}
-                aria-haspopup="dialog"
-                aria-expanded={selecting}
-                onClick={() => void chooseProducts()}
-              >
-                {t("catalog")}
-              </Button>
-              {form.formState.errors.productIds && (
-                <p className="de-error" role="alert">
-                  {t("fieldsRequired")}
-                </p>
+              {imageUrl ? (
+                <img
+                  className="de-drop-art-preview"
+                  src={imageUrl}
+                  alt={form.getValues("imageAlt") || "Drop artwork preview"}
+                />
+              ) : (
+                <div className="de-drop-art-empty">
+                  <Rocket size={28} />
+                  <span>Make this drop unmistakable with a launch image.</span>
+                </div>
+              )}
+              <label className="de-field" htmlFor="drop-image">
+                Image
+              </label>
+              <input
+                id="drop-image"
+                type="file"
+                accept="image/png,image/jpeg,image/webp,image/gif"
+                disabled={busy || uploading}
+                onChange={(event) => void uploadImage(event.target.files?.[0])}
+              />
+              <label className="de-field" htmlFor="drop-image-alt">
+                Image description
+              </label>
+              <input
+                id="drop-image-alt"
+                maxLength={160}
+                {...form.register("imageAlt")}
+                placeholder="Describe the image for screen readers"
+              />
+              {uploading && (
+                <p role="status">Uploading image to Wix Media Manager…</p>
               )}
             </section>
           </div>
@@ -249,13 +277,13 @@ export function DropForm({ drop, data, back, saved }: Props) {
           </aside>
         </div>
         <div className="de-form-footer">
-          <Button type="submit" variant="outline" disabled={busy || selecting}>
+          <Button type="submit" variant="outline" disabled={busy || uploading}>
             {busy && <LoaderCircle size={16} className="de-spin" />}
             {t("save")}
           </Button>
           <Button
             type="button"
-            disabled={busy || selecting}
+            disabled={busy || uploading}
             onClick={form.handleSubmit((input) => submit(input, "publish"))}
           >
             {busy && <LoaderCircle size={16} className="de-spin" />}

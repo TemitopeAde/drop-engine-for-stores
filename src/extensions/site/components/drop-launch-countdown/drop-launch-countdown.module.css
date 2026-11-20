@@ -26,6 +26,22 @@
   font-weight: 600;
   line-height: 1.25;
 }
+.artwork {
+  display: block;
+  width: 100%;
+  max-height: 360px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.dropName {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 650;
+}
+.description {
+  margin: 0;
+  line-height: 1.55;
+}
 .status {
   box-sizing: border-box;
   margin: 0;

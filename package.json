@@ -26,6 +26,7 @@
     "@wix/app-tools": "1.0.7",
     "@wix/astro": "2.75.2",
     "@wix/business-tools": "1.0.233",
+    "@wix/crm": "^1.0.125",
     "@wix/dashboard": "1.3.48",
     "@wix/data": "1.0.527",
     "@wix/design-system": "1.333.1",
@@ -33,6 +34,7 @@
     "@wix/editor": "1.908.0",
     "@wix/email-transmissions": "1.0.13",
     "@wix/essentials": "0.1.28",
+    "@wix/media": "^1.0.403",
     "@wix/react-component-schema": "1.9.0",
     "@wix/react-component-utils": "1.13.0",
     "@wix/site-members": "1.36.0",
@@ -49,12 +51,11 @@
     "quill-delta": "5.1.0",
     "react-hook-form": "7.89.0",
     "react-quill-new": "3.8.3",
+    "react-to-webcomponent": "^2.0.0",
     "sonner": "2.0.8",
     "tailwind-merge": "3.7.0",
     "typescript": "5.9.3",
-    "zod": "4.6.5",
-    "@wix/crm": "^1.0.125",
-    "react-to-webcomponent": "^2.0.0"
+    "zod": "4.6.5"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",
